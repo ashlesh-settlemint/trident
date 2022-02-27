@@ -1,0 +1,520 @@
+{
+  "address": "0xd17B4b5c172A6Df679D0DDfB2D8e0BDe8D69c7Df",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "soId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "warperBeamId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "warpingCid",
+          "type": "string"
+        },
+        {
+          "internalType": "string[]",
+          "name": "pelletIds",
+          "type": "string[]"
+        }
+      ],
+      "name": "addPelletsToWarpMachine",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "soId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "sizingCid",
+          "type": "string"
+        }
+      ],
+      "name": "addWarperBeamsToSizingMachine",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "soId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "loomshedCid",
+          "type": "string"
+        }
+      ],
+      "name": "addWeaverBeamsToLoomMachine",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string[]",
+          "name": "pelletIds",
+          "type": "string[]"
+        },
+        {
+          "internalType": "string",
+          "name": "exitPoint",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "exitTimestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "movePelletsFromWarehouse",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string[]",
+          "name": "warperBeamIds",
+          "type": "string[]"
+        }
+      ],
+      "name": "moveWarperBeamsFromWarpingUnit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string[]",
+          "name": "warperBeamId",
+          "type": "string[]"
+        }
+      ],
+      "name": "moveWarperBeamsToWarping",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string[]",
+          "name": "weaverBeamIds",
+          "type": "string[]"
+        }
+      ],
+      "name": "moveWeaverBeamsFromSizingUnit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x135260be156a1f09d0b1ff65aa4f00857d9907a217fefd1bec6eb24906901714",
+  "receipt": {
+    "to": null,
+    "from": "0xdD38049052752464c9b60a1cabCCec8F3CADF34A",
+    "contractAddress": "0xd17B4b5c172A6Df679D0DDfB2D8e0BDe8D69c7Df",
+    "transactionIndex": 0,
+    "gasUsed": "886947",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000001000000000000002000000000000000000000020800000000000000000800000000000000000000000000000000400000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000020000000000000000000000080000000000000000000000000000000000000000000",
+    "blockHash": "0xe3e4bb2c95f89911590291fa830792cdcb34239ee7933f46a4de951693b56f1d",
+    "transactionHash": "0x135260be156a1f09d0b1ff65aa4f00857d9907a217fefd1bec6eb24906901714",
+    "logs": [
+      {
+        "transactionIndex": 0,
+        "blockNumber": 97026,
+        "transactionHash": "0x135260be156a1f09d0b1ff65aa4f00857d9907a217fefd1bec6eb24906901714",
+        "address": "0xd17B4b5c172A6Df679D0DDfB2D8e0BDe8D69c7Df",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x000000000000000000000000dd38049052752464c9b60a1cabccec8f3cadf34a"
+        ],
+        "data": "0x",
+        "logIndex": 0,
+        "blockHash": "0xe3e4bb2c95f89911590291fa830792cdcb34239ee7933f46a4de951693b56f1d"
+      }
+    ],
+    "blockNumber": 97026,
+    "cumulativeGasUsed": "886947",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "769fc53c8a460dc1a64431c337e12274",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"soId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"warperBeamId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"warpingCid\",\"type\":\"string\"},{\"internalType\":\"string[]\",\"name\":\"pelletIds\",\"type\":\"string[]\"}],\"name\":\"addPelletsToWarpMachine\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"soId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"sizingCid\",\"type\":\"string\"}],\"name\":\"addWarperBeamsToSizingMachine\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"soId\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"loomshedCid\",\"type\":\"string\"}],\"name\":\"addWeaverBeamsToLoomMachine\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string[]\",\"name\":\"pelletIds\",\"type\":\"string[]\"},{\"internalType\":\"string\",\"name\":\"exitPoint\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"exitTimestamp\",\"type\":\"uint256\"}],\"name\":\"movePelletsFromWarehouse\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string[]\",\"name\":\"warperBeamIds\",\"type\":\"string[]\"}],\"name\":\"moveWarperBeamsFromWarpingUnit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string[]\",\"name\":\"warperBeamId\",\"type\":\"string[]\"}],\"name\":\"moveWarperBeamsToWarping\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string[]\",\"name\":\"weaverBeamIds\",\"type\":\"string[]\"}],\"name\":\"moveWeaverBeamsFromSizingUnit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Trident.sol\":\"Trident\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (access/Ownable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _transferOwnership(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0x24e0364e503a9bbde94c715d26573a76f14cd2a202d45f96f52134ab806b67b9\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/Context.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\"},\"contracts/Trident.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// SettleMint.com\\n/**\\n * Copyright (C) SettleMint NV - All Rights Reserved\\n *\\n * Use of this file is strictly prohibited without an active license agreement.\\n * Distribution of this file, via any medium, is strictly prohibited.\\n *\\n * For license inquiries, contcontact hello@settlemint.com\\n */\\npragma solidity ^0.8.9;\\n\\nimport {Ownable} from \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\n/*\\n  WarpingCid - {\\n    warperBeamId, employeeId, machineId, warpDate, pelletIds: {GRI => [pelletIds]} (on create)\\n    exitPoint, exitTimestamp, leftoverQty (on update)\\n  }\\n  Note - Frontend application should be able to sort the pellets based on GRI and send in that format\\n\\n  SizingCid - {\\n\\n  }\\n\\n  PelletsCid - [{\\n    string status;\\n    string exitPoint;\\n    uint256 exitTimestamp;\\n  },{\\n    string status;\\n    string exitPoint;\\n    uint256 exitTimestamp;\\n  }]\\n*/\\n\\ncontract Trident is Ownable {\\n  struct Pellet {\\n    string status;\\n    string exitPoint;\\n    uint256 exitTimestamp;\\n  }\\n\\n  struct SupplyOrder {\\n    string soId;\\n    string prepPo;\\n    string pelletsCid;\\n    string warpingCid;\\n    string sizingCid;\\n    string loomshedCid;\\n  }\\n\\n  struct Warehouse {\\n    string[] pelletIds;\\n    string binId;\\n    uint256 numberOfCones;\\n    uint256 quantity;\\n    string yarnUnit;\\n    string employeeId;\\n    string exitPoint;\\n    uint256 exitTimestamp;\\n  }\\n\\n  mapping(string => SupplyOrder) private _soIdToSupplyDetails;\\n  // SupplyOrder[] private _supplyOrders;\\n\\n  mapping(string => Warehouse) private _griToWarehouseDetails;\\n  mapping(string => string[]) private _soIdToGris;\\n\\n  mapping(string => string) private _warperBeamIdToStatus;\\n  mapping(string => string) private _weaverBeamIdToStatus;\\n  // mapping(bytes => Pellet) private _pelletDidToStatus; // GRI:Pellet => status\\n  // mapping(string => Pellet[]) private _soIdToPellet;\\n  mapping(string => Pellet) private _pelletIdToDetails;\\n\\n\\n\\n  /*\\n    Questions -\\n    1. Will all pellets from GRI be moved from warehouse to the warping unit?\\n  */\\n  function movePelletsFromWarehouse(\\n    string[] memory pelletIds,\\n    string memory exitPoint,\\n    uint256 exitTimestamp\\n  ) external {\\n    for(uint256 i=0; i< pelletIds.length; i++) {\\n      Pellet memory pellet = Pellet(\\n        \\\"movedFromWarehouse\\\",\\n        exitPoint,\\n        exitTimestamp\\n      );\\n      _pelletIdToDetails[pelletIds[i]] = pellet;\\n    }\\n  }\\n\\n  /*\\n    Note - movePelletsToWarping() can be called multiple times for same SoId? In that case we need update option for each processing stage?\\n    Api should take the per warperBeam param\\n    {\\n      \\\"warperBeamId\\\": \\\"BEAM_001\\\",\\n      \\\"employeeId\\\": \\\"EMP_001\\\",\\n      \\\"machineId\\\": \\\"MACHINE_001\\\",\\n      \\\"warpDate\\\": \\\"123123123\\\",\\n      \\\"pelletIds\\\":[\\\"P_001\\\", \\\"P_002\\\"]\\n    },\\n  */\\n  function addPelletsToWarpMachine(\\n    string memory soId,\\n    string memory warperBeamId,\\n    string memory warpingCid,\\n    string[] memory pelletIds\\n  ) external {\\n    if(bytes(_soIdToSupplyDetails[soId].warpingCid).length == 0) {\\n      SupplyOrder memory supplyOrder;\\n      supplyOrder.warpingCid = warpingCid;\\n      _soIdToSupplyDetails[soId] = supplyOrder;\\n      // _supplyOrders.push(soId);\\n    } else {\\n      SupplyOrder storage supplyOrder = _soIdToSupplyDetails[soId];\\n      supplyOrder.warpingCid = warpingCid;\\n    }\\n\\n    _warperBeamIdToStatus[warperBeamId] = \\\"atWarpingUnit\\\";\\n\\n    for(uint i=0; i< pelletIds.length; i++) {\\n      Pellet storage pellet = _pelletIdToDetails[pelletIds[i]];\\n      pellet.status = \\\"receivedAtWarping\\\";\\n    }\\n  }\\n\\n  function moveWarperBeamsFromWarpingUnit(\\n    string[] memory warperBeamIds\\n  ) external {\\n    // Mark the beam status to movedToSizingUnit\\n    for(uint i=0; i< warperBeamIds.length; i++) {\\n      _warperBeamIdToStatus[warperBeamIds[0]] = \\\"movedToSizingUnit\\\";\\n    }\\n  }\\n\\n  function addWarperBeamsToSizingMachine(\\n    string memory soId,\\n    string memory sizingCid\\n  ) external {\\n    if(bytes(_soIdToSupplyDetails[soId].sizingCid).length == 0) {\\n      SupplyOrder memory supplyOrder;\\n      supplyOrder.soId = soId;\\n      supplyOrder.sizingCid = sizingCid;\\n      _soIdToSupplyDetails[soId] = supplyOrder;\\n      // _supplyOrders.push(soId);\\n    } else {\\n      SupplyOrder storage supplyOrder = _soIdToSupplyDetails[soId];\\n      supplyOrder.sizingCid = sizingCid;\\n    }\\n  }\\n\\n  function moveWarperBeamsToWarping(\\n    string[] memory warperBeamId\\n  ) external {\\n      for(uint i=0; i< warperBeamId.length; i++) {\\n        _warperBeamIdToStatus[warperBeamId[0]] = \\\"atWarpingUnit\\\";\\n      }\\n  }\\n\\n  function moveWeaverBeamsFromSizingUnit(\\n    string[] memory weaverBeamIds\\n  ) external {\\n    for(uint i=0; i< weaverBeamIds.length; i++) {\\n        _warperBeamIdToStatus[weaverBeamIds[0]] = \\\"movedToLoomShedUnit\\\";\\n    }\\n  }\\n\\n  function addWeaverBeamsToLoomMachine(\\n    string memory soId,\\n    string memory loomshedCid\\n  ) external {\\n    if(bytes(_soIdToSupplyDetails[soId].loomshedCid).length == 0) {\\n      SupplyOrder memory supplyOrder;\\n      supplyOrder.soId = soId;\\n      supplyOrder.loomshedCid = loomshedCid;\\n      _soIdToSupplyDetails[soId] = supplyOrder;\\n      // _supplyOrders.push(soId);\\n    } else {\\n      SupplyOrder storage supplyOrder = _soIdToSupplyDetails[soId];\\n      supplyOrder.loomshedCid = loomshedCid;\\n    }\\n  }\\n}\",\"keccak256\":\"0x4cf62258df1bfa794bf112eb0025105871af6bc08b2b798179b03262d506aef5\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061001a3361001f565b61006f565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b610ea68061007e6000396000f3fe608060405234801561001057600080fd5b506004361061009e5760003560e01c8063715018a611610066578063715018a6146101045780638da5cb5b1461010c578063a6c8c1541461012b578063b180dd011461013e578063f2fde38b1461015157600080fd5b80631d084919146100a357806321bb8db3146100b85780632231f5c7146100cb57806347f0cf08146100de5780636e854ffe146100f1575b600080fd5b6100b66100b1366004610bd0565b610164565b005b6100b66100c6366004610c0d565b6101fc565b6100b66100d9366004610c7a565b6102dd565b6100b66100ec366004610d27565b61051e565b6100b66100ff366004610bd0565b61066c565b6100b66106fc565b600054604080516001600160a01b039092168252519081900360200190f35b6100b6610139366004610d27565b610767565b6100b661014c366004610bd0565b6107fa565b6100b661015f366004610d8b565b610890565b60005b81518110156101f857604051806040016040528060118152602001701b5bdd9959151bd4da5e9a5b99d55b9a5d607a1b8152506004836000815181106101af576101af610dbb565b60200260200101516040516101c49190610dd1565b908152602001604051809103902090805190602001906101e59291906109ab565b50806101f081610e0c565b915050610167565b5050565b60005b83518110156102d7576040805160a081018252601260608201908152716d6f76656446726f6d57617265686f75736560701b60808301528152602081018590529081018390528451819060069087908590811061025e5761025e610dbb565b60200260200101516040516102739190610dd1565b9081526020016040518091039020600082015181600001908051906020019061029d9291906109ab565b5060208281015180516102b692600185019201906109ab565b506040919091015160029091015550806102cf81610e0c565b9150506101ff565b50505050565b6001846040516102ed9190610dd1565b9081526020016040518091039020600301805461030990610e35565b151590506103f057610319610a2f565b828160600181905250806001866040516103339190610dd1565b9081526020016040518091039020600082015181600001908051906020019061035d9291906109ab565b50602082810151805161037692600185019201906109ab565b50604082015180516103929160028401916020909101906109ab565b50606082015180516103ae9160038401916020909101906109ab565b50608082015180516103ca9160048401916020909101906109ab565b5060a082015180516103e69160058401916020909101906109ab565b509050505061042d565b60006001856040516104029190610dd1565b908152602001604051809103902090508281600301908051906020019061042a9291906109ab565b50505b6040518060400160405280600d81526020016c185d15d85c9c1a5b99d55b9a5d609a1b8152506004846040516104639190610dd1565b908152602001604051809103902090805190602001906104849291906109ab565b5060005b815181101561051757600060068383815181106104a7576104a7610dbb565b60200260200101516040516104bc9190610dd1565b90815260408051602092819003830181208183019092526011808252707265636569766564417457617270696e6760781b939091019283529092506105029183916109ab565b5050808061050f90610e0c565b915050610488565b5050505050565b60018260405161052e9190610dd1565b9081526020016040518091039020600401805461054a90610e35565b151590506106325761055a610a2f565b828152608081018290526040518190600190610577908690610dd1565b908152602001604051809103902060008201518160000190805190602001906105a19291906109ab565b5060208281015180516105ba92600185019201906109ab565b50604082015180516105d69160028401916020909101906109ab565b50606082015180516105f29160038401916020909101906109ab565b506080820151805161060e9160048401916020909101906109ab565b5060a0820151805161062a9160058401916020909101906109ab565b505050505050565b60006001836040516106449190610dd1565b90815260200160405180910390209050818160040190805190602001906102d79291906109ab565b60005b81518110156101f8576040518060400160405280600d81526020016c185d15d85c9c1a5b99d55b9a5d609a1b8152506004836000815181106106b3576106b3610dbb565b60200260200101516040516106c89190610dd1565b908152602001604051809103902090805190602001906106e99291906109ab565b50806106f481610e0c565b91505061066f565b6000546001600160a01b0316331461075b5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e657260448201526064015b60405180910390fd5b610765600061095b565b565b6001826040516107779190610dd1565b9081526020016040518091039020600501805461079390610e35565b151590506107c0576107a3610a2f565b82815260a081018290526040518190600190610577908690610dd1565b60006001836040516107d29190610dd1565b90815260200160405180910390209050818160050190805190602001906102d79291906109ab565b60005b81518110156101f857604051806040016040528060138152602001721b5bdd9959151bd31bdbdb54da1959155b9a5d606a1b81525060048360008151811061084757610847610dbb565b602002602001015160405161085c9190610dd1565b9081526020016040518091039020908051906020019061087d9291906109ab565b508061088881610e0c565b9150506107fd565b6000546001600160a01b031633146108ea5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610752565b6001600160a01b03811661094f5760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608401610752565b6109588161095b565b50565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b8280546109b790610e35565b90600052602060002090601f0160209004810192826109d95760008555610a1f565b82601f106109f257805160ff1916838001178555610a1f565b82800160010185558215610a1f579182015b82811115610a1f578251825591602001919060010190610a04565b50610a2b929150610a65565b5090565b6040518060c001604052806060815260200160608152602001606081526020016060815260200160608152602001606081525090565b5b80821115610a2b5760008155600101610a66565b634e487b7160e01b600052604160045260246000fd5b604051601f8201601f1916810167ffffffffffffffff81118282101715610ab957610ab9610a7a565b604052919050565b600082601f830112610ad257600080fd5b813567ffffffffffffffff811115610aec57610aec610a7a565b610aff601f8201601f1916602001610a90565b818152846020838601011115610b1457600080fd5b816020850160208301376000918101602001919091529392505050565b600082601f830112610b4257600080fd5b8135602067ffffffffffffffff80831115610b5f57610b5f610a7a565b8260051b610b6e838201610a90565b9384528581018301938381019088861115610b8857600080fd5b84880192505b85831015610bc457823584811115610ba65760008081fd5b610bb48a87838c0101610ac1565b8352509184019190840190610b8e565b98975050505050505050565b600060208284031215610be257600080fd5b813567ffffffffffffffff811115610bf957600080fd5b610c0584828501610b31565b949350505050565b600080600060608486031215610c2257600080fd5b833567ffffffffffffffff80821115610c3a57600080fd5b610c4687838801610b31565b94506020860135915080821115610c5c57600080fd5b50610c6986828701610ac1565b925050604084013590509250925092565b60008060008060808587031215610c9057600080fd5b843567ffffffffffffffff80821115610ca857600080fd5b610cb488838901610ac1565b95506020870135915080821115610cca57600080fd5b610cd688838901610ac1565b94506040870135915080821115610cec57600080fd5b610cf888838901610ac1565b93506060870135915080821115610d0e57600080fd5b50610d1b87828801610b31565b91505092959194509250565b60008060408385031215610d3a57600080fd5b823567ffffffffffffffff80821115610d5257600080fd5b610d5e86838701610ac1565b93506020850135915080821115610d7457600080fd5b50610d8185828601610ac1565b9150509250929050565b600060208284031215610d9d57600080fd5b81356001600160a01b0381168114610db457600080fd5b9392505050565b634e487b7160e01b600052603260045260246000fd5b6000825160005b81811015610df25760208186018101518583015201610dd8565b81811115610e01576000828501525b509190910192915050565b6000600019821415610e2e57634e487b7160e01b600052601160045260246000fd5b5060010190565b600181811c90821680610e4957607f821691505b60208210811415610e6a57634e487b7160e01b600052602260045260246000fd5b5091905056fea2646970667358221220c6fd99c94a75b1fedfc3fbf3d0d93607aba68023ed8e7207a711375ffce8060d64736f6c63430008090033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061009e5760003560e01c8063715018a611610066578063715018a6146101045780638da5cb5b1461010c578063a6c8c1541461012b578063b180dd011461013e578063f2fde38b1461015157600080fd5b80631d084919146100a357806321bb8db3146100b85780632231f5c7146100cb57806347f0cf08146100de5780636e854ffe146100f1575b600080fd5b6100b66100b1366004610bd0565b610164565b005b6100b66100c6366004610c0d565b6101fc565b6100b66100d9366004610c7a565b6102dd565b6100b66100ec366004610d27565b61051e565b6100b66100ff366004610bd0565b61066c565b6100b66106fc565b600054604080516001600160a01b039092168252519081900360200190f35b6100b6610139366004610d27565b610767565b6100b661014c366004610bd0565b6107fa565b6100b661015f366004610d8b565b610890565b60005b81518110156101f857604051806040016040528060118152602001701b5bdd9959151bd4da5e9a5b99d55b9a5d607a1b8152506004836000815181106101af576101af610dbb565b60200260200101516040516101c49190610dd1565b908152602001604051809103902090805190602001906101e59291906109ab565b50806101f081610e0c565b915050610167565b5050565b60005b83518110156102d7576040805160a081018252601260608201908152716d6f76656446726f6d57617265686f75736560701b60808301528152602081018590529081018390528451819060069087908590811061025e5761025e610dbb565b60200260200101516040516102739190610dd1565b9081526020016040518091039020600082015181600001908051906020019061029d9291906109ab565b5060208281015180516102b692600185019201906109ab565b506040919091015160029091015550806102cf81610e0c565b9150506101ff565b50505050565b6001846040516102ed9190610dd1565b9081526020016040518091039020600301805461030990610e35565b151590506103f057610319610a2f565b828160600181905250806001866040516103339190610dd1565b9081526020016040518091039020600082015181600001908051906020019061035d9291906109ab565b50602082810151805161037692600185019201906109ab565b50604082015180516103929160028401916020909101906109ab565b50606082015180516103ae9160038401916020909101906109ab565b50608082015180516103ca9160048401916020909101906109ab565b5060a082015180516103e69160058401916020909101906109ab565b509050505061042d565b60006001856040516104029190610dd1565b908152602001604051809103902090508281600301908051906020019061042a9291906109ab565b50505b6040518060400160405280600d81526020016c185d15d85c9c1a5b99d55b9a5d609a1b8152506004846040516104639190610dd1565b908152602001604051809103902090805190602001906104849291906109ab565b5060005b815181101561051757600060068383815181106104a7576104a7610dbb565b60200260200101516040516104bc9190610dd1565b90815260408051602092819003830181208183019092526011808252707265636569766564417457617270696e6760781b939091019283529092506105029183916109ab565b5050808061050f90610e0c565b915050610488565b5050505050565b60018260405161052e9190610dd1565b9081526020016040518091039020600401805461054a90610e35565b151590506106325761055a610a2f565b828152608081018290526040518190600190610577908690610dd1565b908152602001604051809103902060008201518160000190805190602001906105a19291906109ab565b5060208281015180516105ba92600185019201906109ab565b50604082015180516105d69160028401916020909101906109ab565b50606082015180516105f29160038401916020909101906109ab565b506080820151805161060e9160048401916020909101906109ab565b5060a0820151805161062a9160058401916020909101906109ab565b505050505050565b60006001836040516106449190610dd1565b90815260200160405180910390209050818160040190805190602001906102d79291906109ab565b60005b81518110156101f8576040518060400160405280600d81526020016c185d15d85c9c1a5b99d55b9a5d609a1b8152506004836000815181106106b3576106b3610dbb565b60200260200101516040516106c89190610dd1565b908152602001604051809103902090805190602001906106e99291906109ab565b50806106f481610e0c565b91505061066f565b6000546001600160a01b0316331461075b5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e657260448201526064015b60405180910390fd5b610765600061095b565b565b6001826040516107779190610dd1565b9081526020016040518091039020600501805461079390610e35565b151590506107c0576107a3610a2f565b82815260a081018290526040518190600190610577908690610dd1565b60006001836040516107d29190610dd1565b90815260200160405180910390209050818160050190805190602001906102d79291906109ab565b60005b81518110156101f857604051806040016040528060138152602001721b5bdd9959151bd31bdbdb54da1959155b9a5d606a1b81525060048360008151811061084757610847610dbb565b602002602001015160405161085c9190610dd1565b9081526020016040518091039020908051906020019061087d9291906109ab565b508061088881610e0c565b9150506107fd565b6000546001600160a01b031633146108ea5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610752565b6001600160a01b03811661094f5760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608401610752565b6109588161095b565b50565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b8280546109b790610e35565b90600052602060002090601f0160209004810192826109d95760008555610a1f565b82601f106109f257805160ff1916838001178555610a1f565b82800160010185558215610a1f579182015b82811115610a1f578251825591602001919060010190610a04565b50610a2b929150610a65565b5090565b6040518060c001604052806060815260200160608152602001606081526020016060815260200160608152602001606081525090565b5b80821115610a2b5760008155600101610a66565b634e487b7160e01b600052604160045260246000fd5b604051601f8201601f1916810167ffffffffffffffff81118282101715610ab957610ab9610a7a565b604052919050565b600082601f830112610ad257600080fd5b813567ffffffffffffffff811115610aec57610aec610a7a565b610aff601f8201601f1916602001610a90565b818152846020838601011115610b1457600080fd5b816020850160208301376000918101602001919091529392505050565b600082601f830112610b4257600080fd5b8135602067ffffffffffffffff80831115610b5f57610b5f610a7a565b8260051b610b6e838201610a90565b9384528581018301938381019088861115610b8857600080fd5b84880192505b85831015610bc457823584811115610ba65760008081fd5b610bb48a87838c0101610ac1565b8352509184019190840190610b8e565b98975050505050505050565b600060208284031215610be257600080fd5b813567ffffffffffffffff811115610bf957600080fd5b610c0584828501610b31565b949350505050565b600080600060608486031215610c2257600080fd5b833567ffffffffffffffff80821115610c3a57600080fd5b610c4687838801610b31565b94506020860135915080821115610c5c57600080fd5b50610c6986828701610ac1565b925050604084013590509250925092565b60008060008060808587031215610c9057600080fd5b843567ffffffffffffffff80821115610ca857600080fd5b610cb488838901610ac1565b95506020870135915080821115610cca57600080fd5b610cd688838901610ac1565b94506040870135915080821115610cec57600080fd5b610cf888838901610ac1565b93506060870135915080821115610d0e57600080fd5b50610d1b87828801610b31565b91505092959194509250565b60008060408385031215610d3a57600080fd5b823567ffffffffffffffff80821115610d5257600080fd5b610d5e86838701610ac1565b93506020850135915080821115610d7457600080fd5b50610d8185828601610ac1565b9150509250929050565b600060208284031215610d9d57600080fd5b81356001600160a01b0381168114610db457600080fd5b9392505050565b634e487b7160e01b600052603260045260246000fd5b6000825160005b81811015610df25760208186018101518583015201610dd8565b81811115610e01576000828501525b509190910192915050565b6000600019821415610e2e57634e487b7160e01b600052601160045260246000fd5b5060010190565b600181811c90821680610e4957607f821691505b60208210811415610e6a57634e487b7160e01b600052602260045260246000fd5b5091905056fea2646970667358221220c6fd99c94a75b1fedfc3fbf3d0d93607aba68023ed8e7207a711375ffce8060d64736f6c63430008090033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 389,
+        "contract": "contracts/Trident.sol:Trident",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 3964,
+        "contract": "contracts/Trident.sol:Trident",
+        "label": "_soIdToSupplyDetails",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_string_memory_ptr,t_struct(SupplyOrder)3941_storage)"
+      },
+      {
+        "astId": 3969,
+        "contract": "contracts/Trident.sol:Trident",
+        "label": "_griToWarehouseDetails",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_string_memory_ptr,t_struct(Warehouse)3959_storage)"
+      },
+      {
+        "astId": 3974,
+        "contract": "contracts/Trident.sol:Trident",
+        "label": "_soIdToGris",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_string_memory_ptr,t_array(t_string_storage)dyn_storage)"
+      },
+      {
+        "astId": 3978,
+        "contract": "contracts/Trident.sol:Trident",
+        "label": "_warperBeamIdToStatus",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_string_memory_ptr,t_string_storage)"
+      },
+      {
+        "astId": 3982,
+        "contract": "contracts/Trident.sol:Trident",
+        "label": "_weaverBeamIdToStatus",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_string_memory_ptr,t_string_storage)"
+      },
+      {
+        "astId": 3987,
+        "contract": "contracts/Trident.sol:Trident",
+        "label": "_pelletIdToDetails",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_mapping(t_string_memory_ptr,t_struct(Pellet)3928_storage)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_string_storage)dyn_storage": {
+        "base": "t_string_storage",
+        "encoding": "dynamic_array",
+        "label": "string[]",
+        "numberOfBytes": "32"
+      },
+      "t_mapping(t_string_memory_ptr,t_array(t_string_storage)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_string_memory_ptr",
+        "label": "mapping(string => string[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_string_storage)dyn_storage"
+      },
+      "t_mapping(t_string_memory_ptr,t_string_storage)": {
+        "encoding": "mapping",
+        "key": "t_string_memory_ptr",
+        "label": "mapping(string => string)",
+        "numberOfBytes": "32",
+        "value": "t_string_storage"
+      },
+      "t_mapping(t_string_memory_ptr,t_struct(Pellet)3928_storage)": {
+        "encoding": "mapping",
+        "key": "t_string_memory_ptr",
+        "label": "mapping(string => struct Trident.Pellet)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Pellet)3928_storage"
+      },
+      "t_mapping(t_string_memory_ptr,t_struct(SupplyOrder)3941_storage)": {
+        "encoding": "mapping",
+        "key": "t_string_memory_ptr",
+        "label": "mapping(string => struct Trident.SupplyOrder)",
+        "numberOfBytes": "32",
+        "value": "t_struct(SupplyOrder)3941_storage"
+      },
+      "t_mapping(t_string_memory_ptr,t_struct(Warehouse)3959_storage)": {
+        "encoding": "mapping",
+        "key": "t_string_memory_ptr",
+        "label": "mapping(string => struct Trident.Warehouse)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Warehouse)3959_storage"
+      },
+      "t_string_memory_ptr": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Pellet)3928_storage": {
+        "encoding": "inplace",
+        "label": "struct Trident.Pellet",
+        "members": [
+          {
+            "astId": 3923,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "status",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3925,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "exitPoint",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3927,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "exitTimestamp",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "96"
+      },
+      "t_struct(SupplyOrder)3941_storage": {
+        "encoding": "inplace",
+        "label": "struct Trident.SupplyOrder",
+        "members": [
+          {
+            "astId": 3930,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "soId",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3932,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "prepPo",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3934,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "pelletsCid",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3936,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "warpingCid",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3938,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "sizingCid",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3940,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "loomshedCid",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_string_storage"
+          }
+        ],
+        "numberOfBytes": "192"
+      },
+      "t_struct(Warehouse)3959_storage": {
+        "encoding": "inplace",
+        "label": "struct Trident.Warehouse",
+        "members": [
+          {
+            "astId": 3944,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "pelletIds",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_array(t_string_storage)dyn_storage"
+          },
+          {
+            "astId": 3946,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "binId",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3948,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "numberOfCones",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 3950,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "quantity",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 3952,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "yarnUnit",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3954,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "employeeId",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3956,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "exitPoint",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3958,
+            "contract": "contracts/Trident.sol:Trident",
+            "label": "exitTimestamp",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

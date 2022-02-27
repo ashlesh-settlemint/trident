@@ -1,0 +1,14 @@
+{
+  "output": "generated/solidity-empty.",
+  "chain": "localhost",
+  "datasources": [
+    {
+      "name": "Example",
+      "address": "0x6458B5E9Bd7D603a57918e2C52Ed1AEBee1b86C0",
+      "startBlock": 1,
+      "module": [
+        "ownable"
+      ]
+    }
+  ]
+}
