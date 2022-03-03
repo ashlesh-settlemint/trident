@@ -14,7 +14,7 @@ export function handleLoom(event: LoomEvent): void {
     event.params.soId.toString()
   ]);
 
-  const loomshedCid = event.params.loomshedCid.toHexString();
+  const loomshedCid = event.params.loomshedCid.toString();
   log.debug('console loomshed', [loomshedCid]);
 
   const loomshedBytes = ipfs.cat(loomshedCid);
