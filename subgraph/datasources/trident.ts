@@ -21,32 +21,31 @@ export function handleLoom(event: LoomEvent): void {
   log.debug('console loomshedBytes', ['1111111']);
   if (loomshedBytes) {
     const loomshedContent = json.try_fromBytes(loomshedBytes);
-  log.debug('console loomshedContent', ['00000000']);
+    log.debug('console loomshedContent', ['00000000']);
 
 
-  if (loomshedContent.isOk && loomshedContent.value.kind == JSONValueKind.OBJECT) {
-    const loomshedMetadata = loomshedContent.value.toObject();
+    if (loomshedContent.isOk && loomshedContent.value.kind == JSONValueKind.OBJECT) {
+      const loomshedMetadata = loomshedContent.value.toObject();
 
-    const fabricId = loomshedMetadata.get('fabricId');
-    loom.fabricId = fabricId ? fabricId.toString() : 'null';
+      const fabricId = loomshedMetadata.get('fabricId');
+      loom.fabricId = fabricId ? fabricId.toString() : 'null';
 
-    const soId = loomshedMetadata.get('soId');
-    loom.soId = soId ? soId.toString() : 'null';
+      const soId = loomshedMetadata.get('soId');
+      loom.soId = soId ? soId.toString() : 'null';
 
-    const machineId = loomshedMetadata.get('machineId');
-    loom.machineId = machineId ? machineId.toString() : 'null';
+      const machineId = loomshedMetadata.get('machineId');
+      loom.machineId = machineId ? machineId.toString() : 'null';
 
-    const entryTimestamp = loomshedMetadata.get('entryTimestamp');
-    loom.entryTimestamp = entryTimestamp ? entryTimestamp.toString() : 'null';
+      const entryTimestamp = loomshedMetadata.get('entryTimestamp');
+      loom.entryTimestamp = entryTimestamp ? entryTimestamp.toString() : 'null';
 
-    const exitTimestamp = loomshedMetadata.get('exitTimestamp');
-    loom.exitTimestamp = exitTimestamp ? exitTimestamp.toString() : 'null';
+      const exitTimestamp = loomshedMetadata.get('exitTimestamp');
+      loom.exitTimestamp = exitTimestamp ? exitTimestamp.toString() : 'null';
 
-    const empId = loomshedMetadata.get('empId');
-    loom.empId = empId ? empId.toString() : 'null';
+      const empId = loomshedMetadata.get('empId');
+      loom.empId = empId ? empId.toString() : 'null';
 
+    }
   }
-
   loom.save();
 }
-
