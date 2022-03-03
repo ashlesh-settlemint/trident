@@ -237,6 +237,100 @@ export class OwnershipTransferred extends Entity {
   }
 }
 
+export class Loomshed extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("soId", Value.fromString(""));
+    this.set("fabricId", Value.fromString(""));
+    this.set("machineId", Value.fromString(""));
+    this.set("entryTimestamp", Value.fromString(""));
+    this.set("exitTimestamp", Value.fromString(""));
+    this.set("empId", Value.fromString(""));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Loomshed entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Loomshed entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Loomshed", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Loomshed | null {
+    return changetype<Loomshed | null>(store.get("Loomshed", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get soId(): string {
+    let value = this.get("soId");
+    return value!.toString();
+  }
+
+  set soId(value: string) {
+    this.set("soId", Value.fromString(value));
+  }
+
+  get fabricId(): string {
+    let value = this.get("fabricId");
+    return value!.toString();
+  }
+
+  set fabricId(value: string) {
+    this.set("fabricId", Value.fromString(value));
+  }
+
+  get machineId(): string {
+    let value = this.get("machineId");
+    return value!.toString();
+  }
+
+  set machineId(value: string) {
+    this.set("machineId", Value.fromString(value));
+  }
+
+  get entryTimestamp(): string {
+    let value = this.get("entryTimestamp");
+    return value!.toString();
+  }
+
+  set entryTimestamp(value: string) {
+    this.set("entryTimestamp", Value.fromString(value));
+  }
+
+  get exitTimestamp(): string {
+    let value = this.get("exitTimestamp");
+    return value!.toString();
+  }
+
+  set exitTimestamp(value: string) {
+    this.set("exitTimestamp", Value.fromString(value));
+  }
+
+  get empId(): string {
+    let value = this.get("empId");
+    return value!.toString();
+  }
+
+  set empId(value: string) {
+    this.set("empId", Value.fromString(value));
+  }
+}
+
 export class Transaction extends Entity {
   constructor(id: string) {
     super();

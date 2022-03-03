@@ -19,6 +19,15 @@ type OwnershipTransferred implements Event @entity {
 	contract: Ownable!
 	owner: Account!
 }
+type Loomshed @entity {
+	id: ID!
+	soId: String!
+	fabricId: String!
+	machineId: String!
+	entryTimestamp: String!
+	exitTimestamp: String!
+	empId: String!
+}
 interface Event {
 	id: ID!
 	transaction: Transaction!

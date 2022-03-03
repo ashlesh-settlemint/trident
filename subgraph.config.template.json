@@ -3,10 +3,10 @@
   "chain": "localhost",
   "datasources": [
     {
-      "name": "Example",
+      "name": "Trident",
       "address": "0x0000000000000000000000000000000000000000",
       "startBlock": 0,
-      "module": ["ownable"]
+      "module": ["ownable", "trident"]
     }
   ]
 }

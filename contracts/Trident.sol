@@ -48,7 +48,13 @@ contract Trident is Ownable {
     string warpingCid;
     string sizingCid;
     string loomshedCid;
+    string fabricIds;
   }
+
+  // struct Fabric {
+  //   gfInspection,
+  // }
+
 
   struct Warehouse {
     string[] pelletIds;
@@ -77,8 +83,7 @@ contract Trident is Ownable {
   event Loom(string indexed soId, string indexed loomshedCid);
 
   /*
-    Questions -
-    1. Will all pellets from GRI be moved from warehouse to the warping unit?
+    TODO - Add SO id to the pellet Details
   */
   function movePelletsFromWarehouse(
     string[] memory pelletIds,
@@ -143,16 +148,10 @@ contract Trident is Ownable {
     string memory soId,
     string memory sizingCid
   ) external {
-    if(bytes(_soIdToSupplyDetails[soId].sizingCid).length == 0) {
-      SupplyOrder memory supplyOrder;
-      supplyOrder.soId = soId;
-      supplyOrder.sizingCid = sizingCid;
-      _soIdToSupplyDetails[soId] = supplyOrder;
-      // _supplyOrders.push(soId);
-    } else {
+
       SupplyOrder storage supplyOrder = _soIdToSupplyDetails[soId];
       supplyOrder.sizingCid = sizingCid;
-    }
+
   }
 
   function moveWarperBeamsToWarping(
@@ -175,17 +174,17 @@ contract Trident is Ownable {
     string memory soId,
     string memory loomshedCid
   ) external {
-    if(bytes(_soIdToSupplyDetails[soId].loomshedCid).length == 0) {
-      SupplyOrder memory supplyOrder;
-      supplyOrder.soId = soId;
-      supplyOrder.loomshedCid = loomshedCid;
-      _soIdToSupplyDetails[soId] = supplyOrder;
-      // _supplyOrders.push(soId);
-    } else {
+
       SupplyOrder storage supplyOrder = _soIdToSupplyDetails[soId];
       supplyOrder.loomshedCid = loomshedCid;
-    }
+
 
     emit Loom(soId, loomshedCid);
   }
+
+  function getSoDetails(string memory soId) external view returns(SupplyOrder memory){
+    return _soIdToSupplyDetails[soId];
+  }
+
+  // function gfProduced(string memory soId, string[] memory fabricIds)
 }

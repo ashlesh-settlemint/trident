@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ownable
-    network: localhost
+    network: node01-c005
     source:
-      address: "0x6458B5E9Bd7D603a57918e2C52Ed1AEBee1b86C0"
+      address: "0xBa41cAA9A1de6aEe2797abC3e5262164F8e09B7A"
       abi: Ownable
-      startBlock: 1
+      startBlock: 105453
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -22,3 +22,23 @@ dataSources:
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
       file: ../node_modules/@openzeppelin/subgraphs/src/datasources/ownable.ts
+  - kind: ethereum/contract
+    name: trident
+    network: node01-c005
+    source:
+      address: "0xBa41cAA9A1de6aEe2797abC3e5262164F8e09B7A"
+      abi: Trident
+      startBlock: 105453
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Loomshed
+      abis:
+        - name: Trident
+          file: ../abi/Trident.json
+      eventHandlers:
+        - event: Loom(indexed string,indexed string)
+          handler: handleLoom
+      file: ../subgraph/datasources/trident.ts

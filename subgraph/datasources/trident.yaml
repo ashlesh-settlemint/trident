@@ -1,0 +1,20 @@
+  - kind: ethereum/contract
+    name: {id}
+    network: {chain}
+    source:
+      address: "{address}"
+      abi: Trident
+      startBlock: {startBlock}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Loomshed
+      abis:
+        - name: Trident
+          file: {root}/abi/Trident.json
+      eventHandlers:
+        - event: Loom(indexed string,indexed string)
+          handler: handleLoom
+      file: {file}

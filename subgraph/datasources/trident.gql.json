@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Loomshed",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "soId", "type":"String!"},
+      {"name": "fabricId", "type":"String!"},
+      {"name": "machineId", "type":"String!"},
+      {"name": "entryTimestamp", "type":"String!"},
+      {"name": "exitTimestamp", "type":"String!"},
+      {"name": "empId", "type":"String!"}
+    ]
+  }
+]
+
