@@ -10,11 +10,15 @@
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
+        - SupplyOrder
+        - Pellet
         - Loomshed
       abis:
         - name: Trident
           file: {root}/abi/Trident.json
       eventHandlers:
-        - event: Loom(indexed string,indexed string)
-          handler: handleLoom
+        - event: AddPelletEvent(string,string)
+          handler: handleAddPellet
+        - event: ExitPelletEvent(string,string,string)
+          handler: handleExitPellet
       file: {file}

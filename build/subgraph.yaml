@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0xBa41cAA9A1de6aEe2797abC3e5262164F8e09B7A"
+      address: "0x0f9d4F22c9CCF3834b4909C23a540d08e55757b2"
       abi: Ownable
-      startBlock: 105453
+      startBlock: 126549
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,19 +26,23 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0xBa41cAA9A1de6aEe2797abC3e5262164F8e09B7A"
+      address: "0x0f9d4F22c9CCF3834b4909C23a540d08e55757b2"
       abi: Trident
-      startBlock: 105453
+      startBlock: 126549
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
+        - SupplyOrder
+        - Pellet
         - Loomshed
       abis:
         - name: Trident
           file: abi/Trident.json
       eventHandlers:
-        - event: Loom(indexed string,indexed string)
-          handler: handleLoom
+        - event: AddPelletEvent(string,string)
+          handler: handleAddPellet
+        - event: ExitPelletEvent(string,string,string)
+          handler: handleExitPellet
       file: trident/trident.wasm

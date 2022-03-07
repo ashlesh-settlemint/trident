@@ -237,6 +237,336 @@ export class OwnershipTransferred extends Entity {
   }
 }
 
+export class SupplyOrder extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save SupplyOrder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save SupplyOrder entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("SupplyOrder", id.toString(), this);
+    }
+  }
+
+  static load(id: string): SupplyOrder | null {
+    return changetype<SupplyOrder | null>(store.get("SupplyOrder", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get prepPo(): string | null {
+    let value = this.get("prepPo");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set prepPo(value: string | null) {
+    if (!value) {
+      this.unset("prepPo");
+    } else {
+      this.set("prepPo", Value.fromString(<string>value));
+    }
+  }
+
+  get pelletIds(): Array<string> {
+    let value = this.get("pelletIds");
+    return value!.toStringArray();
+  }
+
+  set pelletIds(value: Array<string>) {
+    this.set("pelletIds", Value.fromStringArray(value));
+  }
+}
+
+export class Pellet extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Pellet entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Pellet entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Pellet", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Pellet | null {
+    return changetype<Pellet | null>(store.get("Pellet", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get materialInfo(): string | null {
+    let value = this.get("materialInfo");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set materialInfo(value: string | null) {
+    if (!value) {
+      this.unset("materialInfo");
+    } else {
+      this.set("materialInfo", Value.fromString(<string>value));
+    }
+  }
+
+  get materialType(): string | null {
+    let value = this.get("materialType");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set materialType(value: string | null) {
+    if (!value) {
+      this.unset("materialType");
+    } else {
+      this.set("materialType", Value.fromString(<string>value));
+    }
+  }
+
+  get netWeight(): string | null {
+    let value = this.get("netWeight");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set netWeight(value: string | null) {
+    if (!value) {
+      this.unset("netWeight");
+    } else {
+      this.set("netWeight", Value.fromString(<string>value));
+    }
+  }
+
+  get grossWeight(): string | null {
+    let value = this.get("grossWeight");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set grossWeight(value: string | null) {
+    if (!value) {
+      this.unset("grossWeight");
+    } else {
+      this.set("grossWeight", Value.fromString(<string>value));
+    }
+  }
+
+  get coneQuantity(): string | null {
+    let value = this.get("coneQuantity");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set coneQuantity(value: string | null) {
+    if (!value) {
+      this.unset("coneQuantity");
+    } else {
+      this.set("coneQuantity", Value.fromString(<string>value));
+    }
+  }
+
+  get serialNumber(): string | null {
+    let value = this.get("serialNumber");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set serialNumber(value: string | null) {
+    if (!value) {
+      this.unset("serialNumber");
+    } else {
+      this.set("serialNumber", Value.fromString(<string>value));
+    }
+  }
+
+  get entryTimestamp(): string | null {
+    let value = this.get("entryTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set entryTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("entryTimestamp");
+    } else {
+      this.set("entryTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get lotNumber(): string | null {
+    let value = this.get("lotNumber");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set lotNumber(value: string | null) {
+    if (!value) {
+      this.unset("lotNumber");
+    } else {
+      this.set("lotNumber", Value.fromString(<string>value));
+    }
+  }
+
+  get unloadingTimestamp(): string | null {
+    let value = this.get("unloadingTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set unloadingTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("unloadingTimestamp");
+    } else {
+      this.set("unloadingTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get binNumber(): string | null {
+    let value = this.get("binNumber");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set binNumber(value: string | null) {
+    if (!value) {
+      this.unset("binNumber");
+    } else {
+      this.set("binNumber", Value.fromString(<string>value));
+    }
+  }
+
+  get entryEmpId(): string | null {
+    let value = this.get("entryEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set entryEmpId(value: string | null) {
+    if (!value) {
+      this.unset("entryEmpId");
+    } else {
+      this.set("entryEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get exitTimestamp(): string | null {
+    let value = this.get("exitTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set exitTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("exitTimestamp");
+    } else {
+      this.set("exitTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get exitEmpId(): string | null {
+    let value = this.get("exitEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set exitEmpId(value: string | null) {
+    if (!value) {
+      this.unset("exitEmpId");
+    } else {
+      this.set("exitEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get soId(): string | null {
+    let value = this.get("soId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
+  }
+}
+
 export class Loomshed extends Entity {
   constructor(id: string) {
     super();

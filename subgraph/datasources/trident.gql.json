@@ -1,5 +1,33 @@
 [
   {
+    "name": "SupplyOrder",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "prepPo", "type":"String"},
+      {"name": "pelletIds", "type": "Pellet!", "derived": "soId" }
+    ]
+  },
+  {
+    "name": "Pellet",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "materialInfo", "type": "String"},
+      {"name": "materialType", "type": "String"},
+      {"name": "netWeight", "type": "String"},
+      {"name": "grossWeight", "type": "String"},
+      {"name": "coneQuantity", "type": "String"},
+      {"name": "serialNumber", "type": "String"},
+      {"name": "entryTimestamp", "type": "String"},
+      {"name": "lotNumber", "type": "String"},
+      {"name": "unloadingTimestamp", "type": "String"},
+      {"name": "binNumber", "type": "String"},
+      {"name": "entryEmpId", "type": "String"},
+      {"name": "exitTimestamp", "type": "String"},
+      {"name": "exitEmpId", "type": "String"},
+      {"name": "soId", "type": "SupplyOrder"}
+    ]
+  },
+  {
     "name": "Loomshed",
     "fields": [
       {"name": "id", "type":"ID!"},
@@ -12,4 +40,3 @@
     ]
   }
 ]
-

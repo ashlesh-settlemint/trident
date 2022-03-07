@@ -19,6 +19,28 @@ type OwnershipTransferred implements Event @entity {
 	contract: Ownable!
 	owner: Account!
 }
+type SupplyOrder @entity {
+	id: ID!
+	prepPo: String
+	pelletIds: [Pellet!]! @derivedFrom(field: "soId")
+}
+type Pellet @entity {
+	id: ID!
+	materialInfo: String
+	materialType: String
+	netWeight: String
+	grossWeight: String
+	coneQuantity: String
+	serialNumber: String
+	entryTimestamp: String
+	lotNumber: String
+	unloadingTimestamp: String
+	binNumber: String
+	entryEmpId: String
+	exitTimestamp: String
+	exitEmpId: String
+	soId: SupplyOrder
+}
 type Loomshed @entity {
 	id: ID!
 	soId: String!
