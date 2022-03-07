@@ -17,10 +17,10 @@
       {"name": "grossWeight", "type": "String"},
       {"name": "coneQuantity", "type": "String"},
       {"name": "serialNumber", "type": "String"},
-      {"name": "entryTimestamp", "type": "String"},
       {"name": "lotNumber", "type": "String"},
       {"name": "unloadingTimestamp", "type": "String"},
       {"name": "binNumber", "type": "String"},
+      {"name": "entryTimestamp", "type": "String"},
       {"name": "entryEmpId", "type": "String"},
       {"name": "exitTimestamp", "type": "String"},
       {"name": "exitEmpId", "type": "String"},
@@ -28,15 +28,23 @@
     ]
   },
   {
-    "name": "Loomshed",
+    "name": "WarpInput",
     "fields": [
       {"name": "id", "type":"ID!"},
       {"name": "soId", "type":"String!"},
-      {"name": "fabricId", "type":"String!"},
-      {"name": "machineId", "type":"String!"},
-      {"name": "entryTimestamp", "type":"String!"},
-      {"name": "exitTimestamp", "type":"String!"},
-      {"name": "empId", "type":"String!"}
+      {"name": "creelMachineId", "type":"String!"},
+      {"name": "prepPoId", "type":"String!"},
+      {"name": "loadEmpId", "type":"String!"},
+      {"name": "loadTimestamp", "type":"String!"},
+      {"name": "pelletIds", "type": "[String!]!" },
+      {"name": "warperBeamIds", "type": "WarperOutputBeam!", "derived": "compositekey" }
+    ]
+  },
+  {
+    "name": "WarperOutputBeam",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "compositekey", "type":"WarpInput"}
     ]
   }
 ]

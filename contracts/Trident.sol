@@ -50,6 +50,7 @@ contract Trident is Ownable {
 
   event AddPelletEvent(string pelletId, string pelletDetailsCid);
   event ExitPelletEvent(string soId, string pelletId, string pelletExitCid);
+  event LoadPelletEvent(string soId, string pelletId, string creelMachineId, string warpMachineLoadingCid);
 
   function addPellet(string memory pelletId, string memory pelletDetailsCid) external {
     _pettletIdToCid[pelletId] = pelletDetailsCid;
@@ -65,5 +66,16 @@ contract Trident is Ownable {
     _pelletExitDetails[pelletId] = pelletExitCid;
 
     emit ExitPelletEvent(soId, pelletId, pelletExitCid);
+  }
+
+  // Warping section
+
+  function loadPelletToWarpMachine(
+    string memory soId,
+    string memory creelMachineId,
+    string memory pelletId,
+    string memory warpMachineLoadingCid
+  ) external {
+    emit LoadPelletEvent(soId, pelletId, creelMachineId, warpMachineLoadingCid);
   }
 }

@@ -58,6 +58,36 @@ export class ExitPelletEvent__Params {
   }
 }
 
+export class LoadPelletEvent extends ethereum.Event {
+  get params(): LoadPelletEvent__Params {
+    return new LoadPelletEvent__Params(this);
+  }
+}
+
+export class LoadPelletEvent__Params {
+  _event: LoadPelletEvent;
+
+  constructor(event: LoadPelletEvent) {
+    this._event = event;
+  }
+
+  get soId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get pelletId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get creelMachineId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get warpMachineLoadingCid(): string {
+    return this._event.parameters[3].value.toString();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -131,6 +161,48 @@ export class AddPelletCall__Outputs {
   _call: AddPelletCall;
 
   constructor(call: AddPelletCall) {
+    this._call = call;
+  }
+}
+
+export class LoadPelletToWarpMachineCall extends ethereum.Call {
+  get inputs(): LoadPelletToWarpMachineCall__Inputs {
+    return new LoadPelletToWarpMachineCall__Inputs(this);
+  }
+
+  get outputs(): LoadPelletToWarpMachineCall__Outputs {
+    return new LoadPelletToWarpMachineCall__Outputs(this);
+  }
+}
+
+export class LoadPelletToWarpMachineCall__Inputs {
+  _call: LoadPelletToWarpMachineCall;
+
+  constructor(call: LoadPelletToWarpMachineCall) {
+    this._call = call;
+  }
+
+  get soId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get creelMachineId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get pelletId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get warpMachineLoadingCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class LoadPelletToWarpMachineCall__Outputs {
+  _call: LoadPelletToWarpMachineCall;
+
+  constructor(call: LoadPelletToWarpMachineCall) {
     this._call = call;
   }
 }

@@ -12,7 +12,8 @@
       entities:
         - SupplyOrder
         - Pellet
-        - Loomshed
+        - WarpInput
+        - WarperOutputBeam
       abis:
         - name: Trident
           file: {root}/abi/Trident.json
@@ -21,4 +22,6 @@
           handler: handleAddPellet
         - event: ExitPelletEvent(string,string,string)
           handler: handleExitPellet
+        - event: LoadPelletEvent(string,string,string,string)
+          handler: handleLoadPellet
       file: {file}

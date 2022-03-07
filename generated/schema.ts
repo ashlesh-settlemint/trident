@@ -430,23 +430,6 @@ export class Pellet extends Entity {
     }
   }
 
-  get entryTimestamp(): string | null {
-    let value = this.get("entryTimestamp");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set entryTimestamp(value: string | null) {
-    if (!value) {
-      this.unset("entryTimestamp");
-    } else {
-      this.set("entryTimestamp", Value.fromString(<string>value));
-    }
-  }
-
   get lotNumber(): string | null {
     let value = this.get("lotNumber");
     if (!value || value.kind == ValueKind.NULL) {
@@ -495,6 +478,23 @@ export class Pellet extends Entity {
       this.unset("binNumber");
     } else {
       this.set("binNumber", Value.fromString(<string>value));
+    }
+  }
+
+  get entryTimestamp(): string | null {
+    let value = this.get("entryTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set entryTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("entryTimestamp");
+    } else {
+      this.set("entryTimestamp", Value.fromString(<string>value));
     }
   }
 
@@ -567,34 +567,34 @@ export class Pellet extends Entity {
   }
 }
 
-export class Loomshed extends Entity {
+export class WarpInput extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
 
     this.set("soId", Value.fromString(""));
-    this.set("fabricId", Value.fromString(""));
-    this.set("machineId", Value.fromString(""));
-    this.set("entryTimestamp", Value.fromString(""));
-    this.set("exitTimestamp", Value.fromString(""));
-    this.set("empId", Value.fromString(""));
+    this.set("creelMachineId", Value.fromString(""));
+    this.set("prepPoId", Value.fromString(""));
+    this.set("loadEmpId", Value.fromString(""));
+    this.set("loadTimestamp", Value.fromString(""));
+    this.set("pelletIds", Value.fromStringArray(new Array(0)));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save Loomshed entity without an ID");
+    assert(id != null, "Cannot save WarpInput entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save Loomshed entity with non-string ID. " +
+        "Cannot save WarpInput entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("Loomshed", id.toString(), this);
+      store.set("WarpInput", id.toString(), this);
     }
   }
 
-  static load(id: string): Loomshed | null {
-    return changetype<Loomshed | null>(store.get("Loomshed", id));
+  static load(id: string): WarpInput | null {
+    return changetype<WarpInput | null>(store.get("WarpInput", id));
   }
 
   get id(): string {
@@ -615,49 +615,110 @@ export class Loomshed extends Entity {
     this.set("soId", Value.fromString(value));
   }
 
-  get fabricId(): string {
-    let value = this.get("fabricId");
+  get creelMachineId(): string {
+    let value = this.get("creelMachineId");
     return value!.toString();
   }
 
-  set fabricId(value: string) {
-    this.set("fabricId", Value.fromString(value));
+  set creelMachineId(value: string) {
+    this.set("creelMachineId", Value.fromString(value));
   }
 
-  get machineId(): string {
-    let value = this.get("machineId");
+  get prepPoId(): string {
+    let value = this.get("prepPoId");
     return value!.toString();
   }
 
-  set machineId(value: string) {
-    this.set("machineId", Value.fromString(value));
+  set prepPoId(value: string) {
+    this.set("prepPoId", Value.fromString(value));
   }
 
-  get entryTimestamp(): string {
-    let value = this.get("entryTimestamp");
+  get loadEmpId(): string {
+    let value = this.get("loadEmpId");
     return value!.toString();
   }
 
-  set entryTimestamp(value: string) {
-    this.set("entryTimestamp", Value.fromString(value));
+  set loadEmpId(value: string) {
+    this.set("loadEmpId", Value.fromString(value));
   }
 
-  get exitTimestamp(): string {
-    let value = this.get("exitTimestamp");
+  get loadTimestamp(): string {
+    let value = this.get("loadTimestamp");
     return value!.toString();
   }
 
-  set exitTimestamp(value: string) {
-    this.set("exitTimestamp", Value.fromString(value));
+  set loadTimestamp(value: string) {
+    this.set("loadTimestamp", Value.fromString(value));
   }
 
-  get empId(): string {
-    let value = this.get("empId");
+  get pelletIds(): Array<string> {
+    let value = this.get("pelletIds");
+    return value!.toStringArray();
+  }
+
+  set pelletIds(value: Array<string>) {
+    this.set("pelletIds", Value.fromStringArray(value));
+  }
+
+  get warperBeamIds(): Array<string> {
+    let value = this.get("warperBeamIds");
+    return value!.toStringArray();
+  }
+
+  set warperBeamIds(value: Array<string>) {
+    this.set("warperBeamIds", Value.fromStringArray(value));
+  }
+}
+
+export class WarperOutputBeam extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save WarperOutputBeam entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save WarperOutputBeam entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("WarperOutputBeam", id.toString(), this);
+    }
+  }
+
+  static load(id: string): WarperOutputBeam | null {
+    return changetype<WarperOutputBeam | null>(
+      store.get("WarperOutputBeam", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
     return value!.toString();
   }
 
-  set empId(value: string) {
-    this.set("empId", Value.fromString(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get compositekey(): string | null {
+    let value = this.get("compositekey");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set compositekey(value: string | null) {
+    if (!value) {
+      this.unset("compositekey");
+    } else {
+      this.set("compositekey", Value.fromString(<string>value));
+    }
   }
 }
 

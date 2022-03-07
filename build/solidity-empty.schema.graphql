@@ -32,23 +32,28 @@ type Pellet @entity {
 	grossWeight: String
 	coneQuantity: String
 	serialNumber: String
-	entryTimestamp: String
 	lotNumber: String
 	unloadingTimestamp: String
 	binNumber: String
+	entryTimestamp: String
 	entryEmpId: String
 	exitTimestamp: String
 	exitEmpId: String
 	soId: SupplyOrder
 }
-type Loomshed @entity {
+type WarpInput @entity {
 	id: ID!
 	soId: String!
-	fabricId: String!
-	machineId: String!
-	entryTimestamp: String!
-	exitTimestamp: String!
-	empId: String!
+	creelMachineId: String!
+	prepPoId: String!
+	loadEmpId: String!
+	loadTimestamp: String!
+	pelletIds: [String!]!
+	warperBeamIds: [WarperOutputBeam!]! @derivedFrom(field: "compositekey")
+}
+type WarperOutputBeam @entity {
+	id: ID!
+	compositekey: WarpInput
 }
 interface Event {
 	id: ID!

@@ -4,8 +4,8 @@
   "datasources": [
     {
       "name": "Trident",
-      "address": "0x0f9d4F22c9CCF3834b4909C23a540d08e55757b2",
-      "startBlock": 126549,
+      "address": "0x0bAdc7CCC033d8d8aEE5614B600bbfD785F3E1DE",
+      "startBlock": 145956,
       "module": [
         "ownable",
         "trident"

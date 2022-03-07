@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0x0f9d4F22c9CCF3834b4909C23a540d08e55757b2"
+      address: "0x0bAdc7CCC033d8d8aEE5614B600bbfD785F3E1DE"
       abi: Ownable
-      startBlock: 126549
+      startBlock: 145956
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0x0f9d4F22c9CCF3834b4909C23a540d08e55757b2"
+      address: "0x0bAdc7CCC033d8d8aEE5614B600bbfD785F3E1DE"
       abi: Trident
-      startBlock: 126549
+      startBlock: 145956
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -36,7 +36,8 @@ dataSources:
       entities:
         - SupplyOrder
         - Pellet
-        - Loomshed
+        - WarpInput
+        - WarperOutputBeam
       abis:
         - name: Trident
           file: ../abi/Trident.json
@@ -45,4 +46,6 @@ dataSources:
           handler: handleAddPellet
         - event: ExitPelletEvent(string,string,string)
           handler: handleExitPellet
+        - event: LoadPelletEvent(string,string,string,string)
+          handler: handleLoadPellet
       file: ../subgraph/datasources/trident.ts
