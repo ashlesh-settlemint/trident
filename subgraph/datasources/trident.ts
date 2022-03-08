@@ -1,6 +1,6 @@
 import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts';
-import { Pellet, SupplyOrder, WarpInput, WarperOutputBeam } from '../../generated/schema';
-import { AddPelletEvent, ExitPelletEvent, LoadPelletEvent } from '../../generated/trident/Trident';
+import { Pellet, SupplyOrder, WarpInput } from '../../generated/schema';
+import { AddPelletEvent, ExitPelletEvent, LoadPelletEvent, WarpingOutputEvent } from '../../generated/trident/Trident';
 
 export function handleAddPellet(event: AddPelletEvent): void {
   const pellet = new Pellet(event.params.pelletId);
@@ -97,10 +97,10 @@ export function handleLoadPellet(event: LoadPelletEvent): void {
   const pelletId = event.params.pelletId;
   // warpInput.pelletIds.push(pelletId ? pelletId : 'null');
 
-  let pelletIds = warpInput.pelletIds
-pelletIds.push(pelletId ? pelletId : 'null')
-warpInput.pelletIds = pelletIds
-warpInput.save()
+  const pelletIds = warpInput.pelletIds
+  pelletIds.push(pelletId ? pelletId : 'null')
+  warpInput.pelletIds = pelletIds
+  warpInput.save()
 
   const warpInputBytes = ipfs.cat(event.params.warpMachineLoadingCid);
 
@@ -134,4 +134,55 @@ warpInput.save()
   }
 
   warpInput.save();
+}
+
+export function handleWarpingOutput(event: WarpingOutputEvent): void {
+  const compositeKey = `${event.params.soId}::${event.params.creelMachineId}`;
+  let warpInput = WarpInput.load(compositeKey);
+
+  log.debug('console compositeKey1 {}', [event.params.creelMachineId]);
+
+  if(warpInput === null) {
+    warpInput = new WarpInput(compositeKey);
+  }
+
+  const warpBeamId = event.params.warpBeamId;
+
+  const warperBeamIds = warpInput.warperBeamIds;
+  warperBeamIds.push(warpBeamId ? warpBeamId : 'null')
+  warpInput.warperBeamIds = warperBeamIds
+  warpInput.save()
+
+  // const warpInputBytes = ipfs.cat(event.params.warpMachineLoadingCid);
+
+  // if(warpInputBytes) {
+  //   const warpInputDetails = json.try_fromBytes(warpInputBytes);
+
+  //   if (warpInputDetails.isOk && warpInputDetails.value.kind == JSONValueKind.OBJECT) {
+  //     const warpInputMetadata = warpInputDetails.value.toObject();
+
+  //     // const pelletId = warpInputMetadata.get('pelletId');
+  //     // warpInput.pelletIds.push(pelletId ? pelletId.toString() : 'null');
+
+  //     // log.debug('console pelletIds {}', [pelletId ? pelletId.toString() : 'null']);
+
+  //     const soId = warpInputMetadata.get('soId');
+  //     warpInput.soId = soId ? soId.toString() : 'null';
+
+  //     const creelMachineId = warpInputMetadata.get('creelMachineId');
+  //     warpInput.creelMachineId = creelMachineId ? creelMachineId.toString() : 'null';
+
+
+  //     const prepPoId = warpInputMetadata.get('prepPoId');
+  //     warpInput.prepPoId = prepPoId ? prepPoId.toString() : 'null';
+
+  //     const loadEmpId = warpInputMetadata.get('loadEmpId');
+  //     warpInput.loadEmpId = loadEmpId ? loadEmpId.toString() : 'null';
+
+  //     const loadTimestamp = warpInputMetadata.get('loadTimestamp');
+  //     warpInput.loadTimestamp = loadTimestamp ? loadTimestamp.toString() : 'null';
+  //   }
+  // }
+
+  // warpInput.save();
 }

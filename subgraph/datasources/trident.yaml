@@ -24,4 +24,6 @@
           handler: handleExitPellet
         - event: LoadPelletEvent(string,string,string,string)
           handler: handleLoadPellet
+        - event: WarpingOutputEvent(string,string,string,string)
+          handler: handleWarpingOutput
       file: {file}

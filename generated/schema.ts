@@ -578,6 +578,7 @@ export class WarpInput extends Entity {
     this.set("loadEmpId", Value.fromString(""));
     this.set("loadTimestamp", Value.fromString(""));
     this.set("pelletIds", Value.fromStringArray(new Array(0)));
+    this.set("warperBeamIds", Value.fromStringArray(new Array(0)));
   }
 
   save(): void {

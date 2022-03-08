@@ -110,6 +110,36 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class WarpingOutputEvent extends ethereum.Event {
+  get params(): WarpingOutputEvent__Params {
+    return new WarpingOutputEvent__Params(this);
+  }
+}
+
+export class WarpingOutputEvent__Params {
+  _event: WarpingOutputEvent;
+
+  constructor(event: WarpingOutputEvent) {
+    this._event = event;
+  }
+
+  get warpBeamId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get creelMachineId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get warpMachineOutputCid(): string {
+    return this._event.parameters[3].value.toString();
+  }
+}
+
 export class Trident extends ethereum.SmartContract {
   static bind(address: Address): Trident {
     return new Trident("Trident", address);
@@ -161,6 +191,48 @@ export class AddPelletCall__Outputs {
   _call: AddPelletCall;
 
   constructor(call: AddPelletCall) {
+    this._call = call;
+  }
+}
+
+export class AddWarpingOutputCall extends ethereum.Call {
+  get inputs(): AddWarpingOutputCall__Inputs {
+    return new AddWarpingOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddWarpingOutputCall__Outputs {
+    return new AddWarpingOutputCall__Outputs(this);
+  }
+}
+
+export class AddWarpingOutputCall__Inputs {
+  _call: AddWarpingOutputCall;
+
+  constructor(call: AddWarpingOutputCall) {
+    this._call = call;
+  }
+
+  get warpBeamId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get creelMachineId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get warpMachineOutputCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class AddWarpingOutputCall__Outputs {
+  _call: AddWarpingOutputCall;
+
+  constructor(call: AddWarpingOutputCall) {
     this._call = call;
   }
 }

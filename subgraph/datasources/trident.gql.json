@@ -37,7 +37,7 @@
       {"name": "loadEmpId", "type":"String!"},
       {"name": "loadTimestamp", "type":"String!"},
       {"name": "pelletIds", "type": "[String!]!" },
-      {"name": "warperBeamIds", "type": "WarperOutputBeam!", "derived": "compositekey" }
+      {"name": "warperBeamIds", "type": "[String!]!" }
     ]
   },
   {

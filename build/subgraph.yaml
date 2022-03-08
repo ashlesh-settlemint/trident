@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0x0bAdc7CCC033d8d8aEE5614B600bbfD785F3E1DE"
+      address: "0xE63296e992D9acEf6c1c9f5B25519254E5c7BCcf"
       abi: Ownable
-      startBlock: 145956
+      startBlock: 149001
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0x0bAdc7CCC033d8d8aEE5614B600bbfD785F3E1DE"
+      address: "0xE63296e992D9acEf6c1c9f5B25519254E5c7BCcf"
       abi: Trident
-      startBlock: 145956
+      startBlock: 149001
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -48,4 +48,6 @@ dataSources:
           handler: handleExitPellet
         - event: LoadPelletEvent(string,string,string,string)
           handler: handleLoadPellet
+        - event: WarpingOutputEvent(string,string,string,string)
+          handler: handleWarpingOutput
       file: trident/trident.wasm
