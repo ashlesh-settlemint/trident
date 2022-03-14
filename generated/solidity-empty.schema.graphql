@@ -48,12 +48,22 @@ type WarpInput @entity {
 	prepPoId: String!
 	loadEmpId: String!
 	loadTimestamp: String!
+	outputEmpId: String!
+	outputTimestamp: String!
 	pelletIds: [String!]!
 	warperBeamIds: [String!]!
 }
-type WarperOutputBeam @entity {
+type SizingInput @entity {
 	id: ID!
-	compositekey: WarpInput
+	soId: String!
+	sizingMachineId: String!
+	prepPoId: String!
+	loadEmpId: String!
+	loadTimestamp: String!
+	outputEmpId: String!
+	outputTimestamp: String!
+	warperBeamIds: [String!]!
+	weaverBeamIds: [String!]!
 }
 interface Event {
 	id: ID!

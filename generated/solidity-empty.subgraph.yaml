@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0xE63296e992D9acEf6c1c9f5B25519254E5c7BCcf"
+      address: "0x8ee707713c210EA69c6515CbC903066ca5474d3F"
       abi: Ownable
-      startBlock: 149001
+      startBlock: 184392
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0xE63296e992D9acEf6c1c9f5B25519254E5c7BCcf"
+      address: "0x8ee707713c210EA69c6515CbC903066ca5474d3F"
       abi: Trident
-      startBlock: 149001
+      startBlock: 184392
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -50,4 +50,8 @@ dataSources:
           handler: handleLoadPellet
         - event: WarpingOutputEvent(string,string,string,string)
           handler: handleWarpingOutput
+        - event: LoadWarperBeamEvent(string,string,string,string)
+          handler: handleLoadWarperBeam
+        - event: SizingOutputEvent(string,string,string,string)
+          handler: handleSizingOutput
       file: ../subgraph/datasources/trident.ts

@@ -88,6 +88,36 @@ export class LoadPelletEvent__Params {
   }
 }
 
+export class LoadWarperBeamEvent extends ethereum.Event {
+  get params(): LoadWarperBeamEvent__Params {
+    return new LoadWarperBeamEvent__Params(this);
+  }
+}
+
+export class LoadWarperBeamEvent__Params {
+  _event: LoadWarperBeamEvent;
+
+  constructor(event: LoadWarperBeamEvent) {
+    this._event = event;
+  }
+
+  get soId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get warperBeamId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get sizingMachineId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get sizingMachineLoadingCid(): string {
+    return this._event.parameters[3].value.toString();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -107,6 +137,36 @@ export class OwnershipTransferred__Params {
 
   get newOwner(): Address {
     return this._event.parameters[1].value.toAddress();
+  }
+}
+
+export class SizingOutputEvent extends ethereum.Event {
+  get params(): SizingOutputEvent__Params {
+    return new SizingOutputEvent__Params(this);
+  }
+}
+
+export class SizingOutputEvent__Params {
+  _event: SizingOutputEvent;
+
+  constructor(event: SizingOutputEvent) {
+    this._event = event;
+  }
+
+  get weaverBeamId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get sizingMachineId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get sizingMachineOutputCid(): string {
+    return this._event.parameters[3].value.toString();
   }
 }
 
@@ -195,6 +255,48 @@ export class AddPelletCall__Outputs {
   }
 }
 
+export class AddSizingOutputCall extends ethereum.Call {
+  get inputs(): AddSizingOutputCall__Inputs {
+    return new AddSizingOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddSizingOutputCall__Outputs {
+    return new AddSizingOutputCall__Outputs(this);
+  }
+}
+
+export class AddSizingOutputCall__Inputs {
+  _call: AddSizingOutputCall;
+
+  constructor(call: AddSizingOutputCall) {
+    this._call = call;
+  }
+
+  get weaverBeamId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get sizingMachineId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get sizingMachineOutputCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class AddSizingOutputCall__Outputs {
+  _call: AddSizingOutputCall;
+
+  constructor(call: AddSizingOutputCall) {
+    this._call = call;
+  }
+}
+
 export class AddWarpingOutputCall extends ethereum.Call {
   get inputs(): AddWarpingOutputCall__Inputs {
     return new AddWarpingOutputCall__Inputs(this);
@@ -233,6 +335,48 @@ export class AddWarpingOutputCall__Outputs {
   _call: AddWarpingOutputCall;
 
   constructor(call: AddWarpingOutputCall) {
+    this._call = call;
+  }
+}
+
+export class LoadBeamToSizingMachineCall extends ethereum.Call {
+  get inputs(): LoadBeamToSizingMachineCall__Inputs {
+    return new LoadBeamToSizingMachineCall__Inputs(this);
+  }
+
+  get outputs(): LoadBeamToSizingMachineCall__Outputs {
+    return new LoadBeamToSizingMachineCall__Outputs(this);
+  }
+}
+
+export class LoadBeamToSizingMachineCall__Inputs {
+  _call: LoadBeamToSizingMachineCall;
+
+  constructor(call: LoadBeamToSizingMachineCall) {
+    this._call = call;
+  }
+
+  get soId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get sizingMachineId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get warperBeamId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get sizingMachineLoadingCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class LoadBeamToSizingMachineCall__Outputs {
+  _call: LoadBeamToSizingMachineCall;
+
+  constructor(call: LoadBeamToSizingMachineCall) {
     this._call = call;
   }
 }

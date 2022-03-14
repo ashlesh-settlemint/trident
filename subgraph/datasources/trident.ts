@@ -1,6 +1,13 @@
 import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts';
-import { Pellet, SupplyOrder, WarpInput } from '../../generated/schema';
-import { AddPelletEvent, ExitPelletEvent, LoadPelletEvent, WarpingOutputEvent } from '../../generated/trident/Trident';
+import { Pellet, SupplyOrder, WarpInput, SizingInput} from '../../generated/schema';
+import {
+  AddPelletEvent,
+  ExitPelletEvent,
+  LoadPelletEvent,
+  WarpingOutputEvent,
+  LoadWarperBeamEvent,
+  SizingOutputEvent
+} from '../../generated/trident/Trident';
 
 export function handleAddPellet(event: AddPelletEvent): void {
   const pellet = new Pellet(event.params.pelletId);
@@ -151,38 +158,101 @@ export function handleWarpingOutput(event: WarpingOutputEvent): void {
   const warperBeamIds = warpInput.warperBeamIds;
   warperBeamIds.push(warpBeamId ? warpBeamId : 'null')
   warpInput.warperBeamIds = warperBeamIds
-  warpInput.save()
+  // warpInput.save()
 
-  // const warpInputBytes = ipfs.cat(event.params.warpMachineLoadingCid);
+  const warpInputBytes = ipfs.cat(event.params.warpMachineOutputCid);
 
-  // if(warpInputBytes) {
-  //   const warpInputDetails = json.try_fromBytes(warpInputBytes);
+  if(warpInputBytes) {
+    const warpInputDetails = json.try_fromBytes(warpInputBytes);
 
-  //   if (warpInputDetails.isOk && warpInputDetails.value.kind == JSONValueKind.OBJECT) {
-  //     const warpInputMetadata = warpInputDetails.value.toObject();
+    if (warpInputDetails.isOk && warpInputDetails.value.kind == JSONValueKind.OBJECT) {
+      const warpInputMetadata = warpInputDetails.value.toObject();
 
-  //     // const pelletId = warpInputMetadata.get('pelletId');
-  //     // warpInput.pelletIds.push(pelletId ? pelletId.toString() : 'null');
+      const outputEmpId = warpInputMetadata.get('outputEmpId');
+      warpInput.outputEmpId = outputEmpId ? outputEmpId.toString() : 'null';
 
-  //     // log.debug('console pelletIds {}', [pelletId ? pelletId.toString() : 'null']);
+      const outputTimestamp = warpInputMetadata.get('outputTimestamp');
+      warpInput.outputTimestamp = outputTimestamp ? outputTimestamp.toString() : 'null';
+    }
+  }
 
-  //     const soId = warpInputMetadata.get('soId');
-  //     warpInput.soId = soId ? soId.toString() : 'null';
-
-  //     const creelMachineId = warpInputMetadata.get('creelMachineId');
-  //     warpInput.creelMachineId = creelMachineId ? creelMachineId.toString() : 'null';
-
-
-  //     const prepPoId = warpInputMetadata.get('prepPoId');
-  //     warpInput.prepPoId = prepPoId ? prepPoId.toString() : 'null';
-
-  //     const loadEmpId = warpInputMetadata.get('loadEmpId');
-  //     warpInput.loadEmpId = loadEmpId ? loadEmpId.toString() : 'null';
-
-  //     const loadTimestamp = warpInputMetadata.get('loadTimestamp');
-  //     warpInput.loadTimestamp = loadTimestamp ? loadTimestamp.toString() : 'null';
-  //   }
-  // }
-
-  // warpInput.save();
+  warpInput.save();
 }
+
+export function handleLoadWarperBeam(event: LoadWarperBeamEvent): void {
+  const compositeKey = `${event.params.soId}::${event.params.sizingMachineId}`;
+  let sizingInput = SizingInput.load(compositeKey);
+
+  if(sizingInput === null) {
+    sizingInput = new SizingInput(compositeKey);
+  }
+  const warperBeamId = event.params.warperBeamId;
+
+  const warperBeamIds = sizingInput.warperBeamIds
+  warperBeamIds.push(warperBeamId ? warperBeamId : 'null')
+  sizingInput.warperBeamIds = warperBeamIds
+  sizingInput.save()
+
+  const sizingInputBytes = ipfs.cat(event.params.sizingMachineLoadingCid);
+
+  if(sizingInputBytes) {
+    const sizingInputDetails = json.try_fromBytes(sizingInputBytes);
+
+    if (sizingInputDetails.isOk && sizingInputDetails.value.kind == JSONValueKind.OBJECT) {
+      const sizingInputMetadata = sizingInputDetails.value.toObject();
+
+
+      const soId = sizingInputMetadata.get('soId');
+      sizingInput.soId = soId ? soId.toString() : 'null';
+
+      const sizingMachineId = sizingInputMetadata.get('sizingMachineId');
+      sizingInput.sizingMachineId = sizingMachineId ? sizingMachineId.toString() : 'null';
+
+
+      const prepPoId = sizingInputMetadata.get('prepPoId');
+      sizingInput.prepPoId = prepPoId ? prepPoId.toString() : 'null';
+
+      const loadEmpId = sizingInputMetadata.get('loadEmpId');
+      sizingInput.loadEmpId = loadEmpId ? loadEmpId.toString() : 'null';
+
+      const loadTimestamp = sizingInputMetadata.get('loadTimestamp');
+      sizingInput.loadTimestamp = loadTimestamp ? loadTimestamp.toString() : 'null';
+    }
+  }
+
+  sizingInput.save();
+}
+
+export function handleSizingOutput(event: SizingOutputEvent): void {
+  const compositeKey = `${event.params.soId}::${event.params.sizingMachineId}`;
+  let sizingInput = SizingInput.load(compositeKey);
+
+  if(sizingInput === null) {
+    sizingInput = new SizingInput(compositeKey);
+  }
+
+  const weaverBeamId = event.params.weaverBeamId;
+
+  const weaverBeamIds = sizingInput.weaverBeamIds;
+  weaverBeamIds.push(weaverBeamId ? weaverBeamId : 'null');
+  sizingInput.weaverBeamIds = weaverBeamIds;
+
+  const sizingInputBytes = ipfs.cat(event.params.sizingMachineOutputCid);
+
+  if(sizingInputBytes) {
+    const sizingInputDetails = json.try_fromBytes(sizingInputBytes);
+
+    if (sizingInputDetails.isOk && sizingInputDetails.value.kind == JSONValueKind.OBJECT) {
+      const sizingInputMetadata = sizingInputDetails.value.toObject();
+
+      const outputEmpId = sizingInputMetadata.get('outputEmpId');
+      sizingInput.outputEmpId = outputEmpId ? outputEmpId.toString() : 'null';
+
+      const outputTimestamp = sizingInputMetadata.get('outputTimestamp');
+      sizingInput.outputTimestamp = outputTimestamp ? outputTimestamp.toString() : 'null';
+    }
+  }
+
+  sizingInput.save();
+}
+

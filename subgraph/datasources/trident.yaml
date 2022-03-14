@@ -26,4 +26,8 @@
           handler: handleLoadPellet
         - event: WarpingOutputEvent(string,string,string,string)
           handler: handleWarpingOutput
+        - event: LoadWarperBeamEvent(string,string,string,string)
+          handler: handleLoadWarperBeam
+        - event: SizingOutputEvent(string,string,string,string)
+          handler: handleSizingOutput
       file: {file}

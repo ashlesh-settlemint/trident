@@ -577,6 +577,8 @@ export class WarpInput extends Entity {
     this.set("prepPoId", Value.fromString(""));
     this.set("loadEmpId", Value.fromString(""));
     this.set("loadTimestamp", Value.fromString(""));
+    this.set("outputEmpId", Value.fromString(""));
+    this.set("outputTimestamp", Value.fromString(""));
     this.set("pelletIds", Value.fromStringArray(new Array(0)));
     this.set("warperBeamIds", Value.fromStringArray(new Array(0)));
   }
@@ -652,6 +654,24 @@ export class WarpInput extends Entity {
     this.set("loadTimestamp", Value.fromString(value));
   }
 
+  get outputEmpId(): string {
+    let value = this.get("outputEmpId");
+    return value!.toString();
+  }
+
+  set outputEmpId(value: string) {
+    this.set("outputEmpId", Value.fromString(value));
+  }
+
+  get outputTimestamp(): string {
+    let value = this.get("outputTimestamp");
+    return value!.toString();
+  }
+
+  set outputTimestamp(value: string) {
+    this.set("outputTimestamp", Value.fromString(value));
+  }
+
   get pelletIds(): Array<string> {
     let value = this.get("pelletIds");
     return value!.toStringArray();
@@ -671,29 +691,37 @@ export class WarpInput extends Entity {
   }
 }
 
-export class WarperOutputBeam extends Entity {
+export class SizingInput extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("soId", Value.fromString(""));
+    this.set("sizingMachineId", Value.fromString(""));
+    this.set("prepPoId", Value.fromString(""));
+    this.set("loadEmpId", Value.fromString(""));
+    this.set("loadTimestamp", Value.fromString(""));
+    this.set("outputEmpId", Value.fromString(""));
+    this.set("outputTimestamp", Value.fromString(""));
+    this.set("warperBeamIds", Value.fromStringArray(new Array(0)));
+    this.set("weaverBeamIds", Value.fromStringArray(new Array(0)));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save WarperOutputBeam entity without an ID");
+    assert(id != null, "Cannot save SizingInput entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save WarperOutputBeam entity with non-string ID. " +
+        "Cannot save SizingInput entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("WarperOutputBeam", id.toString(), this);
+      store.set("SizingInput", id.toString(), this);
     }
   }
 
-  static load(id: string): WarperOutputBeam | null {
-    return changetype<WarperOutputBeam | null>(
-      store.get("WarperOutputBeam", id)
-    );
+  static load(id: string): SizingInput | null {
+    return changetype<SizingInput | null>(store.get("SizingInput", id));
   }
 
   get id(): string {
@@ -705,21 +733,85 @@ export class WarperOutputBeam extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get compositekey(): string | null {
-    let value = this.get("compositekey");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
+  get soId(): string {
+    let value = this.get("soId");
+    return value!.toString();
   }
 
-  set compositekey(value: string | null) {
-    if (!value) {
-      this.unset("compositekey");
-    } else {
-      this.set("compositekey", Value.fromString(<string>value));
-    }
+  set soId(value: string) {
+    this.set("soId", Value.fromString(value));
+  }
+
+  get sizingMachineId(): string {
+    let value = this.get("sizingMachineId");
+    return value!.toString();
+  }
+
+  set sizingMachineId(value: string) {
+    this.set("sizingMachineId", Value.fromString(value));
+  }
+
+  get prepPoId(): string {
+    let value = this.get("prepPoId");
+    return value!.toString();
+  }
+
+  set prepPoId(value: string) {
+    this.set("prepPoId", Value.fromString(value));
+  }
+
+  get loadEmpId(): string {
+    let value = this.get("loadEmpId");
+    return value!.toString();
+  }
+
+  set loadEmpId(value: string) {
+    this.set("loadEmpId", Value.fromString(value));
+  }
+
+  get loadTimestamp(): string {
+    let value = this.get("loadTimestamp");
+    return value!.toString();
+  }
+
+  set loadTimestamp(value: string) {
+    this.set("loadTimestamp", Value.fromString(value));
+  }
+
+  get outputEmpId(): string {
+    let value = this.get("outputEmpId");
+    return value!.toString();
+  }
+
+  set outputEmpId(value: string) {
+    this.set("outputEmpId", Value.fromString(value));
+  }
+
+  get outputTimestamp(): string {
+    let value = this.get("outputTimestamp");
+    return value!.toString();
+  }
+
+  set outputTimestamp(value: string) {
+    this.set("outputTimestamp", Value.fromString(value));
+  }
+
+  get warperBeamIds(): Array<string> {
+    let value = this.get("warperBeamIds");
+    return value!.toStringArray();
+  }
+
+  set warperBeamIds(value: Array<string>) {
+    this.set("warperBeamIds", Value.fromStringArray(value));
+  }
+
+  get weaverBeamIds(): Array<string> {
+    let value = this.get("weaverBeamIds");
+    return value!.toStringArray();
+  }
+
+  set weaverBeamIds(value: Array<string>) {
+    this.set("weaverBeamIds", Value.fromStringArray(value));
   }
 }
 
