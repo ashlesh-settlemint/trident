@@ -4,7 +4,10 @@
     "fields": [
       {"name": "id", "type":"ID!"},
       {"name": "prepPo", "type":"String"},
-      {"name": "pelletIds", "type": "Pellet!", "derived": "soId" }
+      {"name": "loomPo", "type":"String"},
+      {"name": "pelletIds", "type": "Pellet!", "derived": "soId" },
+      {"name": "warpInputs", "type": "WarpInput!", "derived": "soId" },
+      {"name": "sizingInputs", "type": "SizingInput!", "derived": "soId" }
     ]
   },
   {
@@ -31,7 +34,7 @@
     "name": "WarpInput",
     "fields": [
       {"name": "id", "type":"ID!"},
-      {"name": "soId", "type":"String!"},
+      {"name": "soId", "type":"SupplyOrder"},
       {"name": "creelMachineId", "type":"String!"},
       {"name": "prepPoId", "type":"String!"},
       {"name": "loadEmpId", "type":"String!"},
@@ -46,7 +49,7 @@
     "name": "SizingInput",
     "fields": [
       {"name": "id", "type":"ID!"},
-      {"name": "soId", "type":"String!"},
+      {"name": "soId", "type":"SupplyOrder"},
       {"name": "sizingMachineId", "type":"String!"},
       {"name": "prepPoId", "type":"String!"},
       {"name": "loadEmpId", "type":"String!"},
@@ -55,6 +58,34 @@
       {"name": "outputTimestamp", "type":"String!"},
       {"name": "warperBeamIds", "type": "[String!]!" },
       {"name": "weaverBeamIds", "type": "[String!]!" }
+    ]
+  },
+  {
+    "name": "SizingStorage",
+    "fields": [
+      {"name": "id", "type": "ID!"},
+      {"name": "soId", "type": "String!"},
+      {"name": "binId", "type": "String!"},
+      {"name": "empId", "type": "String!"},
+      {"name": "timestamp", "type": "String!"},
+      {"name": "prepPoId", "type": "String!"},
+      {"name": "weaverBeamIds", "type": "[String!]!"}
+    ]
+  },
+  {
+    "name": "Loomshed",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "soId", "type":"SupplyOrder"},
+      {"name": "loomMachineId", "type":"String!"},
+      {"name": "loomPoId", "type":"String!"},
+      {"name": "loadEmpId", "type":"String!"},
+      {"name": "loadTimestamp", "type":"String!"},
+      {"name": "outputEmpId", "type":"String!"},
+      {"name": "outputTimestamp", "type":"String!"},
+      {"name": "weaverBeamIds", "type": "[String!]!" },
+      {"name": "pelletIds", "type": "[String!]!" },
+      {"name": "rollIds", "type": "[String!]!" }
     ]
   }
 ]

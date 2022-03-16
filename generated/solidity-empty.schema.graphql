@@ -22,7 +22,10 @@ type OwnershipTransferred implements Event @entity {
 type SupplyOrder @entity {
 	id: ID!
 	prepPo: String
+	loomPo: String
 	pelletIds: [Pellet!]! @derivedFrom(field: "soId")
+	warpInputs: [WarpInput!]! @derivedFrom(field: "soId")
+	sizingInputs: [SizingInput!]! @derivedFrom(field: "soId")
 }
 type Pellet @entity {
 	id: ID!
@@ -43,7 +46,7 @@ type Pellet @entity {
 }
 type WarpInput @entity {
 	id: ID!
-	soId: String!
+	soId: SupplyOrder
 	creelMachineId: String!
 	prepPoId: String!
 	loadEmpId: String!
@@ -55,7 +58,7 @@ type WarpInput @entity {
 }
 type SizingInput @entity {
 	id: ID!
-	soId: String!
+	soId: SupplyOrder
 	sizingMachineId: String!
 	prepPoId: String!
 	loadEmpId: String!
@@ -64,6 +67,28 @@ type SizingInput @entity {
 	outputTimestamp: String!
 	warperBeamIds: [String!]!
 	weaverBeamIds: [String!]!
+}
+type SizingStorage @entity {
+	id: ID!
+	soId: String!
+	binId: String!
+	empId: String!
+	timestamp: String!
+	prepPoId: String!
+	weaverBeamIds: [String!]!
+}
+type Loomshed @entity {
+	id: ID!
+	soId: SupplyOrder
+	loomMachineId: String!
+	loomPoId: String!
+	loadEmpId: String!
+	loadTimestamp: String!
+	outputEmpId: String!
+	outputTimestamp: String!
+	weaverBeamIds: [String!]!
+	pelletIds: [String!]!
+	rollIds: [String!]!
 }
 interface Event {
 	id: ID!

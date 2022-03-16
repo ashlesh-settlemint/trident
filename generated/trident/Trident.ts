@@ -10,6 +10,32 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class AddNewPelletEvent extends ethereum.Event {
+  get params(): AddNewPelletEvent__Params {
+    return new AddNewPelletEvent__Params(this);
+  }
+}
+
+export class AddNewPelletEvent__Params {
+  _event: AddNewPelletEvent;
+
+  constructor(event: AddNewPelletEvent) {
+    this._event = event;
+  }
+
+  get pelletId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get pelletDetailsCid(): string {
+    return this._event.parameters[2].value.toString();
+  }
+}
+
 export class AddPelletEvent extends ethereum.Event {
   get params(): AddPelletEvent__Params {
     return new AddPelletEvent__Params(this);
@@ -118,6 +144,70 @@ export class LoadWarperBeamEvent__Params {
   }
 }
 
+export class LoadWeaverBeamEvent extends ethereum.Event {
+  get params(): LoadWeaverBeamEvent__Params {
+    return new LoadWeaverBeamEvent__Params(this);
+  }
+}
+
+export class LoadWeaverBeamEvent__Params {
+  _event: LoadWeaverBeamEvent;
+
+  constructor(event: LoadWeaverBeamEvent) {
+    this._event = event;
+  }
+
+  get soId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get weaverBeamId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get pelletId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get loomMachineId(): string {
+    return this._event.parameters[3].value.toString();
+  }
+
+  get loomMachineLoadingCid(): string {
+    return this._event.parameters[4].value.toString();
+  }
+}
+
+export class LoomOutputEvent extends ethereum.Event {
+  get params(): LoomOutputEvent__Params {
+    return new LoomOutputEvent__Params(this);
+  }
+}
+
+export class LoomOutputEvent__Params {
+  _event: LoomOutputEvent;
+
+  constructor(event: LoomOutputEvent) {
+    this._event = event;
+  }
+
+  get rollId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get loomMachineId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get loomMachineOutputCid(): string {
+    return this._event.parameters[3].value.toString();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -170,6 +260,36 @@ export class SizingOutputEvent__Params {
   }
 }
 
+export class SizingStorageEvent extends ethereum.Event {
+  get params(): SizingStorageEvent__Params {
+    return new SizingStorageEvent__Params(this);
+  }
+}
+
+export class SizingStorageEvent__Params {
+  _event: SizingStorageEvent;
+
+  constructor(event: SizingStorageEvent) {
+    this._event = event;
+  }
+
+  get binId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get weaverBeamId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get sizingStorageCid(): string {
+    return this._event.parameters[3].value.toString();
+  }
+}
+
 export class WarpingOutputEvent extends ethereum.Event {
   get params(): WarpingOutputEvent__Params {
     return new WarpingOutputEvent__Params(this);
@@ -218,6 +338,48 @@ export class Trident extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+}
+
+export class AddLoomshedOutputCall extends ethereum.Call {
+  get inputs(): AddLoomshedOutputCall__Inputs {
+    return new AddLoomshedOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddLoomshedOutputCall__Outputs {
+    return new AddLoomshedOutputCall__Outputs(this);
+  }
+}
+
+export class AddLoomshedOutputCall__Inputs {
+  _call: AddLoomshedOutputCall;
+
+  constructor(call: AddLoomshedOutputCall) {
+    this._call = call;
+  }
+
+  get rollId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get loomMachineId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get loomMachineOutputCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class AddLoomshedOutputCall__Outputs {
+  _call: AddLoomshedOutputCall;
+
+  constructor(call: AddLoomshedOutputCall) {
+    this._call = call;
   }
 }
 
@@ -423,6 +585,52 @@ export class LoadPelletToWarpMachineCall__Outputs {
   }
 }
 
+export class LoadWeaverBeamToLoomMachineCall extends ethereum.Call {
+  get inputs(): LoadWeaverBeamToLoomMachineCall__Inputs {
+    return new LoadWeaverBeamToLoomMachineCall__Inputs(this);
+  }
+
+  get outputs(): LoadWeaverBeamToLoomMachineCall__Outputs {
+    return new LoadWeaverBeamToLoomMachineCall__Outputs(this);
+  }
+}
+
+export class LoadWeaverBeamToLoomMachineCall__Inputs {
+  _call: LoadWeaverBeamToLoomMachineCall;
+
+  constructor(call: LoadWeaverBeamToLoomMachineCall) {
+    this._call = call;
+  }
+
+  get soId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get loomMachineId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get weaverBeamId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get pelletId(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+
+  get loomMachineLoadingCid(): string {
+    return this._call.inputValues[4].value.toString();
+  }
+}
+
+export class LoadWeaverBeamToLoomMachineCall__Outputs {
+  _call: LoadWeaverBeamToLoomMachineCall;
+
+  constructor(call: LoadWeaverBeamToLoomMachineCall) {
+    this._call = call;
+  }
+}
+
 export class MovePelletFromWarehouseCall extends ethereum.Call {
   get inputs(): MovePelletFromWarehouseCall__Inputs {
     return new MovePelletFromWarehouseCall__Inputs(this);
@@ -483,6 +691,48 @@ export class RenounceOwnershipCall__Outputs {
   _call: RenounceOwnershipCall;
 
   constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class StoreWeaverBeamsCall extends ethereum.Call {
+  get inputs(): StoreWeaverBeamsCall__Inputs {
+    return new StoreWeaverBeamsCall__Inputs(this);
+  }
+
+  get outputs(): StoreWeaverBeamsCall__Outputs {
+    return new StoreWeaverBeamsCall__Outputs(this);
+  }
+}
+
+export class StoreWeaverBeamsCall__Inputs {
+  _call: StoreWeaverBeamsCall;
+
+  constructor(call: StoreWeaverBeamsCall) {
+    this._call = call;
+  }
+
+  get weaverBeamId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get binId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get sizingStorageCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class StoreWeaverBeamsCall__Outputs {
+  _call: StoreWeaverBeamsCall;
+
+  constructor(call: StoreWeaverBeamsCall) {
     this._call = call;
   }
 }

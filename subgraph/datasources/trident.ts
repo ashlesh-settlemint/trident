@@ -1,12 +1,12 @@
 import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts';
-import { Pellet, SupplyOrder, WarpInput, SizingInput} from '../../generated/schema';
+import { Loomshed, Pellet, SizingInput, SizingStorage, SupplyOrder, WarpInput } from '../../generated/schema';
 import {
   AddPelletEvent,
   ExitPelletEvent,
   LoadPelletEvent,
-  WarpingOutputEvent,
-  LoadWarperBeamEvent,
-  SizingOutputEvent
+  LoadWarperBeamEvent, LoadWeaverBeamEvent, LoomOutputEvent, SizingOutputEvent,
+  SizingStorageEvent,
+  WarpingOutputEvent
 } from '../../generated/trident/Trident';
 
 export function handleAddPellet(event: AddPelletEvent): void {
@@ -81,6 +81,9 @@ export function handleExitPellet(event: ExitPelletEvent): void {
 
       const prepPo = pelletMetadata.get('prepPo');
       supplyOrder.prepPo = prepPo ? prepPo.toString() : 'null';
+
+      const loomPo = pelletMetadata.get('loomPo');
+      supplyOrder.loomPo = loomPo ? loomPo.toString() : 'null';
 
 
       const soId = pelletMetadata.get('soId');
@@ -256,3 +259,135 @@ export function handleSizingOutput(event: SizingOutputEvent): void {
   sizingInput.save();
 }
 
+export function handleSizingStorage(event: SizingStorageEvent): void {
+  const binId = `${event.params.binId}`;
+  let sizingStorage = SizingStorage.load(binId);
+
+  if(sizingStorage === null) {
+    sizingStorage = new SizingStorage(binId);
+  }
+
+  const weaverBeamId = event.params.weaverBeamId;
+
+  const weaverBeamIds = sizingStorage.weaverBeamIds;
+  weaverBeamIds.push(weaverBeamId ? weaverBeamId : 'null');
+  sizingStorage.weaverBeamIds = weaverBeamIds;
+
+  const sizingStorageBytes = ipfs.cat(event.params.sizingStorageCid);
+
+  if(sizingStorageBytes) {
+    const sizingStorageDetails = json.try_fromBytes(sizingStorageBytes);
+
+    if (sizingStorageDetails.isOk && sizingStorageDetails.value.kind == JSONValueKind.OBJECT) {
+      const sizingStorageMetadata = sizingStorageDetails.value.toObject();
+
+      const soId = sizingStorageMetadata.get('soId');
+      sizingStorage.soId = soId ? soId.toString() : 'null';
+
+      const binId = sizingStorageMetadata.get('binId');
+      sizingStorage.binId = binId ? binId.toString() : 'null';
+
+      const empId = sizingStorageMetadata.get('empId');
+      sizingStorage.empId = empId ? empId.toString() : 'null';
+
+      const timestamp = sizingStorageMetadata.get('timestamp');
+      sizingStorage.timestamp = timestamp ? timestamp.toString() : 'null';
+
+      const prepPoId = sizingStorageMetadata.get('prepPoId');
+      sizingStorage.prepPoId = prepPoId ? prepPoId.toString() : 'null';
+    }
+  }
+
+  sizingStorage.save();
+}
+
+export function handleLoadWeaverBeam(event: LoadWeaverBeamEvent): void {
+  const compositeKey = `${event.params.soId}::${event.params.loomMachineId}`;
+  let loomshed = Loomshed.load(compositeKey);
+
+  if(loomshed === null) {
+    loomshed = new Loomshed(compositeKey);
+  }
+  const weaverBeamId = event.params.weaverBeamId;
+  const pelletId = event.params.pelletId;
+
+  const weaverBeamIds = loomshed.weaverBeamIds;
+  let flag = true;
+  for(let i=0; i<weaverBeamIds.length; i++) {
+    if(weaverBeamIds[i] == weaverBeamId){
+      flag = false;
+    }
+  }
+
+  if(flag) {
+    weaverBeamIds.push(weaverBeamId ? weaverBeamId : 'null');
+    loomshed.weaverBeamIds = weaverBeamIds;
+  }
+
+  const pelletIds = loomshed.pelletIds;
+  pelletIds.push(pelletId ? pelletId : 'null');
+  loomshed.pelletIds = pelletIds;
+
+  loomshed.save();
+
+  const loomshedBytes = ipfs.cat(event.params.loomMachineLoadingCid);
+
+  if(loomshedBytes) {
+    const loomshedDetails = json.try_fromBytes(loomshedBytes);
+
+    if (loomshedDetails.isOk && loomshedDetails.value.kind == JSONValueKind.OBJECT) {
+      const loomshedMetadata = loomshedDetails.value.toObject();
+
+      const soId = loomshedMetadata.get('soId');
+      loomshed.soId = soId ? soId.toString() : 'null';
+
+      const loomMachineId = loomshedMetadata.get('loomMachineId');
+      loomshed.loomMachineId = loomMachineId ? loomMachineId.toString() : 'null';
+
+
+      const loomPoId = loomshedMetadata.get('loomPoId');
+      loomshed.loomPoId = loomPoId ? loomPoId.toString() : 'null';
+
+      const loadEmpId = loomshedMetadata.get('loadEmpId');
+      loomshed.loadEmpId = loadEmpId ? loadEmpId.toString() : 'null';
+
+      const loadTimestamp = loomshedMetadata.get('loadTimestamp');
+      loomshed.loadTimestamp = loadTimestamp ? loadTimestamp.toString() : 'null';
+    }
+  }
+
+  loomshed.save();
+}
+
+export function handleLoomOutput(event: LoomOutputEvent): void {
+  const compositeKey = `${event.params.soId}::${event.params.loomMachineId}`;
+  let loomshed = Loomshed.load(compositeKey);
+
+  if(loomshed === null) {
+    loomshed = new Loomshed(compositeKey);
+  }
+
+  const rollId = event.params.rollId;
+
+  const rollIds = loomshed.rollIds;
+  rollIds.push(rollId ? rollId : 'null');
+  loomshed.rollIds = rollIds;
+
+  const loomshedBytes = ipfs.cat(event.params.loomMachineOutputCid);
+
+  if(loomshedBytes) {
+    const loomshedDetails = json.try_fromBytes(loomshedBytes);
+
+    if (loomshedDetails.isOk && loomshedDetails.value.kind == JSONValueKind.OBJECT) {
+      const loomshedMetadata = loomshedDetails.value.toObject();
+
+      const outputEmpId = loomshedMetadata.get('outputEmpId');
+      loomshed.outputEmpId = outputEmpId ? outputEmpId.toString() : 'null';
+
+      const outputTimestamp = loomshedMetadata.get('outputTimestamp');
+      loomshed.outputTimestamp = outputTimestamp ? outputTimestamp.toString() : 'null';
+    }
+  }
+
+  loomshed.save();
+}

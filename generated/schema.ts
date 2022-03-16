@@ -286,6 +286,23 @@ export class SupplyOrder extends Entity {
     }
   }
 
+  get loomPo(): string | null {
+    let value = this.get("loomPo");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set loomPo(value: string | null) {
+    if (!value) {
+      this.unset("loomPo");
+    } else {
+      this.set("loomPo", Value.fromString(<string>value));
+    }
+  }
+
   get pelletIds(): Array<string> {
     let value = this.get("pelletIds");
     return value!.toStringArray();
@@ -293,6 +310,24 @@ export class SupplyOrder extends Entity {
 
   set pelletIds(value: Array<string>) {
     this.set("pelletIds", Value.fromStringArray(value));
+  }
+
+  get warpInputs(): Array<string> {
+    let value = this.get("warpInputs");
+    return value!.toStringArray();
+  }
+
+  set warpInputs(value: Array<string>) {
+    this.set("warpInputs", Value.fromStringArray(value));
+  }
+
+  get sizingInputs(): Array<string> {
+    let value = this.get("sizingInputs");
+    return value!.toStringArray();
+  }
+
+  set sizingInputs(value: Array<string>) {
+    this.set("sizingInputs", Value.fromStringArray(value));
   }
 }
 
@@ -572,7 +607,6 @@ export class WarpInput extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("soId", Value.fromString(""));
     this.set("creelMachineId", Value.fromString(""));
     this.set("prepPoId", Value.fromString(""));
     this.set("loadEmpId", Value.fromString(""));
@@ -609,13 +643,21 @@ export class WarpInput extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get soId(): string {
+  get soId(): string | null {
     let value = this.get("soId");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set soId(value: string) {
-    this.set("soId", Value.fromString(value));
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
   }
 
   get creelMachineId(): string {
@@ -696,7 +738,6 @@ export class SizingInput extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("soId", Value.fromString(""));
     this.set("sizingMachineId", Value.fromString(""));
     this.set("prepPoId", Value.fromString(""));
     this.set("loadEmpId", Value.fromString(""));
@@ -733,13 +774,21 @@ export class SizingInput extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get soId(): string {
+  get soId(): string | null {
     let value = this.get("soId");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set soId(value: string) {
-    this.set("soId", Value.fromString(value));
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
   }
 
   get sizingMachineId(): string {
@@ -812,6 +861,241 @@ export class SizingInput extends Entity {
 
   set weaverBeamIds(value: Array<string>) {
     this.set("weaverBeamIds", Value.fromStringArray(value));
+  }
+}
+
+export class SizingStorage extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("soId", Value.fromString(""));
+    this.set("binId", Value.fromString(""));
+    this.set("empId", Value.fromString(""));
+    this.set("timestamp", Value.fromString(""));
+    this.set("prepPoId", Value.fromString(""));
+    this.set("weaverBeamIds", Value.fromStringArray(new Array(0)));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save SizingStorage entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save SizingStorage entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("SizingStorage", id.toString(), this);
+    }
+  }
+
+  static load(id: string): SizingStorage | null {
+    return changetype<SizingStorage | null>(store.get("SizingStorage", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get soId(): string {
+    let value = this.get("soId");
+    return value!.toString();
+  }
+
+  set soId(value: string) {
+    this.set("soId", Value.fromString(value));
+  }
+
+  get binId(): string {
+    let value = this.get("binId");
+    return value!.toString();
+  }
+
+  set binId(value: string) {
+    this.set("binId", Value.fromString(value));
+  }
+
+  get empId(): string {
+    let value = this.get("empId");
+    return value!.toString();
+  }
+
+  set empId(value: string) {
+    this.set("empId", Value.fromString(value));
+  }
+
+  get timestamp(): string {
+    let value = this.get("timestamp");
+    return value!.toString();
+  }
+
+  set timestamp(value: string) {
+    this.set("timestamp", Value.fromString(value));
+  }
+
+  get prepPoId(): string {
+    let value = this.get("prepPoId");
+    return value!.toString();
+  }
+
+  set prepPoId(value: string) {
+    this.set("prepPoId", Value.fromString(value));
+  }
+
+  get weaverBeamIds(): Array<string> {
+    let value = this.get("weaverBeamIds");
+    return value!.toStringArray();
+  }
+
+  set weaverBeamIds(value: Array<string>) {
+    this.set("weaverBeamIds", Value.fromStringArray(value));
+  }
+}
+
+export class Loomshed extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("loomMachineId", Value.fromString(""));
+    this.set("loomPoId", Value.fromString(""));
+    this.set("loadEmpId", Value.fromString(""));
+    this.set("loadTimestamp", Value.fromString(""));
+    this.set("outputEmpId", Value.fromString(""));
+    this.set("outputTimestamp", Value.fromString(""));
+    this.set("weaverBeamIds", Value.fromStringArray(new Array(0)));
+    this.set("pelletIds", Value.fromStringArray(new Array(0)));
+    this.set("rollIds", Value.fromStringArray(new Array(0)));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Loomshed entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Loomshed entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Loomshed", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Loomshed | null {
+    return changetype<Loomshed | null>(store.get("Loomshed", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get soId(): string | null {
+    let value = this.get("soId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
+  }
+
+  get loomMachineId(): string {
+    let value = this.get("loomMachineId");
+    return value!.toString();
+  }
+
+  set loomMachineId(value: string) {
+    this.set("loomMachineId", Value.fromString(value));
+  }
+
+  get loomPoId(): string {
+    let value = this.get("loomPoId");
+    return value!.toString();
+  }
+
+  set loomPoId(value: string) {
+    this.set("loomPoId", Value.fromString(value));
+  }
+
+  get loadEmpId(): string {
+    let value = this.get("loadEmpId");
+    return value!.toString();
+  }
+
+  set loadEmpId(value: string) {
+    this.set("loadEmpId", Value.fromString(value));
+  }
+
+  get loadTimestamp(): string {
+    let value = this.get("loadTimestamp");
+    return value!.toString();
+  }
+
+  set loadTimestamp(value: string) {
+    this.set("loadTimestamp", Value.fromString(value));
+  }
+
+  get outputEmpId(): string {
+    let value = this.get("outputEmpId");
+    return value!.toString();
+  }
+
+  set outputEmpId(value: string) {
+    this.set("outputEmpId", Value.fromString(value));
+  }
+
+  get outputTimestamp(): string {
+    let value = this.get("outputTimestamp");
+    return value!.toString();
+  }
+
+  set outputTimestamp(value: string) {
+    this.set("outputTimestamp", Value.fromString(value));
+  }
+
+  get weaverBeamIds(): Array<string> {
+    let value = this.get("weaverBeamIds");
+    return value!.toStringArray();
+  }
+
+  set weaverBeamIds(value: Array<string>) {
+    this.set("weaverBeamIds", Value.fromStringArray(value));
+  }
+
+  get pelletIds(): Array<string> {
+    let value = this.get("pelletIds");
+    return value!.toStringArray();
+  }
+
+  set pelletIds(value: Array<string>) {
+    this.set("pelletIds", Value.fromStringArray(value));
+  }
+
+  get rollIds(): Array<string> {
+    let value = this.get("rollIds");
+    return value!.toStringArray();
+  }
+
+  set rollIds(value: Array<string>) {
+    this.set("rollIds", Value.fromStringArray(value));
   }
 }
 

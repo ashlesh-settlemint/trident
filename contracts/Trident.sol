@@ -54,6 +54,11 @@ contract Trident is Ownable {
   event WarpingOutputEvent(string warpBeamId, string soId, string creelMachineId, string warpMachineOutputCid);
   event LoadWarperBeamEvent(string soId, string warperBeamId, string sizingMachineId, string sizingMachineLoadingCid);
   event SizingOutputEvent(string weaverBeamId, string soId, string sizingMachineId, string sizingMachineOutputCid);
+  event SizingStorageEvent(string binId, string soId, string weaverBeamId, string sizingStorageCid);
+  event AddNewPelletEvent(string pelletId, string soId, string pelletDetailsCid);
+  event LoadWeaverBeamEvent(string soId, string weaverBeamId, string pelletId, string loomMachineId, string loomMachineLoadingCid);
+  event LoomOutputEvent(string rollId, string soId, string loomMachineId, string loomMachineOutputCid);
+
 
   function addPellet(string memory pelletId, string memory pelletDetailsCid) external {
     _pettletIdToCid[pelletId] = pelletDetailsCid;
@@ -107,5 +112,33 @@ contract Trident is Ownable {
     string memory sizingMachineOutputCid
   ) external {
     emit SizingOutputEvent(weaverBeamId, soId, sizingMachineId, sizingMachineOutputCid);
+  }
+
+  function storeWeaverBeams(
+    string memory weaverBeamId,
+    string memory soId,
+    string memory binId,
+    string memory sizingStorageCid
+  ) external {
+    emit SizingStorageEvent(binId, soId, weaverBeamId, sizingStorageCid);
+  }
+
+  function loadWeaverBeamToLoomMachine(
+    string memory soId,
+    string memory loomMachineId,
+    string memory weaverBeamId,
+    string memory pelletId,
+    string memory loomMachineLoadingCid
+  ) external {
+    emit LoadWeaverBeamEvent(soId, loomMachineId, weaverBeamId, pelletId, loomMachineLoadingCid);
+  }
+
+  function addLoomshedOutput(
+    string memory rollId,
+    string memory soId,
+    string memory loomMachineId,
+    string memory loomMachineOutputCid
+  ) external {
+    emit LoomOutputEvent(rollId, soId, loomMachineId, loomMachineOutputCid);
   }
 }

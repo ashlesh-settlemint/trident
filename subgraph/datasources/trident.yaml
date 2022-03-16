@@ -30,4 +30,10 @@
           handler: handleLoadWarperBeam
         - event: SizingOutputEvent(string,string,string,string)
           handler: handleSizingOutput
+        - event: SizingStorageEvent(string,string,string,string)
+          handler: handleSizingStorage
+        - event: LoadWeaverBeamEvent(string,string,string,string,string)
+          handler: handleLoadWeaverBeam
+        - event: LoomOutputEvent(string,string,string,string)
+          handler: handleLoomOutput
       file: {file}

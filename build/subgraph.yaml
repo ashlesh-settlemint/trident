@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0x8ee707713c210EA69c6515CbC903066ca5474d3F"
+      address: "0x41383977DeFa8C4F748a9e93810b08923acA79dA"
       abi: Ownable
-      startBlock: 184392
+      startBlock: 195179
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0x8ee707713c210EA69c6515CbC903066ca5474d3F"
+      address: "0x41383977DeFa8C4F748a9e93810b08923acA79dA"
       abi: Trident
-      startBlock: 184392
+      startBlock: 195179
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -54,4 +54,10 @@ dataSources:
           handler: handleLoadWarperBeam
         - event: SizingOutputEvent(string,string,string,string)
           handler: handleSizingOutput
+        - event: SizingStorageEvent(string,string,string,string)
+          handler: handleSizingStorage
+        - event: LoadWeaverBeamEvent(string,string,string,string,string)
+          handler: handleLoadWeaverBeam
+        - event: LoomOutputEvent(string,string,string,string)
+          handler: handleLoomOutput
       file: trident/trident.wasm
