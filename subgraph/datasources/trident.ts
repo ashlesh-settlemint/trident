@@ -1,10 +1,7 @@
 import { ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts';
-import { Loomshed, Pellet, SizingInput, SizingStorage, SupplyOrder, WarpInput } from '../../generated/schema';
+import { Batching, Gfi, GfiOutput, Loomshed, Pellet, SizingInput, SizingStorage, SupplyOrder, WarpInput } from '../../generated/schema';
 import {
-  AddPelletEvent,
-  ExitPelletEvent,
-  LoadPelletEvent,
-  LoadWarperBeamEvent, LoadWeaverBeamEvent, LoomOutputEvent, SizingOutputEvent,
+  AddPelletEvent, BatchingEvent, ExitPelletEvent, GfiOutputEvent, LoadPelletEvent, LoadRollEvent, LoadWarperBeamEvent, LoadWeaverBeamEvent, LoomOutputEvent, SizingOutputEvent,
   SizingStorageEvent,
   WarpingOutputEvent
 } from '../../generated/trident/Trident';
@@ -390,4 +387,167 @@ export function handleLoomOutput(event: LoomOutputEvent): void {
   }
 
   loomshed.save();
+}
+
+export function handleLoadRoll(event: LoadRollEvent): void {
+  const compositeKey = `${event.params.soId}::${event.params.gfiMachineId}`;
+  let gfi = Gfi.load(compositeKey);
+
+  if(gfi === null) {
+    gfi = new Gfi(compositeKey);
+  }
+  const rollId = event.params.rollId;
+
+  const rollIds = gfi.rollIds;
+  rollIds.push(rollId ? rollId : 'null');
+  gfi.rollIds = rollIds;
+
+  gfi.save();
+
+  const gfiBytes = ipfs.cat(event.params.gfiMachineLoadingCid);
+
+  if(gfiBytes) {
+    const gfiDetails = json.try_fromBytes(gfiBytes);
+
+    if (gfiDetails.isOk && gfiDetails.value.kind == JSONValueKind.OBJECT) {
+      const gfiMetadata = gfiDetails.value.toObject();
+
+      const soId = gfiMetadata.get('soId');
+      gfi.soId = soId ? soId.toString() : 'null';
+
+      const gfiMachineId = gfiMetadata.get('gfiMachineId');
+      gfi.gfiMachineId = gfiMachineId ? gfiMachineId.toString() : 'null';
+
+
+      const loadEmpId = gfiMetadata.get('loadEmpId');
+      gfi.loadEmpId = loadEmpId ? loadEmpId.toString() : 'null';
+
+      const loadTimestamp = gfiMetadata.get('loadTimestamp');
+      gfi.loadTimestamp = loadTimestamp ? loadTimestamp.toString() : 'null';
+    }
+  }
+
+  gfi.save();
+}
+
+export function handleGfiOutput(event: GfiOutputEvent): void {
+  const compositeKey = `${event.params.soId}::${event.params.gfiMachineId}`;
+  let gfi = Gfi.load(compositeKey);
+
+  if(gfi === null) {
+    gfi = new Gfi(compositeKey);
+  }
+
+  // GfiOutput Entity
+  const gfiOutputCompositeKey = `${event.params.soId}::${event.params.newRollId}`;
+  let gfiOutput = GfiOutput.load(gfiOutputCompositeKey);
+  if(gfiOutput === null) {
+    gfiOutput = new GfiOutput(gfiOutputCompositeKey);
+  }
+
+  const gfiBytes = ipfs.cat(event.params.gfiMachineOutputCid);
+
+  if(gfiBytes) {
+    const gfiDetails = json.try_fromBytes(gfiBytes);
+
+    if (gfiDetails.isOk && gfiDetails.value.kind == JSONValueKind.OBJECT) {
+      const gfiMetadata = gfiDetails.value.toObject();
+
+      const outputEmpId = gfiMetadata.get('outputEmpId');
+      gfi.outputEmpId = outputEmpId ? outputEmpId.toString() : 'null';
+
+      const outputTimestamp = gfiMetadata.get('outputTimestamp');
+      gfi.outputTimestamp = outputTimestamp ? outputTimestamp.toString() : 'null';
+
+      const newRollId = gfiMetadata.get('newRollId');
+      gfiOutput.newRollId = newRollId ? newRollId.toString() : 'null';
+
+      const soId = gfiMetadata.get('soId');
+      gfiOutput.soId = soId ? soId.toString() : 'null';
+    }
+  }
+
+  gfi.save();
+  gfiOutput.save();
+}
+
+export function handleBatching(event: BatchingEvent): void {
+  const lotId = event.params.lotId;
+  let batch = Batching.load(lotId);
+
+  if(batch === null) {
+    batch = new Batching(lotId);
+  }
+
+  const batchBytes = ipfs.cat(event.params.batchingCid);
+
+  if(batchBytes) {
+    const batchDetails = json.try_fromBytes(batchBytes);
+
+    if (batchDetails.isOk && batchDetails.value.kind == JSONValueKind.OBJECT) {
+      const batchMetadata = batchDetails.value.toObject();
+
+      const machineId = batchMetadata.get('machineId');
+      batch.machineId = machineId ? machineId.toString() : 'null';
+
+      const empId = batchMetadata.get('empId');
+      batch.empId = empId ? empId.toString() : 'null';
+
+      const timestamp = batchMetadata.get('timestamp');
+      batch.timestamp = timestamp ? timestamp.toString() : 'null';
+
+      const length = batchMetadata.get('length');
+      batch.length = length ? length.toString() : 'null';
+
+      const aFrame = batchMetadata.get('aFrame');
+      batch.aFrame = aFrame ? aFrame.toString() : 'null';
+
+      const fabricRollIds = batchMetadata.get('fabricRollIds') ;
+      const rolls = fabricRollIds? fabricRollIds.toArray() : [];
+
+      /*
+        fabricRollIds = [
+          {
+            rollid: '123',
+            soid: "123"
+          }
+        ]
+      */
+      for(let i=0; i<rolls.length; i++) {
+        const fabricDetail = rolls[i].toObject();
+
+        const rollIdJsonValue = fabricDetail.get('rollId');
+        const rollId = rollIdJsonValue ? rollIdJsonValue.toString() : 'null';
+
+        const soIdJsonValue = fabricDetail.get('soId');
+        const soId = soIdJsonValue ? soIdJsonValue.toString() : 'null';
+
+
+        const compositeKey = `${soId}::${rollId}`;
+
+        let gfiOutput = GfiOutput.load(compositeKey);
+
+        if(gfiOutput === null) {
+          gfiOutput = new GfiOutput(compositeKey);
+        }
+
+        const gfiOutputBytes = ipfs.cat(event.params.batchingCid);
+
+        if(gfiOutputBytes) {
+          const gfiOutputDetails = json.try_fromBytes(gfiOutputBytes);
+
+          if (gfiOutputDetails.isOk && gfiOutputDetails.value.kind == JSONValueKind.OBJECT) {
+            const gfiOutputMetadata = gfiOutputDetails.value.toObject();
+
+            const lotId = gfiOutputMetadata.get('lotId');
+            batch.lotId = lotId ? lotId.toString() : 'null';
+          }
+
+        gfiOutput.save();
+    }
+  }
+
+  batch.save();
+}
+  }
 }

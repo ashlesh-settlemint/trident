@@ -90,6 +90,32 @@ type Loomshed @entity {
 	pelletIds: [String!]!
 	rollIds: [String!]!
 }
+type Gfi @entity {
+	id: ID!
+	soId: SupplyOrder
+	gfiMachineId: String!
+	loadEmpId: String!
+	loadTimestamp: String!
+	outputEmpId: String!
+	outputTimestamp: String!
+	newRollIds: [String!]!
+	rollIds: [String!]!
+}
+type GfiOutput @entity {
+	id: ID!
+	newRollId: String
+	soId: SupplyOrder
+	lots: [Batching!]! @derivedFrom(field: "lotId")
+}
+type Batching @entity {
+	id: ID!
+	lotId: GfiOutput
+	machineId: String!
+	empId: String!
+	timestamp: String!
+	length: String!
+	aFrame: String!
+}
 interface Event {
 	id: ID!
 	transaction: Transaction!

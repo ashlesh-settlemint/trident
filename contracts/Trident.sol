@@ -58,7 +58,9 @@ contract Trident is Ownable {
   event AddNewPelletEvent(string pelletId, string soId, string pelletDetailsCid);
   event LoadWeaverBeamEvent(string soId, string weaverBeamId, string pelletId, string loomMachineId, string loomMachineLoadingCid);
   event LoomOutputEvent(string rollId, string soId, string loomMachineId, string loomMachineOutputCid);
-
+  event LoadRollEvent(string soId, string rollId, string gfiMachineId, string gfiMachineLoadingCid);
+  event GfiOutputEvent(string newRollId, string soId, string gfiMachineId, string gfiMachineOutputCid);
+  event BatchingEvent(string lotId, string batchingCid);
 
   function addPellet(string memory pelletId, string memory pelletDetailsCid) external {
     _pettletIdToCid[pelletId] = pelletDetailsCid;
@@ -140,5 +142,30 @@ contract Trident is Ownable {
     string memory loomMachineOutputCid
   ) external {
     emit LoomOutputEvent(rollId, soId, loomMachineId, loomMachineOutputCid);
+  }
+
+  function loadRollToGfiMachine(
+    string memory soId,
+    string memory rollId,
+    string memory gfiMachineId,
+    string memory gfiMachineLoadingCid
+  ) external {
+    emit LoadRollEvent(soId, rollId, gfiMachineId, gfiMachineLoadingCid);
+  }
+
+  function addGfiOutput(
+    string memory newRollId,
+    string memory soId,
+    string memory gfiMachineId,
+    string memory gfiMachineOutputCid
+  ) external {
+    emit GfiOutputEvent(newRollId, soId, gfiMachineId, gfiMachineOutputCid);
+  }
+
+  function addBatchingDetails(
+    string memory lotId,
+    string memory batchingCid
+  ) external {
+    emit BatchingEvent(lotId, batchingCid);
   }
 }

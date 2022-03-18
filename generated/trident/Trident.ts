@@ -58,6 +58,28 @@ export class AddPelletEvent__Params {
   }
 }
 
+export class BatchingEvent extends ethereum.Event {
+  get params(): BatchingEvent__Params {
+    return new BatchingEvent__Params(this);
+  }
+}
+
+export class BatchingEvent__Params {
+  _event: BatchingEvent;
+
+  constructor(event: BatchingEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get batchingCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
 export class ExitPelletEvent extends ethereum.Event {
   get params(): ExitPelletEvent__Params {
     return new ExitPelletEvent__Params(this);
@@ -81,6 +103,36 @@ export class ExitPelletEvent__Params {
 
   get pelletExitCid(): string {
     return this._event.parameters[2].value.toString();
+  }
+}
+
+export class GfiOutputEvent extends ethereum.Event {
+  get params(): GfiOutputEvent__Params {
+    return new GfiOutputEvent__Params(this);
+  }
+}
+
+export class GfiOutputEvent__Params {
+  _event: GfiOutputEvent;
+
+  constructor(event: GfiOutputEvent) {
+    this._event = event;
+  }
+
+  get newRollId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get gfiMachineId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get gfiMachineOutputCid(): string {
+    return this._event.parameters[3].value.toString();
   }
 }
 
@@ -110,6 +162,36 @@ export class LoadPelletEvent__Params {
   }
 
   get warpMachineLoadingCid(): string {
+    return this._event.parameters[3].value.toString();
+  }
+}
+
+export class LoadRollEvent extends ethereum.Event {
+  get params(): LoadRollEvent__Params {
+    return new LoadRollEvent__Params(this);
+  }
+}
+
+export class LoadRollEvent__Params {
+  _event: LoadRollEvent;
+
+  constructor(event: LoadRollEvent) {
+    this._event = event;
+  }
+
+  get soId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get rollId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get gfiMachineId(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get gfiMachineLoadingCid(): string {
     return this._event.parameters[3].value.toString();
   }
 }
@@ -338,6 +420,82 @@ export class Trident extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+}
+
+export class AddBatchingDetailsCall extends ethereum.Call {
+  get inputs(): AddBatchingDetailsCall__Inputs {
+    return new AddBatchingDetailsCall__Inputs(this);
+  }
+
+  get outputs(): AddBatchingDetailsCall__Outputs {
+    return new AddBatchingDetailsCall__Outputs(this);
+  }
+}
+
+export class AddBatchingDetailsCall__Inputs {
+  _call: AddBatchingDetailsCall;
+
+  constructor(call: AddBatchingDetailsCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get batchingCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddBatchingDetailsCall__Outputs {
+  _call: AddBatchingDetailsCall;
+
+  constructor(call: AddBatchingDetailsCall) {
+    this._call = call;
+  }
+}
+
+export class AddGfiOutputCall extends ethereum.Call {
+  get inputs(): AddGfiOutputCall__Inputs {
+    return new AddGfiOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddGfiOutputCall__Outputs {
+    return new AddGfiOutputCall__Outputs(this);
+  }
+}
+
+export class AddGfiOutputCall__Inputs {
+  _call: AddGfiOutputCall;
+
+  constructor(call: AddGfiOutputCall) {
+    this._call = call;
+  }
+
+  get newRollId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get gfiMachineId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get gfiMachineOutputCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class AddGfiOutputCall__Outputs {
+  _call: AddGfiOutputCall;
+
+  constructor(call: AddGfiOutputCall) {
+    this._call = call;
   }
 }
 
@@ -581,6 +739,48 @@ export class LoadPelletToWarpMachineCall__Outputs {
   _call: LoadPelletToWarpMachineCall;
 
   constructor(call: LoadPelletToWarpMachineCall) {
+    this._call = call;
+  }
+}
+
+export class LoadRollToGfiMachineCall extends ethereum.Call {
+  get inputs(): LoadRollToGfiMachineCall__Inputs {
+    return new LoadRollToGfiMachineCall__Inputs(this);
+  }
+
+  get outputs(): LoadRollToGfiMachineCall__Outputs {
+    return new LoadRollToGfiMachineCall__Outputs(this);
+  }
+}
+
+export class LoadRollToGfiMachineCall__Inputs {
+  _call: LoadRollToGfiMachineCall;
+
+  constructor(call: LoadRollToGfiMachineCall) {
+    this._call = call;
+  }
+
+  get soId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get rollId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get gfiMachineId(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get gfiMachineLoadingCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class LoadRollToGfiMachineCall__Outputs {
+  _call: LoadRollToGfiMachineCall;
+
+  constructor(call: LoadRollToGfiMachineCall) {
     this._call = call;
   }
 }

@@ -87,5 +87,40 @@
       {"name": "pelletIds", "type": "[String!]!" },
       {"name": "rollIds", "type": "[String!]!" }
     ]
+  },
+  {
+    "name": "Gfi",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "soId", "type":"SupplyOrder"},
+      {"name": "gfiMachineId", "type":"String!"},
+      {"name": "loadEmpId", "type":"String!"},
+      {"name": "loadTimestamp", "type":"String!"},
+      {"name": "outputEmpId", "type":"String!"},
+      {"name": "outputTimestamp", "type":"String!"},
+      {"name": "newRollIds", "type": "[String!]!" },
+      {"name": "rollIds", "type": "[String!]!" }
+    ]
+  },
+  {
+    "name": "GfiOutput",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "newRollId", "type": "String" },
+      {"name": "soId", "type":"SupplyOrder"},
+      {"name": "lots", "type": "Batching!", "derived": "lotId" }
+    ]
+  },
+  {
+    "name": "Batching",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "lotId", "type":"GfiOutput"},
+      {"name": "machineId", "type":"String!"},
+      {"name": "empId", "type":"String!"},
+      {"name": "timestamp", "type":"String!"},
+      {"name": "length", "type":"String!"},
+      {"name": "aFrame", "type":"String!"}
+    ]
   }
 ]

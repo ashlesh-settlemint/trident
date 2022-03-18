@@ -36,4 +36,10 @@
           handler: handleLoadWeaverBeam
         - event: LoomOutputEvent(string,string,string,string)
           handler: handleLoomOutput
+        - event: LoadRollEvent(string,string,string,string)
+          handler: handleLoadRoll
+        - event: GfiOutputEvent(string,string,string,string)
+          handler: handleGfiOutput
+        - event: BatchingEvent(string,string)
+          handler: handleBatching
       file: {file}

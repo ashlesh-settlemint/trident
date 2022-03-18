@@ -1099,6 +1099,304 @@ export class Loomshed extends Entity {
   }
 }
 
+export class Gfi extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("gfiMachineId", Value.fromString(""));
+    this.set("loadEmpId", Value.fromString(""));
+    this.set("loadTimestamp", Value.fromString(""));
+    this.set("outputEmpId", Value.fromString(""));
+    this.set("outputTimestamp", Value.fromString(""));
+    this.set("newRollIds", Value.fromStringArray(new Array(0)));
+    this.set("rollIds", Value.fromStringArray(new Array(0)));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Gfi entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Gfi entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Gfi", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Gfi | null {
+    return changetype<Gfi | null>(store.get("Gfi", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get soId(): string | null {
+    let value = this.get("soId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
+  }
+
+  get gfiMachineId(): string {
+    let value = this.get("gfiMachineId");
+    return value!.toString();
+  }
+
+  set gfiMachineId(value: string) {
+    this.set("gfiMachineId", Value.fromString(value));
+  }
+
+  get loadEmpId(): string {
+    let value = this.get("loadEmpId");
+    return value!.toString();
+  }
+
+  set loadEmpId(value: string) {
+    this.set("loadEmpId", Value.fromString(value));
+  }
+
+  get loadTimestamp(): string {
+    let value = this.get("loadTimestamp");
+    return value!.toString();
+  }
+
+  set loadTimestamp(value: string) {
+    this.set("loadTimestamp", Value.fromString(value));
+  }
+
+  get outputEmpId(): string {
+    let value = this.get("outputEmpId");
+    return value!.toString();
+  }
+
+  set outputEmpId(value: string) {
+    this.set("outputEmpId", Value.fromString(value));
+  }
+
+  get outputTimestamp(): string {
+    let value = this.get("outputTimestamp");
+    return value!.toString();
+  }
+
+  set outputTimestamp(value: string) {
+    this.set("outputTimestamp", Value.fromString(value));
+  }
+
+  get newRollIds(): Array<string> {
+    let value = this.get("newRollIds");
+    return value!.toStringArray();
+  }
+
+  set newRollIds(value: Array<string>) {
+    this.set("newRollIds", Value.fromStringArray(value));
+  }
+
+  get rollIds(): Array<string> {
+    let value = this.get("rollIds");
+    return value!.toStringArray();
+  }
+
+  set rollIds(value: Array<string>) {
+    this.set("rollIds", Value.fromStringArray(value));
+  }
+}
+
+export class GfiOutput extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save GfiOutput entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save GfiOutput entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("GfiOutput", id.toString(), this);
+    }
+  }
+
+  static load(id: string): GfiOutput | null {
+    return changetype<GfiOutput | null>(store.get("GfiOutput", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get newRollId(): string | null {
+    let value = this.get("newRollId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set newRollId(value: string | null) {
+    if (!value) {
+      this.unset("newRollId");
+    } else {
+      this.set("newRollId", Value.fromString(<string>value));
+    }
+  }
+
+  get soId(): string | null {
+    let value = this.get("soId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
+  }
+
+  get lots(): Array<string> {
+    let value = this.get("lots");
+    return value!.toStringArray();
+  }
+
+  set lots(value: Array<string>) {
+    this.set("lots", Value.fromStringArray(value));
+  }
+}
+
+export class Batching extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("machineId", Value.fromString(""));
+    this.set("empId", Value.fromString(""));
+    this.set("timestamp", Value.fromString(""));
+    this.set("length", Value.fromString(""));
+    this.set("aFrame", Value.fromString(""));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Batching entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Batching entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Batching", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Batching | null {
+    return changetype<Batching | null>(store.get("Batching", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get lotId(): string | null {
+    let value = this.get("lotId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set lotId(value: string | null) {
+    if (!value) {
+      this.unset("lotId");
+    } else {
+      this.set("lotId", Value.fromString(<string>value));
+    }
+  }
+
+  get machineId(): string {
+    let value = this.get("machineId");
+    return value!.toString();
+  }
+
+  set machineId(value: string) {
+    this.set("machineId", Value.fromString(value));
+  }
+
+  get empId(): string {
+    let value = this.get("empId");
+    return value!.toString();
+  }
+
+  set empId(value: string) {
+    this.set("empId", Value.fromString(value));
+  }
+
+  get timestamp(): string {
+    let value = this.get("timestamp");
+    return value!.toString();
+  }
+
+  set timestamp(value: string) {
+    this.set("timestamp", Value.fromString(value));
+  }
+
+  get length(): string {
+    let value = this.get("length");
+    return value!.toString();
+  }
+
+  set length(value: string) {
+    this.set("length", Value.fromString(value));
+  }
+
+  get aFrame(): string {
+    let value = this.get("aFrame");
+    return value!.toString();
+  }
+
+  set aFrame(value: string) {
+    this.set("aFrame", Value.fromString(value));
+  }
+}
+
 export class Transaction extends Entity {
   constructor(id: string) {
     super();
