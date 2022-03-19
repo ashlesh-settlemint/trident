@@ -1334,6 +1334,23 @@ export class Batching extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get gfiOutputId(): string | null {
+    let value = this.get("gfiOutputId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set gfiOutputId(value: string | null) {
+    if (!value) {
+      this.unset("gfiOutputId");
+    } else {
+      this.set("gfiOutputId", Value.fromString(<string>value));
+    }
+  }
+
   get lotId(): string | null {
     let value = this.get("lotId");
     if (!value || value.kind == ValueKind.NULL) {

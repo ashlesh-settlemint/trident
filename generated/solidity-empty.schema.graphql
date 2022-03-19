@@ -105,11 +105,12 @@ type GfiOutput @entity {
 	id: ID!
 	newRollId: String
 	soId: SupplyOrder
-	lots: [Batching!]! @derivedFrom(field: "lotId")
+	lots: [Batching!]! @derivedFrom(field: "gfiOutputId")
 }
 type Batching @entity {
 	id: ID!
-	lotId: GfiOutput
+	gfiOutputId: GfiOutput
+	lotId: String
 	machineId: String!
 	empId: String!
 	timestamp: String!
