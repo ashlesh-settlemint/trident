@@ -622,11 +622,11 @@ export function handleBatching(event: BatchingEvent): void {
         //   }
 
         const lotId = batchMetadata.get("lotId");
-        batch.lotId = lotId ? lotId.toString() : "null";
+        gfiOutput.lotId = lotId ? lotId.toString() : "null";
         const test = lotId ? lotId.toString() : "null";
         log.debug('console lotId {}', [test]);
 
-        batch.gfiOutputId = compositeKey;
+        // batch.gfiOutputId = compositeKey;
 
         // }
         batch.save();

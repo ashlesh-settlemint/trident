@@ -1224,6 +1224,8 @@ export class GfiOutput extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("lotId", Value.fromString(""));
   }
 
   save(): void {
@@ -1286,13 +1288,13 @@ export class GfiOutput extends Entity {
     }
   }
 
-  get lots(): Array<string> {
-    let value = this.get("lots");
-    return value!.toStringArray();
+  get lotId(): string {
+    let value = this.get("lotId");
+    return value!.toString();
   }
 
-  set lots(value: Array<string>) {
-    this.set("lots", Value.fromStringArray(value));
+  set lotId(value: string) {
+    this.set("lotId", Value.fromString(value));
   }
 }
 
@@ -1334,21 +1336,13 @@ export class Batching extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get gfiOutputId(): string | null {
-    let value = this.get("gfiOutputId");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
+  get gfiOutputIds(): Array<string> {
+    let value = this.get("gfiOutputIds");
+    return value!.toStringArray();
   }
 
-  set gfiOutputId(value: string | null) {
-    if (!value) {
-      this.unset("gfiOutputId");
-    } else {
-      this.set("gfiOutputId", Value.fromString(<string>value));
-    }
+  set gfiOutputIds(value: Array<string>) {
+    this.set("gfiOutputIds", Value.fromStringArray(value));
   }
 
   get lotId(): string | null {

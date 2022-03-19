@@ -108,14 +108,14 @@
       {"name": "id", "type":"ID!"},
       {"name": "newRollId", "type": "String" },
       {"name": "soId", "type":"SupplyOrder"},
-      {"name": "lots", "type": "Batching!", "derived": "gfiOutputId" }
+      {"name": "lotId", "type": "Batching!" }
     ]
   },
   {
     "name": "Batching",
     "fields": [
       {"name": "id", "type":"ID!"},
-      {"name": "gfiOutputId", "type":"GfiOutput"},
+      {"name": "gfiOutputIds", "type":"GfiOutput!", "derived": "lotId"},
       {"name": "lotId", "type":"String"},
       {"name": "machineId", "type":"String!"},
       {"name": "empId", "type":"String!"},
