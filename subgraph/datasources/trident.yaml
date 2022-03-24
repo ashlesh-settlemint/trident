@@ -32,6 +32,8 @@
           handler: handleSizingOutput
         - event: SizingStorageEvent(string,string,string,string)
           handler: handleSizingStorage
+        - event: IssueNewPelletEvent(string,string)
+          handler: handleIssueNewPellet
         - event: LoadWeaverBeamEvent(string,string,string,string,string)
           handler: handleLoadWeaverBeam
         - event: LoomOutputEvent(string,string,string,string)
@@ -42,4 +44,29 @@
           handler: handleGfiOutput
         - event: BatchingEvent(string,string)
           handler: handleBatching
+
+        - event: SingingPtrInputEvent(string,string)
+          handler: handleSingingPtrInput
+        - event: SingingPtrOutputEvent(string,string)
+          handler: handleSingingPtrOutput
+
+        - event: MercerizingInputEvent(string,string)
+          handler: handleMercerizingInput
+        - event: MercerizingOutputEvent(string,string)
+          handler: handleMercerizingOutput
+
+        - event: DyeingInputEvent(string,string)
+          handler: handleDyeingInput
+        - event: DyeingOutputEvent(string,string)
+          handler: handleDyeingOutput
+
+        - event: PrintingInputEvent(string,string)
+          handler: handlePrintingInput
+        - event: PrintingOutputEvent(string,string)
+          handler: handlePrintingOutput
+
+        - event: FinishedFabricInputEvent(string,string)
+          handler: handleFinishedFabricInput
+        - event: FinishedFabricOutputEvent(string,string)
+          handler: handleFinishedFabricOutput
       file: {file}

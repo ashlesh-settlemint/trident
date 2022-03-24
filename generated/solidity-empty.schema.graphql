@@ -42,6 +42,7 @@ type Pellet @entity {
 	entryEmpId: String
 	exitTimestamp: String
 	exitEmpId: String
+	loomSectionPellet: Boolean
 	soId: SupplyOrder
 }
 type WarpInput @entity {
@@ -49,8 +50,8 @@ type WarpInput @entity {
 	soId: SupplyOrder
 	creelMachineId: String!
 	prepPoId: String!
-	loadEmpId: String!
-	loadTimestamp: String!
+	loadEmpIds: [String!]!
+	loadTimestamps: [String!]!
 	outputEmpId: String!
 	outputTimestamp: String!
 	pelletIds: [String!]!
@@ -61,8 +62,8 @@ type SizingInput @entity {
 	soId: SupplyOrder
 	sizingMachineId: String!
 	prepPoId: String!
-	loadEmpId: String!
-	loadTimestamp: String!
+	loadEmpIds: [String!]!
+	loadTimestamps: [String!]!
 	outputEmpId: String!
 	outputTimestamp: String!
 	warperBeamIds: [String!]!
@@ -72,8 +73,8 @@ type SizingStorage @entity {
 	id: ID!
 	soId: String!
 	binId: String!
-	empId: String!
-	timestamp: String!
+	empIds: [String!]!
+	timestamps: [String!]!
 	prepPoId: String!
 	weaverBeamIds: [String!]!
 }
@@ -82,8 +83,8 @@ type Loomshed @entity {
 	soId: SupplyOrder
 	loomMachineId: String!
 	loomPoId: String!
-	loadEmpId: String!
-	loadTimestamp: String!
+	loadEmpIds: [String!]!
+	loadTimestamps: [String!]!
 	outputEmpId: String!
 	outputTimestamp: String!
 	weaverBeamIds: [String!]!
@@ -94,8 +95,8 @@ type Gfi @entity {
 	id: ID!
 	soId: SupplyOrder
 	gfiMachineId: String!
-	loadEmpId: String!
-	loadTimestamp: String!
+	loadEmpIds: [String!]!
+	loadTimestamps: [String!]!
 	outputEmpId: String!
 	outputTimestamp: String!
 	newRollIds: [String!]!
@@ -103,8 +104,10 @@ type Gfi @entity {
 }
 type GfiOutput @entity {
 	id: ID!
-	newRollId: String
 	soId: SupplyOrder
+	oldRollId: String
+	newRollId: String
+	binId: String
 	lotId: Batching!
 }
 type Batching @entity {
@@ -116,6 +119,50 @@ type Batching @entity {
 	timestamp: String!
 	length: String!
 	aFrame: String!
+}
+type ProcessHouse @entity {
+	id: ID!
+	lotId: String
+	singingPtrInputMachineId: String
+	singingPtrInputAframe: String
+	singingPtrInputTimestamp: String
+	singingPtrInputEmpId: String
+	singingPtrOutputMachineId: String
+	singingPtrOutputAframe: String
+	singingPtrOutputTimestamp: String
+	singingPtrOutputEmpId: String
+	mercerizingInputMachineId: String
+	mercerizingInputAframe: String
+	mercerizingInputTimestamp: String
+	mercerizingInputEmpId: String
+	mercerizingOutputMachineId: String
+	mercerizingOutputAframe: String
+	mercerizingOutputTimestamp: String
+	mercerizingOutputEmpId: String
+	dyeingInputMachineId: String
+	dyeingInputAframe: String
+	dyeingInputTimestamp: String
+	dyeingInputEmpId: String
+	dyeingOutputMachineId: String
+	dyeingOutputAframe: String
+	dyeingOutputTimestamp: String
+	dyeingOutputEmpId: String
+	printingInputMachineId: String
+	printingInputAframe: String
+	printingInputTimestamp: String
+	printingInputEmpId: String
+	printingOutputMachineId: String
+	printingOutputAframe: String
+	printingOutputTimestamp: String
+	printingOutputEmpId: String
+	finishedFabricInputMachineId: String
+	finishedFabricInputAframe: String
+	finishedFabricInputTimestamp: String
+	finishedFabricInputEmpId: String
+	finishedFabricOutputMachineId: String
+	finishedFabricOutputAframe: String
+	finishedFabricOutputTimestamp: String
+	finishedFabricOutputEmpId: String
 }
 interface Event {
 	id: ID!

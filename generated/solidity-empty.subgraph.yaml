@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0x42eEadd5231D32a5E710509D11B4466F12481D11"
+      address: "0xd8F61F344e48e9a1738293c9a0b353e3e1B2ea9a"
       abi: Ownable
-      startBlock: 212337
+      startBlock: 236791
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0x42eEadd5231D32a5E710509D11B4466F12481D11"
+      address: "0xd8F61F344e48e9a1738293c9a0b353e3e1B2ea9a"
       abi: Trident
-      startBlock: 212337
+      startBlock: 236791
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -56,6 +56,8 @@ dataSources:
           handler: handleSizingOutput
         - event: SizingStorageEvent(string,string,string,string)
           handler: handleSizingStorage
+        - event: IssueNewPelletEvent(string,string)
+          handler: handleIssueNewPellet
         - event: LoadWeaverBeamEvent(string,string,string,string,string)
           handler: handleLoadWeaverBeam
         - event: LoomOutputEvent(string,string,string,string)
@@ -66,4 +68,29 @@ dataSources:
           handler: handleGfiOutput
         - event: BatchingEvent(string,string)
           handler: handleBatching
+
+        - event: SingingPtrInputEvent(string,string)
+          handler: handleSingingPtrInput
+        - event: SingingPtrOutputEvent(string,string)
+          handler: handleSingingPtrOutput
+
+        - event: MercerizingInputEvent(string,string)
+          handler: handleMercerizingInput
+        - event: MercerizingOutputEvent(string,string)
+          handler: handleMercerizingOutput
+
+        - event: DyeingInputEvent(string,string)
+          handler: handleDyeingInput
+        - event: DyeingOutputEvent(string,string)
+          handler: handleDyeingOutput
+
+        - event: PrintingInputEvent(string,string)
+          handler: handlePrintingInput
+        - event: PrintingOutputEvent(string,string)
+          handler: handlePrintingOutput
+
+        - event: FinishedFabricInputEvent(string,string)
+          handler: handleFinishedFabricInput
+        - event: FinishedFabricOutputEvent(string,string)
+          handler: handleFinishedFabricOutput
       file: ../subgraph/datasources/trident.ts

@@ -55,12 +55,24 @@ contract Trident is Ownable {
   event LoadWarperBeamEvent(string soId, string warperBeamId, string sizingMachineId, string sizingMachineLoadingCid);
   event SizingOutputEvent(string weaverBeamId, string soId, string sizingMachineId, string sizingMachineOutputCid);
   event SizingStorageEvent(string binId, string soId, string weaverBeamId, string sizingStorageCid);
-  event AddNewPelletEvent(string pelletId, string soId, string pelletDetailsCid);
+  event IssueNewPelletEvent(string soId, string pelletId);
   event LoadWeaverBeamEvent(string soId, string weaverBeamId, string pelletId, string loomMachineId, string loomMachineLoadingCid);
   event LoomOutputEvent(string rollId, string soId, string loomMachineId, string loomMachineOutputCid);
   event LoadRollEvent(string soId, string rollId, string gfiMachineId, string gfiMachineLoadingCid);
   event GfiOutputEvent(string newRollId, string soId, string gfiMachineId, string gfiMachineOutputCid);
   event BatchingEvent(string lotId, string batchingCid);
+
+  event SingingPtrInputEvent(string lotId, string singingPtrInputCid);
+  event MercerizingInputEvent(string lotId, string mercerizingInputCid);
+  event DyeingInputEvent(string lotId, string dyeingInputCid);
+  event PrintingInputEvent(string lotId, string printingInputCid);
+  event FinishedFabricInputEvent(string lotId, string finishedFabricInputCid);
+
+  event SingingPtrOutputEvent(string lotId, string singingPtrOutputCid);
+  event MercerizingOutputEvent(string lotId, string mercerizingOutputCid);
+  event DyeingOutputEvent(string lotId, string dyeingOutputCid);
+  event PrintingOutputEvent(string lotId, string printingOutputCid);
+  event FinishedFabricOutputEvent(string lotId, string finishedFabricOutputCid);
 
   function addPellet(string memory pelletId, string memory pelletDetailsCid) external {
     _pettletIdToCid[pelletId] = pelletDetailsCid;
@@ -125,6 +137,10 @@ contract Trident is Ownable {
     emit SizingStorageEvent(binId, soId, weaverBeamId, sizingStorageCid);
   }
 
+  function issueNewPellet(string memory soId, string memory pelletId) external {
+    emit IssueNewPelletEvent(soId, pelletId);
+  }
+
   function loadWeaverBeamToLoomMachine(
     string memory soId,
     string memory loomMachineId,
@@ -167,5 +183,75 @@ contract Trident is Ownable {
     string memory batchingCid
   ) external {
     emit BatchingEvent(lotId, batchingCid);
+  }
+
+  function addSingingPtrInput(
+    string memory lotId,
+    string memory singingPtrInputCid
+  ) external {
+    emit SingingPtrInputEvent(lotId, singingPtrInputCid);
+  }
+
+  function addSingingPtrOutput(
+    string memory lotId,
+    string memory singingPtrOutputCid
+  ) external {
+    emit SingingPtrOutputEvent(lotId, singingPtrOutputCid);
+  }
+
+  function addMercerizingInput(
+    string memory lotId,
+    string memory mercerizingInputCid
+  ) external {
+    emit MercerizingInputEvent(lotId, mercerizingInputCid);
+  }
+
+  function addMercerizingOutput(
+    string memory lotId,
+    string memory mercerizingOutputCid
+  ) external {
+    emit MercerizingOutputEvent(lotId, mercerizingOutputCid);
+  }
+
+  function addDyeingInput(
+    string memory lotId,
+    string memory dyeingInputCid
+  ) external {
+    emit DyeingInputEvent(lotId, dyeingInputCid);
+  }
+
+  function addDyeingOutput(
+    string memory lotId,
+    string memory dyeingOutputCid
+  ) external {
+    emit DyeingOutputEvent(lotId, dyeingOutputCid);
+  }
+
+  function addPrintingInput(
+    string memory lotId,
+    string memory printingInputCid
+  ) external {
+    emit PrintingInputEvent(lotId, printingInputCid);
+  }
+
+  function addPrintingOutput(
+    string memory lotId,
+    string memory printingOutputCid
+  ) external {
+    emit PrintingOutputEvent(lotId, printingOutputCid);
+  }
+
+  function addFinishedFabricInput(
+    string memory lotId,
+    string memory finishedFabricInputCid
+  ) external {
+    emit FinishedFabricInputEvent(lotId, finishedFabricInputCid);
+  }
+
+  function addFinishedFabricOutput(
+    string memory lotId,
+    string memory finishedFabricOutputCid
+  ) external {
+    emit FinishedFabricOutputEvent(lotId, finishedFabricOutputCid);
   }
 }

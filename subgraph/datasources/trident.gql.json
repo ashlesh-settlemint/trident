@@ -27,6 +27,7 @@
       {"name": "entryEmpId", "type": "String"},
       {"name": "exitTimestamp", "type": "String"},
       {"name": "exitEmpId", "type": "String"},
+      {"name": "loomSectionPellet", "type": "Boolean"},
       {"name": "soId", "type": "SupplyOrder"}
     ]
   },
@@ -37,8 +38,8 @@
       {"name": "soId", "type":"SupplyOrder"},
       {"name": "creelMachineId", "type":"String!"},
       {"name": "prepPoId", "type":"String!"},
-      {"name": "loadEmpId", "type":"String!"},
-      {"name": "loadTimestamp", "type":"String!"},
+      {"name": "loadEmpIds", "type":"[String!]!"},
+      {"name": "loadTimestamps", "type":"[String!]!"},
       {"name": "outputEmpId", "type":"String!"},
       {"name": "outputTimestamp", "type":"String!"},
       {"name": "pelletIds", "type": "[String!]!" },
@@ -52,8 +53,8 @@
       {"name": "soId", "type":"SupplyOrder"},
       {"name": "sizingMachineId", "type":"String!"},
       {"name": "prepPoId", "type":"String!"},
-      {"name": "loadEmpId", "type":"String!"},
-      {"name": "loadTimestamp", "type":"String!"},
+      {"name": "loadEmpIds", "type":"[String!]!"},
+      {"name": "loadTimestamps", "type":"[String!]!"},
       {"name": "outputEmpId", "type":"String!"},
       {"name": "outputTimestamp", "type":"String!"},
       {"name": "warperBeamIds", "type": "[String!]!" },
@@ -66,8 +67,8 @@
       {"name": "id", "type": "ID!"},
       {"name": "soId", "type": "String!"},
       {"name": "binId", "type": "String!"},
-      {"name": "empId", "type": "String!"},
-      {"name": "timestamp", "type": "String!"},
+      {"name": "empIds", "type": "[String!]!"},
+      {"name": "timestamps", "type": "[String!]!"},
       {"name": "prepPoId", "type": "String!"},
       {"name": "weaverBeamIds", "type": "[String!]!"}
     ]
@@ -79,8 +80,8 @@
       {"name": "soId", "type":"SupplyOrder"},
       {"name": "loomMachineId", "type":"String!"},
       {"name": "loomPoId", "type":"String!"},
-      {"name": "loadEmpId", "type":"String!"},
-      {"name": "loadTimestamp", "type":"String!"},
+      {"name": "loadEmpIds", "type":"[String!]!"},
+      {"name": "loadTimestamps", "type":"[String!]!"},
       {"name": "outputEmpId", "type":"String!"},
       {"name": "outputTimestamp", "type":"String!"},
       {"name": "weaverBeamIds", "type": "[String!]!" },
@@ -94,8 +95,8 @@
       {"name": "id", "type":"ID!"},
       {"name": "soId", "type":"SupplyOrder"},
       {"name": "gfiMachineId", "type":"String!"},
-      {"name": "loadEmpId", "type":"String!"},
-      {"name": "loadTimestamp", "type":"String!"},
+      {"name": "loadEmpIds", "type":"[String!]!"},
+      {"name": "loadTimestamps", "type":"[String!]!"},
       {"name": "outputEmpId", "type":"String!"},
       {"name": "outputTimestamp", "type":"String!"},
       {"name": "newRollIds", "type": "[String!]!" },
@@ -106,8 +107,10 @@
     "name": "GfiOutput",
     "fields": [
       {"name": "id", "type":"ID!"},
-      {"name": "newRollId", "type": "String" },
       {"name": "soId", "type":"SupplyOrder"},
+      {"name": "oldRollId", "type": "String" },
+      {"name": "newRollId", "type": "String" },
+      {"name": "binId", "type": "String" },
       {"name": "lotId", "type": "Batching!" }
     ]
   },
@@ -122,6 +125,63 @@
       {"name": "timestamp", "type":"String!"},
       {"name": "length", "type":"String!"},
       {"name": "aFrame", "type":"String!"}
+    ]
+  },
+  {
+    "name": "ProcessHouse",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "lotId", "type":"String"},
+
+      {"name": "singingPtrInputMachineId", "type":"String"},
+      {"name": "singingPtrInputAframe", "type":"String"},
+      {"name": "singingPtrInputTimestamp", "type":"String"},
+      {"name": "singingPtrInputEmpId", "type":"String"},
+
+      {"name": "singingPtrOutputMachineId", "type":"String"},
+      {"name": "singingPtrOutputAframe", "type":"String"},
+      {"name": "singingPtrOutputTimestamp", "type":"String"},
+      {"name": "singingPtrOutputEmpId", "type":"String"},
+
+      {"name": "mercerizingInputMachineId", "type":"String"},
+      {"name": "mercerizingInputAframe", "type":"String"},
+      {"name": "mercerizingInputTimestamp", "type":"String"},
+      {"name": "mercerizingInputEmpId", "type":"String"},
+
+      {"name": "mercerizingOutputMachineId", "type":"String"},
+      {"name": "mercerizingOutputAframe", "type":"String"},
+      {"name": "mercerizingOutputTimestamp", "type":"String"},
+      {"name": "mercerizingOutputEmpId", "type":"String"},
+
+      {"name": "dyeingInputMachineId", "type":"String"},
+      {"name": "dyeingInputAframe", "type":"String"},
+      {"name": "dyeingInputTimestamp", "type":"String"},
+      {"name": "dyeingInputEmpId", "type":"String"},
+
+      {"name": "dyeingOutputMachineId", "type":"String"},
+      {"name": "dyeingOutputAframe", "type":"String"},
+      {"name": "dyeingOutputTimestamp", "type":"String"},
+      {"name": "dyeingOutputEmpId", "type":"String"},
+
+      {"name": "printingInputMachineId", "type":"String"},
+      {"name": "printingInputAframe", "type":"String"},
+      {"name": "printingInputTimestamp", "type":"String"},
+      {"name": "printingInputEmpId", "type":"String"},
+
+      {"name": "printingOutputMachineId", "type":"String"},
+      {"name": "printingOutputAframe", "type":"String"},
+      {"name": "printingOutputTimestamp", "type":"String"},
+      {"name": "printingOutputEmpId", "type":"String"},
+
+      {"name": "finishedFabricInputMachineId", "type":"String"},
+      {"name": "finishedFabricInputAframe", "type":"String"},
+      {"name": "finishedFabricInputTimestamp", "type":"String"},
+      {"name": "finishedFabricInputEmpId", "type":"String"},
+
+      {"name": "finishedFabricOutputMachineId", "type":"String"},
+      {"name": "finishedFabricOutputAframe", "type":"String"},
+      {"name": "finishedFabricOutputTimestamp", "type":"String"},
+      {"name": "finishedFabricOutputEmpId", "type":"String"}
     ]
   }
 ]

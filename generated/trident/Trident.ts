@@ -10,32 +10,6 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
-export class AddNewPelletEvent extends ethereum.Event {
-  get params(): AddNewPelletEvent__Params {
-    return new AddNewPelletEvent__Params(this);
-  }
-}
-
-export class AddNewPelletEvent__Params {
-  _event: AddNewPelletEvent;
-
-  constructor(event: AddNewPelletEvent) {
-    this._event = event;
-  }
-
-  get pelletId(): string {
-    return this._event.parameters[0].value.toString();
-  }
-
-  get soId(): string {
-    return this._event.parameters[1].value.toString();
-  }
-
-  get pelletDetailsCid(): string {
-    return this._event.parameters[2].value.toString();
-  }
-}
-
 export class AddPelletEvent extends ethereum.Event {
   get params(): AddPelletEvent__Params {
     return new AddPelletEvent__Params(this);
@@ -80,6 +54,50 @@ export class BatchingEvent__Params {
   }
 }
 
+export class DyeingInputEvent extends ethereum.Event {
+  get params(): DyeingInputEvent__Params {
+    return new DyeingInputEvent__Params(this);
+  }
+}
+
+export class DyeingInputEvent__Params {
+  _event: DyeingInputEvent;
+
+  constructor(event: DyeingInputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get dyeingInputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class DyeingOutputEvent extends ethereum.Event {
+  get params(): DyeingOutputEvent__Params {
+    return new DyeingOutputEvent__Params(this);
+  }
+}
+
+export class DyeingOutputEvent__Params {
+  _event: DyeingOutputEvent;
+
+  constructor(event: DyeingOutputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get dyeingOutputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
 export class ExitPelletEvent extends ethereum.Event {
   get params(): ExitPelletEvent__Params {
     return new ExitPelletEvent__Params(this);
@@ -103,6 +121,50 @@ export class ExitPelletEvent__Params {
 
   get pelletExitCid(): string {
     return this._event.parameters[2].value.toString();
+  }
+}
+
+export class FinishedFabricInputEvent extends ethereum.Event {
+  get params(): FinishedFabricInputEvent__Params {
+    return new FinishedFabricInputEvent__Params(this);
+  }
+}
+
+export class FinishedFabricInputEvent__Params {
+  _event: FinishedFabricInputEvent;
+
+  constructor(event: FinishedFabricInputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get finishedFabricInputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class FinishedFabricOutputEvent extends ethereum.Event {
+  get params(): FinishedFabricOutputEvent__Params {
+    return new FinishedFabricOutputEvent__Params(this);
+  }
+}
+
+export class FinishedFabricOutputEvent__Params {
+  _event: FinishedFabricOutputEvent;
+
+  constructor(event: FinishedFabricOutputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get finishedFabricOutputCid(): string {
+    return this._event.parameters[1].value.toString();
   }
 }
 
@@ -133,6 +195,28 @@ export class GfiOutputEvent__Params {
 
   get gfiMachineOutputCid(): string {
     return this._event.parameters[3].value.toString();
+  }
+}
+
+export class IssueNewPelletEvent extends ethereum.Event {
+  get params(): IssueNewPelletEvent__Params {
+    return new IssueNewPelletEvent__Params(this);
+  }
+}
+
+export class IssueNewPelletEvent__Params {
+  _event: IssueNewPelletEvent;
+
+  constructor(event: IssueNewPelletEvent) {
+    this._event = event;
+  }
+
+  get soId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get pelletId(): string {
+    return this._event.parameters[1].value.toString();
   }
 }
 
@@ -290,6 +374,50 @@ export class LoomOutputEvent__Params {
   }
 }
 
+export class MercerizingInputEvent extends ethereum.Event {
+  get params(): MercerizingInputEvent__Params {
+    return new MercerizingInputEvent__Params(this);
+  }
+}
+
+export class MercerizingInputEvent__Params {
+  _event: MercerizingInputEvent;
+
+  constructor(event: MercerizingInputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get mercerizingInputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class MercerizingOutputEvent extends ethereum.Event {
+  get params(): MercerizingOutputEvent__Params {
+    return new MercerizingOutputEvent__Params(this);
+  }
+}
+
+export class MercerizingOutputEvent__Params {
+  _event: MercerizingOutputEvent;
+
+  constructor(event: MercerizingOutputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get mercerizingOutputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -309,6 +437,94 @@ export class OwnershipTransferred__Params {
 
   get newOwner(): Address {
     return this._event.parameters[1].value.toAddress();
+  }
+}
+
+export class PrintingInputEvent extends ethereum.Event {
+  get params(): PrintingInputEvent__Params {
+    return new PrintingInputEvent__Params(this);
+  }
+}
+
+export class PrintingInputEvent__Params {
+  _event: PrintingInputEvent;
+
+  constructor(event: PrintingInputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get printingInputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class PrintingOutputEvent extends ethereum.Event {
+  get params(): PrintingOutputEvent__Params {
+    return new PrintingOutputEvent__Params(this);
+  }
+}
+
+export class PrintingOutputEvent__Params {
+  _event: PrintingOutputEvent;
+
+  constructor(event: PrintingOutputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get printingOutputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class SingingPtrInputEvent extends ethereum.Event {
+  get params(): SingingPtrInputEvent__Params {
+    return new SingingPtrInputEvent__Params(this);
+  }
+}
+
+export class SingingPtrInputEvent__Params {
+  _event: SingingPtrInputEvent;
+
+  constructor(event: SingingPtrInputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get singingPtrInputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class SingingPtrOutputEvent extends ethereum.Event {
+  get params(): SingingPtrOutputEvent__Params {
+    return new SingingPtrOutputEvent__Params(this);
+  }
+}
+
+export class SingingPtrOutputEvent__Params {
+  _event: SingingPtrOutputEvent;
+
+  constructor(event: SingingPtrOutputEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get singingPtrOutputCid(): string {
+    return this._event.parameters[1].value.toString();
   }
 }
 
@@ -457,6 +673,142 @@ export class AddBatchingDetailsCall__Outputs {
   }
 }
 
+export class AddDyeingInputCall extends ethereum.Call {
+  get inputs(): AddDyeingInputCall__Inputs {
+    return new AddDyeingInputCall__Inputs(this);
+  }
+
+  get outputs(): AddDyeingInputCall__Outputs {
+    return new AddDyeingInputCall__Outputs(this);
+  }
+}
+
+export class AddDyeingInputCall__Inputs {
+  _call: AddDyeingInputCall;
+
+  constructor(call: AddDyeingInputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get dyeingInputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddDyeingInputCall__Outputs {
+  _call: AddDyeingInputCall;
+
+  constructor(call: AddDyeingInputCall) {
+    this._call = call;
+  }
+}
+
+export class AddDyeingOutputCall extends ethereum.Call {
+  get inputs(): AddDyeingOutputCall__Inputs {
+    return new AddDyeingOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddDyeingOutputCall__Outputs {
+    return new AddDyeingOutputCall__Outputs(this);
+  }
+}
+
+export class AddDyeingOutputCall__Inputs {
+  _call: AddDyeingOutputCall;
+
+  constructor(call: AddDyeingOutputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get dyeingOutputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddDyeingOutputCall__Outputs {
+  _call: AddDyeingOutputCall;
+
+  constructor(call: AddDyeingOutputCall) {
+    this._call = call;
+  }
+}
+
+export class AddFinishedFabricInputCall extends ethereum.Call {
+  get inputs(): AddFinishedFabricInputCall__Inputs {
+    return new AddFinishedFabricInputCall__Inputs(this);
+  }
+
+  get outputs(): AddFinishedFabricInputCall__Outputs {
+    return new AddFinishedFabricInputCall__Outputs(this);
+  }
+}
+
+export class AddFinishedFabricInputCall__Inputs {
+  _call: AddFinishedFabricInputCall;
+
+  constructor(call: AddFinishedFabricInputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get finishedFabricInputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddFinishedFabricInputCall__Outputs {
+  _call: AddFinishedFabricInputCall;
+
+  constructor(call: AddFinishedFabricInputCall) {
+    this._call = call;
+  }
+}
+
+export class AddFinishedFabricOutputCall extends ethereum.Call {
+  get inputs(): AddFinishedFabricOutputCall__Inputs {
+    return new AddFinishedFabricOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddFinishedFabricOutputCall__Outputs {
+    return new AddFinishedFabricOutputCall__Outputs(this);
+  }
+}
+
+export class AddFinishedFabricOutputCall__Inputs {
+  _call: AddFinishedFabricOutputCall;
+
+  constructor(call: AddFinishedFabricOutputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get finishedFabricOutputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddFinishedFabricOutputCall__Outputs {
+  _call: AddFinishedFabricOutputCall;
+
+  constructor(call: AddFinishedFabricOutputCall) {
+    this._call = call;
+  }
+}
+
 export class AddGfiOutputCall extends ethereum.Call {
   get inputs(): AddGfiOutputCall__Inputs {
     return new AddGfiOutputCall__Inputs(this);
@@ -541,6 +893,74 @@ export class AddLoomshedOutputCall__Outputs {
   }
 }
 
+export class AddMercerizingInputCall extends ethereum.Call {
+  get inputs(): AddMercerizingInputCall__Inputs {
+    return new AddMercerizingInputCall__Inputs(this);
+  }
+
+  get outputs(): AddMercerizingInputCall__Outputs {
+    return new AddMercerizingInputCall__Outputs(this);
+  }
+}
+
+export class AddMercerizingInputCall__Inputs {
+  _call: AddMercerizingInputCall;
+
+  constructor(call: AddMercerizingInputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get mercerizingInputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddMercerizingInputCall__Outputs {
+  _call: AddMercerizingInputCall;
+
+  constructor(call: AddMercerizingInputCall) {
+    this._call = call;
+  }
+}
+
+export class AddMercerizingOutputCall extends ethereum.Call {
+  get inputs(): AddMercerizingOutputCall__Inputs {
+    return new AddMercerizingOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddMercerizingOutputCall__Outputs {
+    return new AddMercerizingOutputCall__Outputs(this);
+  }
+}
+
+export class AddMercerizingOutputCall__Inputs {
+  _call: AddMercerizingOutputCall;
+
+  constructor(call: AddMercerizingOutputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get mercerizingOutputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddMercerizingOutputCall__Outputs {
+  _call: AddMercerizingOutputCall;
+
+  constructor(call: AddMercerizingOutputCall) {
+    this._call = call;
+  }
+}
+
 export class AddPelletCall extends ethereum.Call {
   get inputs(): AddPelletCall__Inputs {
     return new AddPelletCall__Inputs(this);
@@ -571,6 +991,142 @@ export class AddPelletCall__Outputs {
   _call: AddPelletCall;
 
   constructor(call: AddPelletCall) {
+    this._call = call;
+  }
+}
+
+export class AddPrintingInputCall extends ethereum.Call {
+  get inputs(): AddPrintingInputCall__Inputs {
+    return new AddPrintingInputCall__Inputs(this);
+  }
+
+  get outputs(): AddPrintingInputCall__Outputs {
+    return new AddPrintingInputCall__Outputs(this);
+  }
+}
+
+export class AddPrintingInputCall__Inputs {
+  _call: AddPrintingInputCall;
+
+  constructor(call: AddPrintingInputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get printingInputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddPrintingInputCall__Outputs {
+  _call: AddPrintingInputCall;
+
+  constructor(call: AddPrintingInputCall) {
+    this._call = call;
+  }
+}
+
+export class AddPrintingOutputCall extends ethereum.Call {
+  get inputs(): AddPrintingOutputCall__Inputs {
+    return new AddPrintingOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddPrintingOutputCall__Outputs {
+    return new AddPrintingOutputCall__Outputs(this);
+  }
+}
+
+export class AddPrintingOutputCall__Inputs {
+  _call: AddPrintingOutputCall;
+
+  constructor(call: AddPrintingOutputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get printingOutputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddPrintingOutputCall__Outputs {
+  _call: AddPrintingOutputCall;
+
+  constructor(call: AddPrintingOutputCall) {
+    this._call = call;
+  }
+}
+
+export class AddSingingPtrInputCall extends ethereum.Call {
+  get inputs(): AddSingingPtrInputCall__Inputs {
+    return new AddSingingPtrInputCall__Inputs(this);
+  }
+
+  get outputs(): AddSingingPtrInputCall__Outputs {
+    return new AddSingingPtrInputCall__Outputs(this);
+  }
+}
+
+export class AddSingingPtrInputCall__Inputs {
+  _call: AddSingingPtrInputCall;
+
+  constructor(call: AddSingingPtrInputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get singingPtrInputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddSingingPtrInputCall__Outputs {
+  _call: AddSingingPtrInputCall;
+
+  constructor(call: AddSingingPtrInputCall) {
+    this._call = call;
+  }
+}
+
+export class AddSingingPtrOutputCall extends ethereum.Call {
+  get inputs(): AddSingingPtrOutputCall__Inputs {
+    return new AddSingingPtrOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddSingingPtrOutputCall__Outputs {
+    return new AddSingingPtrOutputCall__Outputs(this);
+  }
+}
+
+export class AddSingingPtrOutputCall__Inputs {
+  _call: AddSingingPtrOutputCall;
+
+  constructor(call: AddSingingPtrOutputCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get singingPtrOutputCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddSingingPtrOutputCall__Outputs {
+  _call: AddSingingPtrOutputCall;
+
+  constructor(call: AddSingingPtrOutputCall) {
     this._call = call;
   }
 }
@@ -655,6 +1211,40 @@ export class AddWarpingOutputCall__Outputs {
   _call: AddWarpingOutputCall;
 
   constructor(call: AddWarpingOutputCall) {
+    this._call = call;
+  }
+}
+
+export class IssueNewPelletCall extends ethereum.Call {
+  get inputs(): IssueNewPelletCall__Inputs {
+    return new IssueNewPelletCall__Inputs(this);
+  }
+
+  get outputs(): IssueNewPelletCall__Outputs {
+    return new IssueNewPelletCall__Outputs(this);
+  }
+}
+
+export class IssueNewPelletCall__Inputs {
+  _call: IssueNewPelletCall;
+
+  constructor(call: IssueNewPelletCall) {
+    this._call = call;
+  }
+
+  get soId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get pelletId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class IssueNewPelletCall__Outputs {
+  _call: IssueNewPelletCall;
+
+  constructor(call: IssueNewPelletCall) {
     this._call = call;
   }
 }

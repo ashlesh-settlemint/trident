@@ -4,23 +4,20 @@ import {
   Gfi,
   GfiOutput,
   Loomshed,
-  Pellet,
-  SizingInput,
+  Pellet, ProcessHouse, SizingInput,
   SizingStorage,
   SupplyOrder,
   WarpInput
 } from "../../generated/schema";
 import {
   AddPelletEvent,
-  BatchingEvent,
-  ExitPelletEvent,
-  GfiOutputEvent,
-  LoadPelletEvent,
+  BatchingEvent, DyeingInputEvent,
+  DyeingOutputEvent, ExitPelletEvent, FinishedFabricInputEvent,
+  FinishedFabricOutputEvent, GfiOutputEvent, IssueNewPelletEvent, LoadPelletEvent,
   LoadRollEvent,
   LoadWarperBeamEvent,
   LoadWeaverBeamEvent,
-  LoomOutputEvent,
-  SizingOutputEvent,
+  LoomOutputEvent, MercerizingInputEvent, MercerizingOutputEvent, PrintingInputEvent, PrintingOutputEvent, SingingPtrInputEvent, SingingPtrOutputEvent, SizingOutputEvent,
   SizingStorageEvent,
   WarpingOutputEvent
 } from "../../generated/trident/Trident";
@@ -147,11 +144,6 @@ export function handleLoadPellet(event: LoadPelletEvent): void {
     ) {
       const warpInputMetadata = warpInputDetails.value.toObject();
 
-      // const pelletId = warpInputMetadata.get('pelletId');
-      // warpInput.pelletIds.push(pelletId ? pelletId.toString() : 'null');
-
-      // log.debug('console pelletIds {}', [pelletId ? pelletId.toString() : 'null']);
-
       const soId = warpInputMetadata.get("soId");
       warpInput.soId = soId ? soId.toString() : "null";
 
@@ -164,12 +156,16 @@ export function handleLoadPellet(event: LoadPelletEvent): void {
       warpInput.prepPoId = prepPoId ? prepPoId.toString() : "null";
 
       const loadEmpId = warpInputMetadata.get("loadEmpId");
-      warpInput.loadEmpId = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIdString = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIds = warpInput.loadEmpIds;
+      loadEmpIds.push(loadEmpIdString ? loadEmpIdString : "null");
+      warpInput.loadEmpIds = loadEmpIds;
 
       const loadTimestamp = warpInputMetadata.get("loadTimestamp");
-      warpInput.loadTimestamp = loadTimestamp
-        ? loadTimestamp.toString()
-        : "null";
+      const loadTimestampString = loadTimestamp ? loadTimestamp.toString() : "null";
+      const loadTimestamps = warpInput.loadTimestamps;
+      loadTimestamps.push(loadTimestampString ? loadTimestampString : "null");
+      warpInput.loadTimestamps = loadTimestamps;
     }
   }
 
@@ -254,12 +250,16 @@ export function handleLoadWarperBeam(event: LoadWarperBeamEvent): void {
       sizingInput.prepPoId = prepPoId ? prepPoId.toString() : "null";
 
       const loadEmpId = sizingInputMetadata.get("loadEmpId");
-      sizingInput.loadEmpId = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIdString = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIds = sizingInput.loadEmpIds;
+      loadEmpIds.push(loadEmpIdString ? loadEmpIdString : "null");
+      sizingInput.loadEmpIds = loadEmpIds;
 
       const loadTimestamp = sizingInputMetadata.get("loadTimestamp");
-      sizingInput.loadTimestamp = loadTimestamp
-        ? loadTimestamp.toString()
-        : "null";
+      const loadTimestampString = loadTimestamp ? loadTimestamp.toString() : "null";
+      const loadTimestamps = sizingInput.loadTimestamps;
+      loadTimestamps.push(loadTimestampString ? loadTimestampString : "null");
+      sizingInput.loadTimestamps = loadTimestamps;
     }
   }
 
@@ -304,6 +304,17 @@ export function handleSizingOutput(event: SizingOutputEvent): void {
   sizingInput.save();
 }
 
+export function handleIssueNewPellet(event: IssueNewPelletEvent): void {
+  let pellet = Pellet.load(event.params.pelletId);
+
+  if(pellet === null) {
+    pellet = new Pellet(event.params.pelletId);
+  }
+
+  pellet.loomSectionPellet = true;
+  pellet.save();
+}
+
 export function handleSizingStorage(event: SizingStorageEvent): void {
   const binId = `${event.params.binId}`;
   let sizingStorage = SizingStorage.load(binId);
@@ -336,10 +347,16 @@ export function handleSizingStorage(event: SizingStorageEvent): void {
       sizingStorage.binId = binId ? binId.toString() : "null";
 
       const empId = sizingStorageMetadata.get("empId");
-      sizingStorage.empId = empId ? empId.toString() : "null";
+      const empIdString = empId ? empId.toString() : "null";
+      const empIds = sizingStorage.empIds;
+      empIds.push(empIdString ? empIdString : "null");
+      sizingStorage.empIds = empIds;
 
       const timestamp = sizingStorageMetadata.get("timestamp");
-      sizingStorage.timestamp = timestamp ? timestamp.toString() : "null";
+      const timestampString = timestamp ? timestamp.toString() : "null";
+      const timestamps = sizingStorage.timestamps;
+      timestamps.push(timestampString ? timestampString : "null");
+      sizingStorage.timestamps = timestamps;
 
       const prepPoId = sizingStorageMetadata.get("prepPoId");
       sizingStorage.prepPoId = prepPoId ? prepPoId.toString() : "null";
@@ -401,12 +418,17 @@ export function handleLoadWeaverBeam(event: LoadWeaverBeamEvent): void {
       loomshed.loomPoId = loomPoId ? loomPoId.toString() : "null";
 
       const loadEmpId = loomshedMetadata.get("loadEmpId");
-      loomshed.loadEmpId = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIdString = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIds = loomshed.loadEmpIds;
+      loadEmpIds.push(loadEmpIdString ? loadEmpIdString : "null");
+      loomshed.loadEmpIds = loadEmpIds;
 
       const loadTimestamp = loomshedMetadata.get("loadTimestamp");
-      loomshed.loadTimestamp = loadTimestamp
-        ? loadTimestamp.toString()
-        : "null";
+      const loadTimestampString = loadTimestamp ? loadTimestamp.toString() : "null";
+      const loadTimestamps = loomshed.loadTimestamps;
+      loadTimestamps.push(loadTimestampString ? loadTimestampString : "null");
+      loomshed.loadTimestamps = loadTimestamps;
+
     }
   }
 
@@ -464,8 +486,6 @@ export function handleLoadRoll(event: LoadRollEvent): void {
   rollIds.push(rollId ? rollId : "null");
   gfi.rollIds = rollIds;
 
-  // gfi.save();
-
   const gfiBytes = ipfs.cat(event.params.gfiMachineLoadingCid);
 
   if (gfiBytes) {
@@ -481,10 +501,17 @@ export function handleLoadRoll(event: LoadRollEvent): void {
       gfi.gfiMachineId = gfiMachineId ? gfiMachineId.toString() : "null";
 
       const loadEmpId = gfiMetadata.get("loadEmpId");
-      gfi.loadEmpId = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIdString = loadEmpId ? loadEmpId.toString() : "null";
+      const loadEmpIds = gfi.loadEmpIds;
+      loadEmpIds.push(loadEmpIdString ? loadEmpIdString : "null");
+      gfi.loadEmpIds = loadEmpIds;
 
       const loadTimestamp = gfiMetadata.get("loadTimestamp");
-      gfi.loadTimestamp = loadTimestamp ? loadTimestamp.toString() : "null";
+      const loadTimestampString = loadTimestamp ? loadTimestamp.toString() : "null";
+      const loadTimestamps = gfi.loadTimestamps;
+      loadTimestamps.push(loadTimestampString ? loadTimestampString : "null");
+      gfi.loadTimestamps = loadTimestamps;
+
     }
   }
 
@@ -534,6 +561,9 @@ export function handleGfiOutput(event: GfiOutputEvent): void {
       const newRollId = gfiMetadata.get("newRollId");
       gfiOutput.newRollId = newRollId ? newRollId.toString() : "null";
 
+      const oldRollId = gfiMetadata.get("oldRollId");
+      gfiOutput.oldRollId = oldRollId ? oldRollId.toString() : "null";
+
       const soId = gfiMetadata.get("soId");
       gfiOutput.soId = soId ? soId.toString() : "null";
     }
@@ -559,6 +589,9 @@ export function handleBatching(event: BatchingEvent): void {
     if (batchDetails.isOk && batchDetails.value.kind == JSONValueKind.OBJECT) {
       const batchMetadata = batchDetails.value.toObject();
 
+      const lotId = batchMetadata.get("lotId");
+      batch.lotId = lotId ? lotId.toString() : "null";
+
       const machineId = batchMetadata.get("machineId");
       batch.machineId = machineId ? machineId.toString() : "null";
 
@@ -577,14 +610,6 @@ export function handleBatching(event: BatchingEvent): void {
       const fabricRollIds = batchMetadata.get("fabricRollIds");
       const rolls = fabricRollIds ? fabricRollIds.toArray() : [];
 
-      /*
-        fabricRollIds = [
-          {
-            rollid: '123',
-            soid: "123"
-          }
-        ]
-      */
       for (let i = 0; i < rolls.length; i++) {
         const fabricDetail = rolls[i].toObject();
 
@@ -605,21 +630,7 @@ export function handleBatching(event: BatchingEvent): void {
           gfiOutput = new GfiOutput(compositeKey);
         }
 
-        // const gfiOutputBytes = ipfs.cat(event.params.batchingCid);
 
-        // if(gfiOutputBytes) {
-        //   log.debug('console inside11', []);
-
-        //   const gfiOutputDetails = json.try_fromBytes(gfiOutputBytes);
-
-        //   if (gfiOutputDetails.isOk && gfiOutputDetails.value.kind == JSONValueKind.OBJECT) {
-        //   log.debug('console inside22', []);
-
-        //     const gfiOutputMetadata = gfiOutputDetails.value.toObject();
-
-        //     const lotId = gfiOutputMetadata.get('lotId');
-        //     batch.lotId = lotId ? lotId.toString() : 'null';
-        //   }
 
         const lotId = batchMetadata.get("lotId");
         gfiOutput.lotId = lotId ? lotId.toString() : "null";
@@ -632,7 +643,427 @@ export function handleBatching(event: BatchingEvent): void {
         batch.save();
         gfiOutput.save();
       }
-
     }
   }
 }
+
+export function handleSingingPtrInput(event: SingingPtrInputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.singingPtrInputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const singingPtrInputMachineId = ipfsMetadata.get("singingPtrInputMachineId");
+      processHouse.singingPtrInputMachineId = singingPtrInputMachineId ? singingPtrInputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [singingPtrInputMachineId ? singingPtrInputMachineId.toString() : "null"]);
+
+      const singingPtrInputAframe = ipfsMetadata.get("singingPtrInputAframe");
+      processHouse.singingPtrInputAframe = singingPtrInputAframe ? singingPtrInputAframe.toString() : "null";
+
+      const singingPtrInputTimestamp = ipfsMetadata.get("singingPtrInputTimestamp");
+      processHouse.singingPtrInputTimestamp = singingPtrInputTimestamp ? singingPtrInputTimestamp.toString() : "null";
+
+      const singingPtrInputEmpId = ipfsMetadata.get("singingPtrInputEmpId");
+      processHouse.singingPtrInputEmpId = singingPtrInputEmpId ? singingPtrInputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleSingingPtrOutput(event: SingingPtrOutputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.singingPtrOutputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const singingPtrOutputMachineId = ipfsMetadata.get("singingPtrOutputMachineId");
+      processHouse.singingPtrOutputMachineId = singingPtrOutputMachineId ? singingPtrOutputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [singingPtrOutputMachineId ? singingPtrOutputMachineId.toString() : "null"]);
+
+      const singingPtrOutputAframe = ipfsMetadata.get("singingPtrOutputAframe");
+      processHouse.singingPtrOutputAframe = singingPtrOutputAframe ? singingPtrOutputAframe.toString() : "null";
+
+      const singingPtrOutputTimestamp = ipfsMetadata.get("singingPtrOutputTimestamp");
+      processHouse.singingPtrOutputTimestamp = singingPtrOutputTimestamp ? singingPtrOutputTimestamp.toString() : "null";
+
+      const singingPtrOutputEmpId = ipfsMetadata.get("singingPtrOutputEmpId");
+      processHouse.singingPtrOutputEmpId = singingPtrOutputEmpId ? singingPtrOutputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleMercerizingInput(event: MercerizingInputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.mercerizingInputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const mercerizingInputMachineId = ipfsMetadata.get("mercerizingInputMachineId");
+      processHouse.mercerizingInputMachineId = mercerizingInputMachineId ? mercerizingInputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [mercerizingInputMachineId ? mercerizingInputMachineId.toString() : "null"]);
+
+      const mercerizingInputAframe = ipfsMetadata.get("mercerizingInputAframe");
+      processHouse.mercerizingInputAframe = mercerizingInputAframe ? mercerizingInputAframe.toString() : "null";
+
+      const mercerizingInputTimestamp = ipfsMetadata.get("mercerizingInputTimestamp");
+      processHouse.mercerizingInputTimestamp = mercerizingInputTimestamp ? mercerizingInputTimestamp.toString() : "null";
+
+      const mercerizingInputEmpId = ipfsMetadata.get("mercerizingInputEmpId");
+      processHouse.mercerizingInputEmpId = mercerizingInputEmpId ? mercerizingInputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleMercerizingOutput(event: MercerizingOutputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.mercerizingOutputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const mercerizingOutputMachineId = ipfsMetadata.get("mercerizingOutputMachineId");
+      processHouse.mercerizingOutputMachineId = mercerizingOutputMachineId ? mercerizingOutputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [mercerizingOutputMachineId ? mercerizingOutputMachineId.toString() : "null"]);
+
+      const mercerizingOutputAframe = ipfsMetadata.get("mercerizingOutputAframe");
+      processHouse.mercerizingOutputAframe = mercerizingOutputAframe ? mercerizingOutputAframe.toString() : "null";
+
+      const mercerizingOutputTimestamp = ipfsMetadata.get("mercerizingOutputTimestamp");
+      processHouse.mercerizingOutputTimestamp = mercerizingOutputTimestamp ? mercerizingOutputTimestamp.toString() : "null";
+
+      const mercerizingOutputEmpId = ipfsMetadata.get("mercerizingOutputEmpId");
+      processHouse.mercerizingOutputEmpId = mercerizingOutputEmpId ? mercerizingOutputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleDyeingInput(event: DyeingInputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.dyeingInputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const dyeingInputMachineId = ipfsMetadata.get("dyeingInputMachineId");
+      processHouse.dyeingInputMachineId = dyeingInputMachineId ? dyeingInputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [dyeingInputMachineId ? dyeingInputMachineId.toString() : "null"]);
+
+      const dyeingInputAframe = ipfsMetadata.get("dyeingInputAframe");
+      processHouse.dyeingInputAframe = dyeingInputAframe ? dyeingInputAframe.toString() : "null";
+
+      const dyeingInputTimestamp = ipfsMetadata.get("dyeingInputTimestamp");
+      processHouse.dyeingInputTimestamp = dyeingInputTimestamp ? dyeingInputTimestamp.toString() : "null";
+
+      const dyeingInputEmpId = ipfsMetadata.get("dyeingInputEmpId");
+      processHouse.dyeingInputEmpId = dyeingInputEmpId ? dyeingInputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleDyeingOutput(event: DyeingOutputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.dyeingOutputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const dyeingOutputMachineId = ipfsMetadata.get("dyeingOutputMachineId");
+      processHouse.dyeingOutputMachineId = dyeingOutputMachineId ? dyeingOutputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [dyeingOutputMachineId ? dyeingOutputMachineId.toString() : "null"]);
+
+      const dyeingOutputAframe = ipfsMetadata.get("dyeingOutputAframe");
+      processHouse.dyeingOutputAframe = dyeingOutputAframe ? dyeingOutputAframe.toString() : "null";
+
+      const dyeingOutputTimestamp = ipfsMetadata.get("dyeingOutputTimestamp");
+      processHouse.dyeingOutputTimestamp = dyeingOutputTimestamp ? dyeingOutputTimestamp.toString() : "null";
+
+      const dyeingOutputEmpId = ipfsMetadata.get("dyeingOutputEmpId");
+      processHouse.dyeingOutputEmpId = dyeingOutputEmpId ? dyeingOutputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handlePrintingInput(event: PrintingInputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.printingInputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const printingInputMachineId = ipfsMetadata.get("printingInputMachineId");
+      processHouse.printingInputMachineId = printingInputMachineId ? printingInputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [printingInputMachineId ? printingInputMachineId.toString() : "null"]);
+
+      const printingInputAframe = ipfsMetadata.get("printingInputAframe");
+      processHouse.printingInputAframe = printingInputAframe ? printingInputAframe.toString() : "null";
+
+      const printingInputTimestamp = ipfsMetadata.get("printingInputTimestamp");
+      processHouse.printingInputTimestamp = printingInputTimestamp ? printingInputTimestamp.toString() : "null";
+
+      const printingInputEmpId = ipfsMetadata.get("printingInputEmpId");
+      processHouse.printingInputEmpId = printingInputEmpId ? printingInputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handlePrintingOutput(event: PrintingOutputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.printingOutputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const printingOutputMachineId = ipfsMetadata.get("printingOutputMachineId");
+      processHouse.printingOutputMachineId = printingOutputMachineId ? printingOutputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [printingOutputMachineId ? printingOutputMachineId.toString() : "null"]);
+
+      const printingOutputAframe = ipfsMetadata.get("printingOutputAframe");
+      processHouse.printingOutputAframe = printingOutputAframe ? printingOutputAframe.toString() : "null";
+
+      const printingOutputTimestamp = ipfsMetadata.get("printingOutputTimestamp");
+      processHouse.printingOutputTimestamp = printingOutputTimestamp ? printingOutputTimestamp.toString() : "null";
+
+      const printingOutputEmpId = ipfsMetadata.get("printingOutputEmpId");
+      processHouse.printingOutputEmpId = printingOutputEmpId ? printingOutputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleFinishedFabricInput(event: FinishedFabricInputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.finishedFabricInputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const finishedFabricInputMachineId = ipfsMetadata.get("finishedFabricInputMachineId");
+      processHouse.finishedFabricInputMachineId = finishedFabricInputMachineId ? finishedFabricInputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [finishedFabricInputMachineId ? finishedFabricInputMachineId.toString() : "null"]);
+
+      const finishedFabricInputAframe = ipfsMetadata.get("finishedFabricInputAframe");
+      processHouse.finishedFabricInputAframe = finishedFabricInputAframe ? finishedFabricInputAframe.toString() : "null";
+
+      const finishedFabricInputTimestamp = ipfsMetadata.get("finishedFabricInputTimestamp");
+      processHouse.finishedFabricInputTimestamp = finishedFabricInputTimestamp ? finishedFabricInputTimestamp.toString() : "null";
+
+      const finishedFabricInputEmpId = ipfsMetadata.get("finishedFabricInputEmpId");
+      processHouse.finishedFabricInputEmpId = finishedFabricInputEmpId ? finishedFabricInputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleFinishedFabricOutput(event: FinishedFabricOutputEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.finishedFabricOutputCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const finishedFabricOutputMachineId = ipfsMetadata.get("finishedFabricOutputMachineId");
+      processHouse.finishedFabricOutputMachineId = finishedFabricOutputMachineId ? finishedFabricOutputMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [finishedFabricOutputMachineId ? finishedFabricOutputMachineId.toString() : "null"]);
+
+      const finishedFabricOutputAframe = ipfsMetadata.get("finishedFabricOutputAframe");
+      processHouse.finishedFabricOutputAframe = finishedFabricOutputAframe ? finishedFabricOutputAframe.toString() : "null";
+
+      const finishedFabricOutputTimestamp = ipfsMetadata.get("finishedFabricOutputTimestamp");
+      processHouse.finishedFabricOutputTimestamp = finishedFabricOutputTimestamp ? finishedFabricOutputTimestamp.toString() : "null";
+
+      const finishedFabricOutputEmpId = ipfsMetadata.get("finishedFabricOutputEmpId");
+      processHouse.finishedFabricOutputEmpId = finishedFabricOutputEmpId ? finishedFabricOutputEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+

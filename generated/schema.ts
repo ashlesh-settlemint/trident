@@ -584,6 +584,15 @@ export class Pellet extends Entity {
     }
   }
 
+  get loomSectionPellet(): boolean {
+    let value = this.get("loomSectionPellet");
+    return value!.toBoolean();
+  }
+
+  set loomSectionPellet(value: boolean) {
+    this.set("loomSectionPellet", Value.fromBoolean(value));
+  }
+
   get soId(): string | null {
     let value = this.get("soId");
     if (!value || value.kind == ValueKind.NULL) {
@@ -609,8 +618,8 @@ export class WarpInput extends Entity {
 
     this.set("creelMachineId", Value.fromString(""));
     this.set("prepPoId", Value.fromString(""));
-    this.set("loadEmpId", Value.fromString(""));
-    this.set("loadTimestamp", Value.fromString(""));
+    this.set("loadEmpIds", Value.fromStringArray(new Array(0)));
+    this.set("loadTimestamps", Value.fromStringArray(new Array(0)));
     this.set("outputEmpId", Value.fromString(""));
     this.set("outputTimestamp", Value.fromString(""));
     this.set("pelletIds", Value.fromStringArray(new Array(0)));
@@ -678,22 +687,22 @@ export class WarpInput extends Entity {
     this.set("prepPoId", Value.fromString(value));
   }
 
-  get loadEmpId(): string {
-    let value = this.get("loadEmpId");
-    return value!.toString();
+  get loadEmpIds(): Array<string> {
+    let value = this.get("loadEmpIds");
+    return value!.toStringArray();
   }
 
-  set loadEmpId(value: string) {
-    this.set("loadEmpId", Value.fromString(value));
+  set loadEmpIds(value: Array<string>) {
+    this.set("loadEmpIds", Value.fromStringArray(value));
   }
 
-  get loadTimestamp(): string {
-    let value = this.get("loadTimestamp");
-    return value!.toString();
+  get loadTimestamps(): Array<string> {
+    let value = this.get("loadTimestamps");
+    return value!.toStringArray();
   }
 
-  set loadTimestamp(value: string) {
-    this.set("loadTimestamp", Value.fromString(value));
+  set loadTimestamps(value: Array<string>) {
+    this.set("loadTimestamps", Value.fromStringArray(value));
   }
 
   get outputEmpId(): string {
@@ -740,8 +749,8 @@ export class SizingInput extends Entity {
 
     this.set("sizingMachineId", Value.fromString(""));
     this.set("prepPoId", Value.fromString(""));
-    this.set("loadEmpId", Value.fromString(""));
-    this.set("loadTimestamp", Value.fromString(""));
+    this.set("loadEmpIds", Value.fromStringArray(new Array(0)));
+    this.set("loadTimestamps", Value.fromStringArray(new Array(0)));
     this.set("outputEmpId", Value.fromString(""));
     this.set("outputTimestamp", Value.fromString(""));
     this.set("warperBeamIds", Value.fromStringArray(new Array(0)));
@@ -809,22 +818,22 @@ export class SizingInput extends Entity {
     this.set("prepPoId", Value.fromString(value));
   }
 
-  get loadEmpId(): string {
-    let value = this.get("loadEmpId");
-    return value!.toString();
+  get loadEmpIds(): Array<string> {
+    let value = this.get("loadEmpIds");
+    return value!.toStringArray();
   }
 
-  set loadEmpId(value: string) {
-    this.set("loadEmpId", Value.fromString(value));
+  set loadEmpIds(value: Array<string>) {
+    this.set("loadEmpIds", Value.fromStringArray(value));
   }
 
-  get loadTimestamp(): string {
-    let value = this.get("loadTimestamp");
-    return value!.toString();
+  get loadTimestamps(): Array<string> {
+    let value = this.get("loadTimestamps");
+    return value!.toStringArray();
   }
 
-  set loadTimestamp(value: string) {
-    this.set("loadTimestamp", Value.fromString(value));
+  set loadTimestamps(value: Array<string>) {
+    this.set("loadTimestamps", Value.fromStringArray(value));
   }
 
   get outputEmpId(): string {
@@ -871,8 +880,8 @@ export class SizingStorage extends Entity {
 
     this.set("soId", Value.fromString(""));
     this.set("binId", Value.fromString(""));
-    this.set("empId", Value.fromString(""));
-    this.set("timestamp", Value.fromString(""));
+    this.set("empIds", Value.fromStringArray(new Array(0)));
+    this.set("timestamps", Value.fromStringArray(new Array(0)));
     this.set("prepPoId", Value.fromString(""));
     this.set("weaverBeamIds", Value.fromStringArray(new Array(0)));
   }
@@ -921,22 +930,22 @@ export class SizingStorage extends Entity {
     this.set("binId", Value.fromString(value));
   }
 
-  get empId(): string {
-    let value = this.get("empId");
-    return value!.toString();
+  get empIds(): Array<string> {
+    let value = this.get("empIds");
+    return value!.toStringArray();
   }
 
-  set empId(value: string) {
-    this.set("empId", Value.fromString(value));
+  set empIds(value: Array<string>) {
+    this.set("empIds", Value.fromStringArray(value));
   }
 
-  get timestamp(): string {
-    let value = this.get("timestamp");
-    return value!.toString();
+  get timestamps(): Array<string> {
+    let value = this.get("timestamps");
+    return value!.toStringArray();
   }
 
-  set timestamp(value: string) {
-    this.set("timestamp", Value.fromString(value));
+  set timestamps(value: Array<string>) {
+    this.set("timestamps", Value.fromStringArray(value));
   }
 
   get prepPoId(): string {
@@ -965,8 +974,8 @@ export class Loomshed extends Entity {
 
     this.set("loomMachineId", Value.fromString(""));
     this.set("loomPoId", Value.fromString(""));
-    this.set("loadEmpId", Value.fromString(""));
-    this.set("loadTimestamp", Value.fromString(""));
+    this.set("loadEmpIds", Value.fromStringArray(new Array(0)));
+    this.set("loadTimestamps", Value.fromStringArray(new Array(0)));
     this.set("outputEmpId", Value.fromString(""));
     this.set("outputTimestamp", Value.fromString(""));
     this.set("weaverBeamIds", Value.fromStringArray(new Array(0)));
@@ -1035,22 +1044,22 @@ export class Loomshed extends Entity {
     this.set("loomPoId", Value.fromString(value));
   }
 
-  get loadEmpId(): string {
-    let value = this.get("loadEmpId");
-    return value!.toString();
+  get loadEmpIds(): Array<string> {
+    let value = this.get("loadEmpIds");
+    return value!.toStringArray();
   }
 
-  set loadEmpId(value: string) {
-    this.set("loadEmpId", Value.fromString(value));
+  set loadEmpIds(value: Array<string>) {
+    this.set("loadEmpIds", Value.fromStringArray(value));
   }
 
-  get loadTimestamp(): string {
-    let value = this.get("loadTimestamp");
-    return value!.toString();
+  get loadTimestamps(): Array<string> {
+    let value = this.get("loadTimestamps");
+    return value!.toStringArray();
   }
 
-  set loadTimestamp(value: string) {
-    this.set("loadTimestamp", Value.fromString(value));
+  set loadTimestamps(value: Array<string>) {
+    this.set("loadTimestamps", Value.fromStringArray(value));
   }
 
   get outputEmpId(): string {
@@ -1105,8 +1114,8 @@ export class Gfi extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("gfiMachineId", Value.fromString(""));
-    this.set("loadEmpId", Value.fromString(""));
-    this.set("loadTimestamp", Value.fromString(""));
+    this.set("loadEmpIds", Value.fromStringArray(new Array(0)));
+    this.set("loadTimestamps", Value.fromStringArray(new Array(0)));
     this.set("outputEmpId", Value.fromString(""));
     this.set("outputTimestamp", Value.fromString(""));
     this.set("newRollIds", Value.fromStringArray(new Array(0)));
@@ -1165,22 +1174,22 @@ export class Gfi extends Entity {
     this.set("gfiMachineId", Value.fromString(value));
   }
 
-  get loadEmpId(): string {
-    let value = this.get("loadEmpId");
-    return value!.toString();
+  get loadEmpIds(): Array<string> {
+    let value = this.get("loadEmpIds");
+    return value!.toStringArray();
   }
 
-  set loadEmpId(value: string) {
-    this.set("loadEmpId", Value.fromString(value));
+  set loadEmpIds(value: Array<string>) {
+    this.set("loadEmpIds", Value.fromStringArray(value));
   }
 
-  get loadTimestamp(): string {
-    let value = this.get("loadTimestamp");
-    return value!.toString();
+  get loadTimestamps(): Array<string> {
+    let value = this.get("loadTimestamps");
+    return value!.toStringArray();
   }
 
-  set loadTimestamp(value: string) {
-    this.set("loadTimestamp", Value.fromString(value));
+  set loadTimestamps(value: Array<string>) {
+    this.set("loadTimestamps", Value.fromStringArray(value));
   }
 
   get outputEmpId(): string {
@@ -1254,6 +1263,40 @@ export class GfiOutput extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get soId(): string | null {
+    let value = this.get("soId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
+  }
+
+  get oldRollId(): string | null {
+    let value = this.get("oldRollId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set oldRollId(value: string | null) {
+    if (!value) {
+      this.unset("oldRollId");
+    } else {
+      this.set("oldRollId", Value.fromString(<string>value));
+    }
+  }
+
   get newRollId(): string | null {
     let value = this.get("newRollId");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1271,8 +1314,8 @@ export class GfiOutput extends Entity {
     }
   }
 
-  get soId(): string | null {
-    let value = this.get("soId");
+  get binId(): string | null {
+    let value = this.get("binId");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -1280,11 +1323,11 @@ export class GfiOutput extends Entity {
     }
   }
 
-  set soId(value: string | null) {
+  set binId(value: string | null) {
     if (!value) {
-      this.unset("soId");
+      this.unset("binId");
     } else {
-      this.set("soId", Value.fromString(<string>value));
+      this.set("binId", Value.fromString(<string>value));
     }
   }
 
@@ -1405,6 +1448,742 @@ export class Batching extends Entity {
 
   set aFrame(value: string) {
     this.set("aFrame", Value.fromString(value));
+  }
+}
+
+export class ProcessHouse extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ProcessHouse entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save ProcessHouse entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("ProcessHouse", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ProcessHouse | null {
+    return changetype<ProcessHouse | null>(store.get("ProcessHouse", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get lotId(): string | null {
+    let value = this.get("lotId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set lotId(value: string | null) {
+    if (!value) {
+      this.unset("lotId");
+    } else {
+      this.set("lotId", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrInputMachineId(): string | null {
+    let value = this.get("singingPtrInputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrInputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrInputMachineId");
+    } else {
+      this.set("singingPtrInputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrInputAframe(): string | null {
+    let value = this.get("singingPtrInputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrInputAframe(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrInputAframe");
+    } else {
+      this.set("singingPtrInputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrInputTimestamp(): string | null {
+    let value = this.get("singingPtrInputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrInputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrInputTimestamp");
+    } else {
+      this.set("singingPtrInputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrInputEmpId(): string | null {
+    let value = this.get("singingPtrInputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrInputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrInputEmpId");
+    } else {
+      this.set("singingPtrInputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrOutputMachineId(): string | null {
+    let value = this.get("singingPtrOutputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrOutputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrOutputMachineId");
+    } else {
+      this.set("singingPtrOutputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrOutputAframe(): string | null {
+    let value = this.get("singingPtrOutputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrOutputAframe(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrOutputAframe");
+    } else {
+      this.set("singingPtrOutputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrOutputTimestamp(): string | null {
+    let value = this.get("singingPtrOutputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrOutputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrOutputTimestamp");
+    } else {
+      this.set("singingPtrOutputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get singingPtrOutputEmpId(): string | null {
+    let value = this.get("singingPtrOutputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set singingPtrOutputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("singingPtrOutputEmpId");
+    } else {
+      this.set("singingPtrOutputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingInputMachineId(): string | null {
+    let value = this.get("mercerizingInputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingInputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingInputMachineId");
+    } else {
+      this.set("mercerizingInputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingInputAframe(): string | null {
+    let value = this.get("mercerizingInputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingInputAframe(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingInputAframe");
+    } else {
+      this.set("mercerizingInputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingInputTimestamp(): string | null {
+    let value = this.get("mercerizingInputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingInputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingInputTimestamp");
+    } else {
+      this.set("mercerizingInputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingInputEmpId(): string | null {
+    let value = this.get("mercerizingInputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingInputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingInputEmpId");
+    } else {
+      this.set("mercerizingInputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingOutputMachineId(): string | null {
+    let value = this.get("mercerizingOutputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingOutputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingOutputMachineId");
+    } else {
+      this.set("mercerizingOutputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingOutputAframe(): string | null {
+    let value = this.get("mercerizingOutputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingOutputAframe(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingOutputAframe");
+    } else {
+      this.set("mercerizingOutputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingOutputTimestamp(): string | null {
+    let value = this.get("mercerizingOutputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingOutputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingOutputTimestamp");
+    } else {
+      this.set("mercerizingOutputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get mercerizingOutputEmpId(): string | null {
+    let value = this.get("mercerizingOutputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set mercerizingOutputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("mercerizingOutputEmpId");
+    } else {
+      this.set("mercerizingOutputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingInputMachineId(): string | null {
+    let value = this.get("dyeingInputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingInputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("dyeingInputMachineId");
+    } else {
+      this.set("dyeingInputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingInputAframe(): string | null {
+    let value = this.get("dyeingInputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingInputAframe(value: string | null) {
+    if (!value) {
+      this.unset("dyeingInputAframe");
+    } else {
+      this.set("dyeingInputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingInputTimestamp(): string | null {
+    let value = this.get("dyeingInputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingInputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("dyeingInputTimestamp");
+    } else {
+      this.set("dyeingInputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingInputEmpId(): string | null {
+    let value = this.get("dyeingInputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingInputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("dyeingInputEmpId");
+    } else {
+      this.set("dyeingInputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingOutputMachineId(): string | null {
+    let value = this.get("dyeingOutputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingOutputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("dyeingOutputMachineId");
+    } else {
+      this.set("dyeingOutputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingOutputAframe(): string | null {
+    let value = this.get("dyeingOutputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingOutputAframe(value: string | null) {
+    if (!value) {
+      this.unset("dyeingOutputAframe");
+    } else {
+      this.set("dyeingOutputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingOutputTimestamp(): string | null {
+    let value = this.get("dyeingOutputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingOutputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("dyeingOutputTimestamp");
+    } else {
+      this.set("dyeingOutputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get dyeingOutputEmpId(): string | null {
+    let value = this.get("dyeingOutputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dyeingOutputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("dyeingOutputEmpId");
+    } else {
+      this.set("dyeingOutputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get printingInputMachineId(): string | null {
+    let value = this.get("printingInputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingInputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("printingInputMachineId");
+    } else {
+      this.set("printingInputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get printingInputAframe(): string | null {
+    let value = this.get("printingInputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingInputAframe(value: string | null) {
+    if (!value) {
+      this.unset("printingInputAframe");
+    } else {
+      this.set("printingInputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get printingInputTimestamp(): string | null {
+    let value = this.get("printingInputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingInputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("printingInputTimestamp");
+    } else {
+      this.set("printingInputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get printingInputEmpId(): string | null {
+    let value = this.get("printingInputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingInputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("printingInputEmpId");
+    } else {
+      this.set("printingInputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get printingOutputMachineId(): string | null {
+    let value = this.get("printingOutputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingOutputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("printingOutputMachineId");
+    } else {
+      this.set("printingOutputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get printingOutputAframe(): string | null {
+    let value = this.get("printingOutputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingOutputAframe(value: string | null) {
+    if (!value) {
+      this.unset("printingOutputAframe");
+    } else {
+      this.set("printingOutputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get printingOutputTimestamp(): string | null {
+    let value = this.get("printingOutputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingOutputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("printingOutputTimestamp");
+    } else {
+      this.set("printingOutputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get printingOutputEmpId(): string | null {
+    let value = this.get("printingOutputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set printingOutputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("printingOutputEmpId");
+    } else {
+      this.set("printingOutputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get finishedFabricInputMachineId(): string | null {
+    let value = this.get("finishedFabricInputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInputMachineId");
+    } else {
+      this.set("finishedFabricInputMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get finishedFabricInputAframe(): string | null {
+    let value = this.get("finishedFabricInputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInputAframe(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInputAframe");
+    } else {
+      this.set("finishedFabricInputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get finishedFabricInputTimestamp(): string | null {
+    let value = this.get("finishedFabricInputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInputTimestamp");
+    } else {
+      this.set("finishedFabricInputTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get finishedFabricInputEmpId(): string | null {
+    let value = this.get("finishedFabricInputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInputEmpId");
+    } else {
+      this.set("finishedFabricInputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get finishedFabricOutputMachineId(): string | null {
+    let value = this.get("finishedFabricOutputMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricOutputMachineId(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricOutputMachineId");
+    } else {
+      this.set(
+        "finishedFabricOutputMachineId",
+        Value.fromString(<string>value)
+      );
+    }
+  }
+
+  get finishedFabricOutputAframe(): string | null {
+    let value = this.get("finishedFabricOutputAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricOutputAframe(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricOutputAframe");
+    } else {
+      this.set("finishedFabricOutputAframe", Value.fromString(<string>value));
+    }
+  }
+
+  get finishedFabricOutputTimestamp(): string | null {
+    let value = this.get("finishedFabricOutputTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricOutputTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricOutputTimestamp");
+    } else {
+      this.set(
+        "finishedFabricOutputTimestamp",
+        Value.fromString(<string>value)
+      );
+    }
+  }
+
+  get finishedFabricOutputEmpId(): string | null {
+    let value = this.get("finishedFabricOutputEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricOutputEmpId(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricOutputEmpId");
+    } else {
+      this.set("finishedFabricOutputEmpId", Value.fromString(<string>value));
+    }
   }
 }
 
