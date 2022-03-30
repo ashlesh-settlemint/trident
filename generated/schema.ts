@@ -303,6 +303,23 @@ export class SupplyOrder extends Entity {
     }
   }
 
+  get processHousePo(): string | null {
+    let value = this.get("processHousePo");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set processHousePo(value: string | null) {
+    if (!value) {
+      this.unset("processHousePo");
+    } else {
+      this.set("processHousePo", Value.fromString(<string>value));
+    }
+  }
+
   get pelletIds(): Array<string> {
     let value = this.get("pelletIds");
     return value!.toStringArray();
@@ -2183,6 +2200,475 @@ export class ProcessHouse extends Entity {
       this.unset("finishedFabricOutputEmpId");
     } else {
       this.set("finishedFabricOutputEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get finishedFabricInspectionMachineId(): string | null {
+    let value = this.get("finishedFabricInspectionMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInspectionMachineId(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInspectionMachineId");
+    } else {
+      this.set(
+        "finishedFabricInspectionMachineId",
+        Value.fromString(<string>value)
+      );
+    }
+  }
+
+  get finishedFabricInspectionAframe(): string | null {
+    let value = this.get("finishedFabricInspectionAframe");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInspectionAframe(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInspectionAframe");
+    } else {
+      this.set(
+        "finishedFabricInspectionAframe",
+        Value.fromString(<string>value)
+      );
+    }
+  }
+
+  get finishedFabricInspectionTimestamp(): string | null {
+    let value = this.get("finishedFabricInspectionTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInspectionTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInspectionTimestamp");
+    } else {
+      this.set(
+        "finishedFabricInspectionTimestamp",
+        Value.fromString(<string>value)
+      );
+    }
+  }
+
+  get finishedFabricInspectionEmpId(): string | null {
+    let value = this.get("finishedFabricInspectionEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set finishedFabricInspectionEmpId(value: string | null) {
+    if (!value) {
+      this.unset("finishedFabricInspectionEmpId");
+    } else {
+      this.set(
+        "finishedFabricInspectionEmpId",
+        Value.fromString(<string>value)
+      );
+    }
+  }
+}
+
+export class FabricRoll extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save FabricRoll entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save FabricRoll entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("FabricRoll", id.toString(), this);
+    }
+  }
+
+  static load(id: string): FabricRoll | null {
+    return changetype<FabricRoll | null>(store.get("FabricRoll", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get ffiRollId(): string | null {
+    let value = this.get("ffiRollId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set ffiRollId(value: string | null) {
+    if (!value) {
+      this.unset("ffiRollId");
+    } else {
+      this.set("ffiRollId", Value.fromString(<string>value));
+    }
+  }
+
+  get soId(): string | null {
+    let value = this.get("soId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
+  }
+
+  get lotId(): string | null {
+    let value = this.get("lotId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set lotId(value: string | null) {
+    if (!value) {
+      this.unset("lotId");
+    } else {
+      this.set("lotId", Value.fromString(<string>value));
+    }
+  }
+
+  get machineId(): string | null {
+    let value = this.get("machineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set machineId(value: string | null) {
+    if (!value) {
+      this.unset("machineId");
+    } else {
+      this.set("machineId", Value.fromString(<string>value));
+    }
+  }
+
+  get empId(): string | null {
+    let value = this.get("empId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set empId(value: string | null) {
+    if (!value) {
+      this.unset("empId");
+    } else {
+      this.set("empId", Value.fromString(<string>value));
+    }
+  }
+
+  get timestamp(): string | null {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set timestamp(value: string | null) {
+    if (!value) {
+      this.unset("timestamp");
+    } else {
+      this.set("timestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get imsBinNumber(): string | null {
+    let value = this.get("imsBinNumber");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set imsBinNumber(value: string | null) {
+    if (!value) {
+      this.unset("imsBinNumber");
+    } else {
+      this.set("imsBinNumber", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class Csp extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Csp entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Csp entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Csp", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Csp | null {
+    return changetype<Csp | null>(store.get("Csp", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get ffiRollId(): string | null {
+    let value = this.get("ffiRollId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set ffiRollId(value: string | null) {
+    if (!value) {
+      this.unset("ffiRollId");
+    } else {
+      this.set("ffiRollId", Value.fromString(<string>value));
+    }
+  }
+
+  get soId(): string | null {
+    let value = this.get("soId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set soId(value: string | null) {
+    if (!value) {
+      this.unset("soId");
+    } else {
+      this.set("soId", Value.fromString(<string>value));
+    }
+  }
+
+  get newTag(): string | null {
+    let value = this.get("newTag");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set newTag(value: string | null) {
+    if (!value) {
+      this.unset("newTag");
+    } else {
+      this.set("newTag", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingMachineId(): string | null {
+    let value = this.get("cuttingMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingMachineId(value: string | null) {
+    if (!value) {
+      this.unset("cuttingMachineId");
+    } else {
+      this.set("cuttingMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingEmpId(): string | null {
+    let value = this.get("cuttingEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingEmpId(value: string | null) {
+    if (!value) {
+      this.unset("cuttingEmpId");
+    } else {
+      this.set("cuttingEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingTimestamp(): string | null {
+    let value = this.get("cuttingTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("cuttingTimestamp");
+    } else {
+      this.set("cuttingTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingNumberOfPieces(): string | null {
+    let value = this.get("cuttingNumberOfPieces");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingNumberOfPieces(value: string | null) {
+    if (!value) {
+      this.unset("cuttingNumberOfPieces");
+    } else {
+      this.set("cuttingNumberOfPieces", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingTrolleyId(): string | null {
+    let value = this.get("cuttingTrolleyId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingTrolleyId(value: string | null) {
+    if (!value) {
+      this.unset("cuttingTrolleyId");
+    } else {
+      this.set("cuttingTrolleyId", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingStorageMachineId(): string | null {
+    let value = this.get("cuttingStorageMachineId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingStorageMachineId(value: string | null) {
+    if (!value) {
+      this.unset("cuttingStorageMachineId");
+    } else {
+      this.set("cuttingStorageMachineId", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingStorageEmpId(): string | null {
+    let value = this.get("cuttingStorageEmpId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingStorageEmpId(value: string | null) {
+    if (!value) {
+      this.unset("cuttingStorageEmpId");
+    } else {
+      this.set("cuttingStorageEmpId", Value.fromString(<string>value));
+    }
+  }
+
+  get cuttingStorageTimestamp(): string | null {
+    let value = this.get("cuttingStorageTimestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cuttingStorageTimestamp(value: string | null) {
+    if (!value) {
+      this.unset("cuttingStorageTimestamp");
+    } else {
+      this.set("cuttingStorageTimestamp", Value.fromString(<string>value));
+    }
+  }
+
+  get binNumber(): string | null {
+    let value = this.get("binNumber");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set binNumber(value: string | null) {
+    if (!value) {
+      this.unset("binNumber");
+    } else {
+      this.set("binNumber", Value.fromString(<string>value));
     }
   }
 }

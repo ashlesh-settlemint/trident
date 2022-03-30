@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0xd8F61F344e48e9a1738293c9a0b353e3e1B2ea9a"
+      address: "0xf9Ce303104EC0458c7e1D6eB03De6718b1BD7ad1"
       abi: Ownable
-      startBlock: 236791
+      startBlock: 275419
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0xd8F61F344e48e9a1738293c9a0b353e3e1B2ea9a"
+      address: "0xf9Ce303104EC0458c7e1D6eB03De6718b1BD7ad1"
       abi: Trident
-      startBlock: 236791
+      startBlock: 275419
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -93,4 +93,18 @@ dataSources:
           handler: handleFinishedFabricInput
         - event: FinishedFabricOutputEvent(string,string)
           handler: handleFinishedFabricOutput
+        - event: FinishedFabricInspectionEvent(string,string)
+          handler: handleFinishedFabricInspection
+
+        - event: LinkProcessHousePoEvent(string,string)
+          handler: handleLinkProcessHousePo
+        - event: FfiOutputEvent(string,string,string)
+          handler: handleFfiOutput
+        - event: FfiStorageEvent(string,string,string)
+          handler: handleFfiStorage
+
+        - event: CuttingEvent(string,string,string,string)
+          handler: handleCutting
+        - event: CuttingStorageEvent(string,string,string)
+          handler: handleCuttingStorage
       file: ../subgraph/datasources/trident.ts

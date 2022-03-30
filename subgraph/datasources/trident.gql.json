@@ -5,6 +5,7 @@
       {"name": "id", "type":"ID!"},
       {"name": "prepPo", "type":"String"},
       {"name": "loomPo", "type":"String"},
+      {"name": "processHousePo", "type":"String"},
       {"name": "pelletIds", "type": "Pellet!", "derived": "soId" },
       {"name": "warpInputs", "type": "WarpInput!", "derived": "soId" },
       {"name": "sizingInputs", "type": "SizingInput!", "derived": "soId" }
@@ -181,7 +182,46 @@
       {"name": "finishedFabricOutputMachineId", "type":"String"},
       {"name": "finishedFabricOutputAframe", "type":"String"},
       {"name": "finishedFabricOutputTimestamp", "type":"String"},
-      {"name": "finishedFabricOutputEmpId", "type":"String"}
+      {"name": "finishedFabricOutputEmpId", "type":"String"},
+
+      {"name": "finishedFabricInspectionMachineId", "type":"String"},
+      {"name": "finishedFabricInspectionAframe", "type":"String"},
+      {"name": "finishedFabricInspectionTimestamp", "type":"String"},
+      {"name": "finishedFabricInspectionEmpId", "type":"String"}
+    ]
+  },
+  {
+    "name": "FabricRoll",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "ffiRollId", "type":"String"},
+      {"name": "soId", "type":"SupplyOrder"},
+      {"name": "lotId", "type":"String"},
+      {"name": "machineId", "type":"String"},
+      {"name": "empId", "type":"String"},
+      {"name": "timestamp", "type":"String"},
+      {"name": "imsBinNumber", "type":"String"}
+    ]
+  },
+  {
+    "name": "Csp",
+    "fields": [
+      {"name": "id", "type":"ID!"},
+      {"name": "ffiRollId", "type":"String"},
+      {"name": "soId", "type":"SupplyOrder"},
+      {"name": "newTag", "type":"String"},
+
+
+      {"name": "cuttingMachineId", "type":"String"},
+      {"name": "cuttingEmpId", "type":"String"},
+      {"name": "cuttingTimestamp", "type":"String"},
+      {"name": "cuttingNumberOfPieces", "type":"String"},
+      {"name": "cuttingTrolleyId", "type":"String"},
+
+      {"name": "cuttingStorageMachineId", "type":"String"},
+      {"name": "cuttingStorageEmpId", "type":"String"},
+      {"name": "cuttingStorageTimestamp", "type":"String"},
+      {"name": "binNumber", "type":"String"}
     ]
   }
 ]

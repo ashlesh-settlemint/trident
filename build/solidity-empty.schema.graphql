@@ -23,6 +23,7 @@ type SupplyOrder @entity {
 	id: ID!
 	prepPo: String
 	loomPo: String
+	processHousePo: String
 	pelletIds: [Pellet!]! @derivedFrom(field: "soId")
 	warpInputs: [WarpInput!]! @derivedFrom(field: "soId")
 	sizingInputs: [SizingInput!]! @derivedFrom(field: "soId")
@@ -163,6 +164,35 @@ type ProcessHouse @entity {
 	finishedFabricOutputAframe: String
 	finishedFabricOutputTimestamp: String
 	finishedFabricOutputEmpId: String
+	finishedFabricInspectionMachineId: String
+	finishedFabricInspectionAframe: String
+	finishedFabricInspectionTimestamp: String
+	finishedFabricInspectionEmpId: String
+}
+type FabricRoll @entity {
+	id: ID!
+	ffiRollId: String
+	soId: SupplyOrder
+	lotId: String
+	machineId: String
+	empId: String
+	timestamp: String
+	imsBinNumber: String
+}
+type Csp @entity {
+	id: ID!
+	ffiRollId: String
+	soId: SupplyOrder
+	newTag: String
+	cuttingMachineId: String
+	cuttingEmpId: String
+	cuttingTimestamp: String
+	cuttingNumberOfPieces: String
+	cuttingTrolleyId: String
+	cuttingStorageMachineId: String
+	cuttingStorageEmpId: String
+	cuttingStorageTimestamp: String
+	binNumber: String
 }
 interface Event {
 	id: ID!

@@ -54,6 +54,62 @@ export class BatchingEvent__Params {
   }
 }
 
+export class CuttingEvent extends ethereum.Event {
+  get params(): CuttingEvent__Params {
+    return new CuttingEvent__Params(this);
+  }
+}
+
+export class CuttingEvent__Params {
+  _event: CuttingEvent;
+
+  constructor(event: CuttingEvent) {
+    this._event = event;
+  }
+
+  get ffiRollId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get newTag(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get cuttingCid(): string {
+    return this._event.parameters[3].value.toString();
+  }
+}
+
+export class CuttingStorageEvent extends ethereum.Event {
+  get params(): CuttingStorageEvent__Params {
+    return new CuttingStorageEvent__Params(this);
+  }
+}
+
+export class CuttingStorageEvent__Params {
+  _event: CuttingStorageEvent;
+
+  constructor(event: CuttingStorageEvent) {
+    this._event = event;
+  }
+
+  get newTag(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get cuttingStorageCid(): string {
+    return this._event.parameters[2].value.toString();
+  }
+}
+
 export class DyeingInputEvent extends ethereum.Event {
   get params(): DyeingInputEvent__Params {
     return new DyeingInputEvent__Params(this);
@@ -124,6 +180,58 @@ export class ExitPelletEvent__Params {
   }
 }
 
+export class FfiOutputEvent extends ethereum.Event {
+  get params(): FfiOutputEvent__Params {
+    return new FfiOutputEvent__Params(this);
+  }
+}
+
+export class FfiOutputEvent__Params {
+  _event: FfiOutputEvent;
+
+  constructor(event: FfiOutputEvent) {
+    this._event = event;
+  }
+
+  get ffiRollId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get ffiOutputCid(): string {
+    return this._event.parameters[2].value.toString();
+  }
+}
+
+export class FfiStorageEvent extends ethereum.Event {
+  get params(): FfiStorageEvent__Params {
+    return new FfiStorageEvent__Params(this);
+  }
+}
+
+export class FfiStorageEvent__Params {
+  _event: FfiStorageEvent;
+
+  constructor(event: FfiStorageEvent) {
+    this._event = event;
+  }
+
+  get ffiRollId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get imsBinNumber(): string {
+    return this._event.parameters[2].value.toString();
+  }
+}
+
 export class FinishedFabricInputEvent extends ethereum.Event {
   get params(): FinishedFabricInputEvent__Params {
     return new FinishedFabricInputEvent__Params(this);
@@ -142,6 +250,28 @@ export class FinishedFabricInputEvent__Params {
   }
 
   get finishedFabricInputCid(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class FinishedFabricInspectionEvent extends ethereum.Event {
+  get params(): FinishedFabricInspectionEvent__Params {
+    return new FinishedFabricInspectionEvent__Params(this);
+  }
+}
+
+export class FinishedFabricInspectionEvent__Params {
+  _event: FinishedFabricInspectionEvent;
+
+  constructor(event: FinishedFabricInspectionEvent) {
+    this._event = event;
+  }
+
+  get lotId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get finishedFabricInspectionCid(): string {
     return this._event.parameters[1].value.toString();
   }
 }
@@ -216,6 +346,28 @@ export class IssueNewPelletEvent__Params {
   }
 
   get pelletId(): string {
+    return this._event.parameters[1].value.toString();
+  }
+}
+
+export class LinkProcessHousePoEvent extends ethereum.Event {
+  get params(): LinkProcessHousePoEvent__Params {
+    return new LinkProcessHousePoEvent__Params(this);
+  }
+}
+
+export class LinkProcessHousePoEvent__Params {
+  _event: LinkProcessHousePoEvent;
+
+  constructor(event: LinkProcessHousePoEvent) {
+    this._event = event;
+  }
+
+  get soId(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get processHousePo(): string {
     return this._event.parameters[1].value.toString();
   }
 }
@@ -673,6 +825,86 @@ export class AddBatchingDetailsCall__Outputs {
   }
 }
 
+export class AddCuttingDetailsCall extends ethereum.Call {
+  get inputs(): AddCuttingDetailsCall__Inputs {
+    return new AddCuttingDetailsCall__Inputs(this);
+  }
+
+  get outputs(): AddCuttingDetailsCall__Outputs {
+    return new AddCuttingDetailsCall__Outputs(this);
+  }
+}
+
+export class AddCuttingDetailsCall__Inputs {
+  _call: AddCuttingDetailsCall;
+
+  constructor(call: AddCuttingDetailsCall) {
+    this._call = call;
+  }
+
+  get ffiRollId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get newTag(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get cuttingCid(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class AddCuttingDetailsCall__Outputs {
+  _call: AddCuttingDetailsCall;
+
+  constructor(call: AddCuttingDetailsCall) {
+    this._call = call;
+  }
+}
+
+export class AddCuttingStorageCall extends ethereum.Call {
+  get inputs(): AddCuttingStorageCall__Inputs {
+    return new AddCuttingStorageCall__Inputs(this);
+  }
+
+  get outputs(): AddCuttingStorageCall__Outputs {
+    return new AddCuttingStorageCall__Outputs(this);
+  }
+}
+
+export class AddCuttingStorageCall__Inputs {
+  _call: AddCuttingStorageCall;
+
+  constructor(call: AddCuttingStorageCall) {
+    this._call = call;
+  }
+
+  get newTag(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get cuttingStorageCid(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+}
+
+export class AddCuttingStorageCall__Outputs {
+  _call: AddCuttingStorageCall;
+
+  constructor(call: AddCuttingStorageCall) {
+    this._call = call;
+  }
+}
+
 export class AddDyeingInputCall extends ethereum.Call {
   get inputs(): AddDyeingInputCall__Inputs {
     return new AddDyeingInputCall__Inputs(this);
@@ -741,6 +973,82 @@ export class AddDyeingOutputCall__Outputs {
   }
 }
 
+export class AddFfiOutputCall extends ethereum.Call {
+  get inputs(): AddFfiOutputCall__Inputs {
+    return new AddFfiOutputCall__Inputs(this);
+  }
+
+  get outputs(): AddFfiOutputCall__Outputs {
+    return new AddFfiOutputCall__Outputs(this);
+  }
+}
+
+export class AddFfiOutputCall__Inputs {
+  _call: AddFfiOutputCall;
+
+  constructor(call: AddFfiOutputCall) {
+    this._call = call;
+  }
+
+  get ffiRollId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get ffiOutputCid(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+}
+
+export class AddFfiOutputCall__Outputs {
+  _call: AddFfiOutputCall;
+
+  constructor(call: AddFfiOutputCall) {
+    this._call = call;
+  }
+}
+
+export class AddFfiStorageCall extends ethereum.Call {
+  get inputs(): AddFfiStorageCall__Inputs {
+    return new AddFfiStorageCall__Inputs(this);
+  }
+
+  get outputs(): AddFfiStorageCall__Outputs {
+    return new AddFfiStorageCall__Outputs(this);
+  }
+}
+
+export class AddFfiStorageCall__Inputs {
+  _call: AddFfiStorageCall;
+
+  constructor(call: AddFfiStorageCall) {
+    this._call = call;
+  }
+
+  get ffiRollId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get soId(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get imsBinNumber(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+}
+
+export class AddFfiStorageCall__Outputs {
+  _call: AddFfiStorageCall;
+
+  constructor(call: AddFfiStorageCall) {
+    this._call = call;
+  }
+}
+
 export class AddFinishedFabricInputCall extends ethereum.Call {
   get inputs(): AddFinishedFabricInputCall__Inputs {
     return new AddFinishedFabricInputCall__Inputs(this);
@@ -771,6 +1079,40 @@ export class AddFinishedFabricInputCall__Outputs {
   _call: AddFinishedFabricInputCall;
 
   constructor(call: AddFinishedFabricInputCall) {
+    this._call = call;
+  }
+}
+
+export class AddFinishedFabricInspectionCall extends ethereum.Call {
+  get inputs(): AddFinishedFabricInspectionCall__Inputs {
+    return new AddFinishedFabricInspectionCall__Inputs(this);
+  }
+
+  get outputs(): AddFinishedFabricInspectionCall__Outputs {
+    return new AddFinishedFabricInspectionCall__Outputs(this);
+  }
+}
+
+export class AddFinishedFabricInspectionCall__Inputs {
+  _call: AddFinishedFabricInspectionCall;
+
+  constructor(call: AddFinishedFabricInspectionCall) {
+    this._call = call;
+  }
+
+  get lotId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get finishedFabricInspectionCid(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class AddFinishedFabricInspectionCall__Outputs {
+  _call: AddFinishedFabricInspectionCall;
+
+  constructor(call: AddFinishedFabricInspectionCall) {
     this._call = call;
   }
 }
@@ -1245,6 +1587,40 @@ export class IssueNewPelletCall__Outputs {
   _call: IssueNewPelletCall;
 
   constructor(call: IssueNewPelletCall) {
+    this._call = call;
+  }
+}
+
+export class LinkProcessHousePoCall extends ethereum.Call {
+  get inputs(): LinkProcessHousePoCall__Inputs {
+    return new LinkProcessHousePoCall__Inputs(this);
+  }
+
+  get outputs(): LinkProcessHousePoCall__Outputs {
+    return new LinkProcessHousePoCall__Outputs(this);
+  }
+}
+
+export class LinkProcessHousePoCall__Inputs {
+  _call: LinkProcessHousePoCall;
+
+  constructor(call: LinkProcessHousePoCall) {
+    this._call = call;
+  }
+
+  get soId(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get processHousePo(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+}
+
+export class LinkProcessHousePoCall__Outputs {
+  _call: LinkProcessHousePoCall;
+
+  constructor(call: LinkProcessHousePoCall) {
     this._call = call;
   }
 }

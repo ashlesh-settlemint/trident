@@ -69,4 +69,18 @@
           handler: handleFinishedFabricInput
         - event: FinishedFabricOutputEvent(string,string)
           handler: handleFinishedFabricOutput
+        - event: FinishedFabricInspectionEvent(string,string)
+          handler: handleFinishedFabricInspection
+
+        - event: LinkProcessHousePoEvent(string,string)
+          handler: handleLinkProcessHousePo
+        - event: FfiOutputEvent(string,string,string)
+          handler: handleFfiOutput
+        - event: FfiStorageEvent(string,string,string)
+          handler: handleFfiStorage
+
+        - event: CuttingEvent(string,string,string,string)
+          handler: handleCutting
+        - event: CuttingStorageEvent(string,string,string)
+          handler: handleCuttingStorage
       file: {file}

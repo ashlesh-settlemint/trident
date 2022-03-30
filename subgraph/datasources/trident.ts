@@ -7,19 +7,24 @@ import {
   Pellet, ProcessHouse, SizingInput,
   SizingStorage,
   SupplyOrder,
-  WarpInput
+  WarpInput,
+  Csp,
+  FabricRoll
 } from "../../generated/schema";
 import {
   AddPelletEvent,
   BatchingEvent, DyeingInputEvent,
-  DyeingOutputEvent, ExitPelletEvent, FinishedFabricInputEvent,
-  FinishedFabricOutputEvent, GfiOutputEvent, IssueNewPelletEvent, LoadPelletEvent,
+  DyeingOutputEvent, ExitPelletEvent, FinishedFabricInputEvent, FinishedFabricInspectionEvent, FinishedFabricOutputEvent, GfiOutputEvent, IssueNewPelletEvent, LinkProcessHousePoEvent, LoadPelletEvent,
   LoadRollEvent,
   LoadWarperBeamEvent,
   LoadWeaverBeamEvent,
   LoomOutputEvent, MercerizingInputEvent, MercerizingOutputEvent, PrintingInputEvent, PrintingOutputEvent, SingingPtrInputEvent, SingingPtrOutputEvent, SizingOutputEvent,
   SizingStorageEvent,
-  WarpingOutputEvent
+  WarpingOutputEvent,
+  FfiOutputEvent,
+  FfiStorageEvent,
+  CuttingStorageEvent,
+  CuttingEvent
 } from "../../generated/trident/Trident";
 
 export function handleAddPellet(event: AddPelletEvent): void {
@@ -1066,4 +1071,188 @@ export function handleFinishedFabricOutput(event: FinishedFabricOutputEvent): vo
   }
   processHouse.save();
 }
+
+export function handleFinishedFabricInspection(event: FinishedFabricInspectionEvent): void {
+  let processHouse = ProcessHouse.load(event.params.lotId);
+
+  if(processHouse === null) {
+    processHouse = new ProcessHouse(event.params.lotId);
+  }
+
+  const cidBytes = ipfs.cat(event.params.finishedFabricInspectionCid);
+    log.debug('console 000',[]);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      processHouse.lotId = lotId ? lotId.toString() : "null";
+
+      log.debug('console lotId {}', [lotId ? lotId.toString() : "null"]);
+
+      const finishedFabricInspectionMachineId = ipfsMetadata.get("finishedFabricInspectionMachineId");
+      processHouse.finishedFabricInspectionMachineId = finishedFabricInspectionMachineId ? finishedFabricInspectionMachineId.toString() : "null";
+
+      log.debug('console lotId {}', [finishedFabricInspectionMachineId ? finishedFabricInspectionMachineId.toString() : "null"]);
+
+      const finishedFabricInspectionAframe = ipfsMetadata.get("finishedFabricInspectionAframe");
+      processHouse.finishedFabricInspectionAframe = finishedFabricInspectionAframe ? finishedFabricInspectionAframe.toString() : "null";
+
+      const finishedFabricInspectionTimestamp = ipfsMetadata.get("finishedFabricInspectionTimestamp");
+      processHouse.finishedFabricInspectionTimestamp = finishedFabricInspectionTimestamp ? finishedFabricInspectionTimestamp.toString() : "null";
+
+      const finishedFabricInspectionEmpId = ipfsMetadata.get("finishedFabricInspectionEmpId");
+      processHouse.finishedFabricInspectionEmpId = finishedFabricInspectionEmpId ? finishedFabricInspectionEmpId.toString() : "null";
+    }
+  }
+  processHouse.save();
+}
+
+export function handleLinkProcessHousePo(event: LinkProcessHousePoEvent): void {
+  let supplyOrder = SupplyOrder.load(event.params.soId);
+
+  if(supplyOrder === null) {
+    supplyOrder = new SupplyOrder(event.params.soId);
+  }
+
+  supplyOrder.processHousePo = event.params.processHousePo;
+  supplyOrder.save();
+}
+
+export function handleFfiOutput(event: FfiOutputEvent): void {
+  const compositeKey = `${event.params.ffiRollId}::${event.params.soId}`;
+  let fabricRoll = FabricRoll.load(compositeKey);
+
+  if(fabricRoll === null) {
+    fabricRoll = new FabricRoll(compositeKey);
+  }
+
+  const cidBytes = ipfs.cat(event.params.ffiOutputCid);
+
+  if (cidBytes) {
+    log.debug('console 111',[]);
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+    log.debug('console 222',[]);
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const lotId = ipfsMetadata.get("lotId");
+      fabricRoll.lotId = lotId ? lotId.toString() : "null";
+
+      const ffiRollId = ipfsMetadata.get("ffiRollId");
+      fabricRoll.ffiRollId = ffiRollId ? ffiRollId.toString() : "null";
+
+      const soId = ipfsMetadata.get("soId");
+      fabricRoll.soId = soId ? soId.toString() : "null";
+
+      const timestamp = ipfsMetadata.get("timestamp");
+      fabricRoll.timestamp = timestamp ? timestamp.toString() : "null";
+
+      const empId = ipfsMetadata.get("empId");
+      fabricRoll.empId = empId ? empId.toString() : "null";
+
+      const machineId = ipfsMetadata.get("machineId");
+      fabricRoll.machineId = machineId ? machineId.toString() : "null";
+    }
+  }
+  fabricRoll.save();
+}
+
+export function handleFfiStorage(event: FfiStorageEvent): void {
+  const compositeKey = `${event.params.ffiRollId}::${event.params.soId}`;
+  let fabricRoll = FabricRoll.load(compositeKey);
+
+  if(fabricRoll === null) {
+    fabricRoll = new FabricRoll(compositeKey);
+  }
+
+  fabricRoll.imsBinNumber = event.params.imsBinNumber;
+
+  fabricRoll.save();
+}
+
+export function handleCutting(event: CuttingEvent): void {
+  const key = event.params.newTag;
+  let csp = Csp.load(key);
+
+  if(csp === null) {
+    csp = new Csp(key);
+  }
+
+  const cidBytes = ipfs.cat(event.params.cuttingCid);
+
+  if (cidBytes) {
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const cuttingMachineId = ipfsMetadata.get("cuttingMachineId");
+      csp.cuttingMachineId = cuttingMachineId ? cuttingMachineId.toString() : "null";
+
+      const cuttingEmpId = ipfsMetadata.get("cuttingEmpId");
+      csp.cuttingEmpId = cuttingEmpId ? cuttingEmpId.toString() : "null";
+
+      const cuttingTimestamp = ipfsMetadata.get("cuttingTimestamp");
+      csp.cuttingTimestamp = cuttingTimestamp ? cuttingTimestamp.toString() : "null";
+
+      const cuttingNumberOfPieces = ipfsMetadata.get("cuttingNumberOfPieces");
+      csp.cuttingNumberOfPieces = cuttingNumberOfPieces ? cuttingNumberOfPieces.toString() : "null";
+
+      const cuttingTrolleyId = ipfsMetadata.get("cuttingTrolleyId");
+      csp.cuttingTrolleyId = cuttingTrolleyId ? cuttingTrolleyId.toString() : "null";
+
+      const soId = ipfsMetadata.get("soId");
+      csp.soId = soId ? soId.toString() : "null";
+
+      const newTag = ipfsMetadata.get("newTag");
+      csp.newTag = newTag ? newTag.toString() : "null";
+    }
+  }
+  csp.save();
+}
+
+export function handleCuttingStorage(event: CuttingStorageEvent): void {
+  const key = event.params.newTag;
+  let csp = Csp.load(key);
+
+  if(csp === null) {
+    csp = new Csp(key);
+  }
+
+  const cidBytes = ipfs.cat(event.params.cuttingStorageCid);
+
+  if (cidBytes) {
+    const ipfsDetails = json.try_fromBytes(cidBytes);
+
+    if (ipfsDetails.isOk && ipfsDetails.value.kind == JSONValueKind.OBJECT) {
+
+      const ipfsMetadata = ipfsDetails.value.toObject();
+
+      const cuttingStorageMachineId = ipfsMetadata.get("cuttingStorageMachineId");
+      csp.cuttingStorageMachineId = cuttingStorageMachineId ? cuttingStorageMachineId.toString() : "null";
+
+      const cuttingStorageEmpId = ipfsMetadata.get("cuttingStorageEmpId");
+      csp.cuttingStorageEmpId = cuttingStorageEmpId ? cuttingStorageEmpId.toString() : "null";
+
+      const cuttingStorageTimestamp = ipfsMetadata.get("cuttingStorageTimestamp");
+      csp.cuttingStorageTimestamp = cuttingStorageTimestamp ? cuttingStorageTimestamp.toString() : "null";
+
+      const binNumber = ipfsMetadata.get("binNumber");
+      csp.binNumber = binNumber ? binNumber.toString() : "null";
+    }
+  }
+  csp.save();
+}
+
+
 

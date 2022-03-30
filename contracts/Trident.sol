@@ -73,6 +73,13 @@ contract Trident is Ownable {
   event DyeingOutputEvent(string lotId, string dyeingOutputCid);
   event PrintingOutputEvent(string lotId, string printingOutputCid);
   event FinishedFabricOutputEvent(string lotId, string finishedFabricOutputCid);
+  event FinishedFabricInspectionEvent(string lotId, string finishedFabricInspectionCid);
+
+  event LinkProcessHousePoEvent(string soId, string processHousePo);
+  event FfiOutputEvent(string ffiRollId, string soId, string ffiOutputCid);
+  event FfiStorageEvent(string ffiRollId, string soId, string imsBinNumber);
+  event CuttingEvent(string ffiRollId, string soId, string newTag, string cuttingCid);
+  event CuttingStorageEvent(string newTag, string soId, string cuttingStorageCid);
 
   function addPellet(string memory pelletId, string memory pelletDetailsCid) external {
     _pettletIdToCid[pelletId] = pelletDetailsCid;
@@ -253,5 +260,49 @@ contract Trident is Ownable {
     string memory finishedFabricOutputCid
   ) external {
     emit FinishedFabricOutputEvent(lotId, finishedFabricOutputCid);
+  }
+
+  function addFinishedFabricInspection(
+    string memory lotId,
+    string memory finishedFabricInspectionCid
+  ) external {
+    emit FinishedFabricInspectionEvent(lotId, finishedFabricInspectionCid);
+  }
+
+  function linkProcessHousePo(string memory soId, string memory processHousePo) external {
+    emit LinkProcessHousePoEvent(soId, processHousePo);
+  }
+
+  function addFfiOutput(
+    string memory ffiRollId,
+    string memory soId,
+    string memory ffiOutputCid
+  ) external {
+    emit FfiOutputEvent(ffiRollId, soId, ffiOutputCid);
+  }
+
+  function addFfiStorage(
+    string memory ffiRollId,
+    string memory soId,
+    string memory imsBinNumber
+  ) external {
+    emit FfiStorageEvent(ffiRollId, soId, imsBinNumber);
+  }
+
+  function addCuttingDetails(
+    string memory ffiRollId,
+    string memory soId,
+    string memory newTag,
+    string memory cuttingCid
+  ) external {
+    emit CuttingEvent(ffiRollId, soId, newTag, cuttingCid);
+  }
+
+  function addCuttingStorage(
+    string memory newTag,
+    string memory soId,
+    string memory cuttingStorageCid
+  ) external {
+    emit CuttingStorageEvent(newTag, soId, cuttingStorageCid);
   }
 }
