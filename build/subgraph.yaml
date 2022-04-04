@@ -6,9 +6,9 @@ dataSources:
     name: ownable
     network: node01-c005
     source:
-      address: "0xf9Ce303104EC0458c7e1D6eB03De6718b1BD7ad1"
+      address: "0x76A85E639FC5e6D86fCf02a8a862C5c648B7e81e"
       abi: Ownable
-      startBlock: 275419
+      startBlock: 276155
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: trident
     network: node01-c005
     source:
-      address: "0xf9Ce303104EC0458c7e1D6eB03De6718b1BD7ad1"
+      address: "0x76A85E639FC5e6D86fCf02a8a862C5c648B7e81e"
       abi: Trident
-      startBlock: 275419
+      startBlock: 276155
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
