@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/facets/Facet1.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract Facet1 {\n    event TestEvent(address something);\n\n    function test1Func1() external {}\n\n    function test1Func2() external {}\n\n    function test1Func3() external {}\n\n    function test1Func4() external {}\n\n    function test1Func5() external {}\n\n    function test1Func6() external {}\n\n    function test1Func7() external {}\n\n    function test1Func8() external {}\n\n    function test1Func9() external {}\n\n    function test1Func10() external {}\n\n    function test1Func11() external {}\n\n    function test1Func12() external {}\n\n    function test1Func13() external {}\n\n    function test1Func14() external {}\n\n    function test1Func15() external {}\n\n    function test1Func16() external {}\n\n    function test1Func17() external {}\n\n    function test1Func18() external {}\n\n    function test1Func19() external {}\n\n    function test1Func20() external {}\n\n    // function supportsInterface(bytes4 _interfaceID) external view returns (bool) {}\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "istanbul",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

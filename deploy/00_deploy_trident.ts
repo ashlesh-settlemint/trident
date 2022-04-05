@@ -1,8 +1,8 @@
 import { run } from 'hardhat';
 import { DeployFunction } from 'hardhat-deploy/types';
 
-const migrate: DeployFunction = async ({ getNamedAccounts, deployments: { deploy }, config, network }) => {
-  const { deployer } = await getNamedAccounts();
+const migrate: DeployFunction = async ({ getNamedAccounts, deployments: { diamond }, config, network }) => {
+  const { deployer, diamondAdmin } = await getNamedAccounts();
   if (!deployer) {
     console.error(
       '\n\nERROR!\n\nThe node you are deploying to does not have access to a private key to sign this transaction. Add a Private Key in this application to solve this.\n\n'
@@ -10,11 +10,14 @@ const migrate: DeployFunction = async ({ getNamedAccounts, deployments: { deploy
     process.exit(1);
   }
 
-  await deploy('Trident', {
+  const res = await diamond.deploy("Diamond", {
     from: deployer,
-    args: [],
-    log: true,
+    owner: diamondAdmin,
+    facets: ["TridentFacet1","Facet1"],
   });
+  console.log("res", res);
+
+
   let hasEtherScanInstance = false;
   try {
     await run('verify:get-etherscan-endpoint');
